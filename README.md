@@ -1,2 +1,4 @@
-# ca-calgary-transit-bus-parser
+ca-calgary-transit-bus-parser
+=============================
+
 Parser for Calgary Transit Bus data
