@@ -73,8 +73,16 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		return MAgency.ROUTE_TYPE_BUS;
 	}
 
+	private static final String RSN_FLOATER = "FLT";
+	private static final long RID_FLOATER = 10001l;
+
 	@Override
 	public long getRouteId(GRoute gRoute) {
+		if (!Utils.isDigitsOnly(gRoute.route_short_name)) {
+			if (RSN_FLOATER.equals(gRoute.route_short_name)) {
+				return RID_FLOATER;
+			}
+		}
 		return Long.parseLong(gRoute.route_short_name); // using route short name as route ID
 	}
 
@@ -1960,7 +1968,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		}
 
-		mTrip.setHeadsignString(cleanTripHeadsign(gTrip.trip_headsign.toLowerCase(Locale.ENGLISH)), gTrip.direction_id);
+		mTrip.setHeadsignString(cleanTripHeadsign(gTrip.trip_headsign), gTrip.direction_id);
 	}
 
 	@Override
