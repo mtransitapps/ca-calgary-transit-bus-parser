@@ -1,22 +1,31 @@
 package org.mtransit.parser.ca_calgary_transit_bus;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mtransit.parser.DefaultAgencyTools;
+import org.mtransit.parser.Pair;
 import org.mtransit.parser.Utils;
 import org.mtransit.parser.gtfs.data.GCalendar;
 import org.mtransit.parser.gtfs.data.GCalendarDate;
 import org.mtransit.parser.gtfs.data.GRoute;
 import org.mtransit.parser.gtfs.data.GSpec;
+import org.mtransit.parser.gtfs.data.GStop;
+import org.mtransit.parser.gtfs.data.GStopTime;
 import org.mtransit.parser.gtfs.data.GTrip;
+import org.mtransit.parser.gtfs.data.GTripStop;
 import org.mtransit.parser.mt.data.MAgency;
 import org.mtransit.parser.mt.data.MDirectionType;
 import org.mtransit.parser.mt.data.MRoute;
 import org.mtransit.parser.mt.data.MSpec;
 import org.mtransit.parser.mt.data.MTrip;
+import org.mtransit.parser.mt.data.MTripStop;
 
 // https://www.calgarytransit.com/developer-resources
 // https://data.calgary.ca/OpenData/Pages/DatasetDetails.aspx?DatasetID=PDC0-99999-99999-00501-P(CITYonlineDefault)
@@ -114,6 +123,11 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String getRouteColor(GRoute gRoute) {
+		if (!Utils.isDigitsOnly(gRoute.route_short_name)) {
+			if (RSN_FLOATER.equals(gRoute.route_short_name)) {
+				return null;
+			}
+		}
 		int rsn = Integer.parseInt(gRoute.route_short_name);
 		switch (rsn) {
 		// @formatter:off
@@ -244,8 +258,10 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		case 300: return COLOR_BUS_ROUTES_BRT;
 		case 301: return COLOR_BUS_ROUTES_BRT;
 		case 302: return COLOR_BUS_ROUTES_BRT;
+		case 304: return COLOR_BUS_ROUTES_BRT;
 		case 305: return COLOR_BUS_ROUTES_BRT;
 		case 306: return COLOR_BUS_ROUTES_BRT;
+		case 308: return COLOR_BUS_ROUTES_BRT;
 		case 402: return COLOR_BUS_ROUTES;
 		case 404: return COLOR_BUS_ROUTES;
 		case 405: return COLOR_BUS_ROUTES;
@@ -388,19 +404,19 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		}
 	}
 
-	private static final String _69_ST_STN = "69 St Stn";
+	private static final String _69_ST_STATION = "69 St Sta";
 	private static final String ACADIA = "Acadia";
 	private static final String OAKRIDGE = "Oakridge";
 	private static final String ACADIA_OAKRIDGE = ACADIA + " / " + OAKRIDGE;
 	private static final String AIRPORT = "Airport";
 	private static final String ANDERSON = "Anderson";
-	private static final String ANDERSON_STN = ANDERSON; // "Anderson Stn";
+	private static final String ANDERSON_STATION = ANDERSON; // "Anderson Sta";
 	private static final String ANNIE_GALE = "Annie Gale";
 	private static final String APPLEWOOD = "Applewood";
 	private static final String ARBOUR_LK = "Arbour Lk";
 	private static final String AUBURN_BAY = "Auburn Bay";
 	private static final String B_GRANDIN = "B Grandin";
-	private static final String BARLOW_STN = "Barlow Stn";
+	private static final String BARLOW_STATION = "Barlow Sta";
 	private static final String BEAVERBROOK = "Beaverbrook";
 	private static final String BEDDINGTON = "Beddington";
 	private static final String BISHOP_O_BYRNE = "B O'Byrne";
@@ -409,14 +425,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String BOWNESS = "Bowness";
 	private static final String BREBEUF = "Brebeuf";
 	private static final String BRENTWOOD = "Brentwood";
-	private static final String BRENTWOOD_STN = BRENTWOOD; // "Brentwood Stn";
+	private static final String BRENTWOOD_STATION = BRENTWOOD; // "Brentwood Sta";
 	private static final String BRIDGELAND = "Bridgeland";
 	private static final String CASTLERIDGE = "Castleridge";
 	private static final String CENTRAL_MEMORIAL = "Central Memorial";
 	private static final String CHAPARRAL = "Chaparral";
 	private static final String CHATEAU_ESTS = "Chateau Ests";
 	private static final String CHINOOK = "Chinook";
-	private static final String CHINOOK_STN = CHINOOK; // "Chinook Stn";
+	private static final String CHINOOK_STATION = CHINOOK; // "Chinook Sta";
 	private static final String CHURCHILL = "Churchill";
 	private static final String CIRCLE_ROUTE = "Circle Route";
 	private static final String CITADEL = "Citadel";
@@ -424,6 +440,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String COACH_HL = "Coach Hl";
 	private static final String COPPERFIELD = "Copperfield";
 	private static final String CORAL_SPGS = "Coral Spgs";
+	private static final String COUGAR_RDG = "Cougar Rdg";
 	private static final String COUNTRY_HLS = "Country Hls";
 	private static final String COUNTRY_VLG = "Country Vlg";
 	private static final String COVENTRY = "Coventry";
@@ -450,6 +467,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String EVERGREEN_SOMERSET = EVERGREEN + " / " + SOMERSET;
 	private static final String F_WHELIHAN = "F Whelihan";
 	private static final String FALCONRIDGE = "Falconridge";
+	private static final String FOOTHILLS = "Foothills";
 	private static final String FOOTHILLS_IND = "Foothills Ind";
 	private static final String FOREST_HTS = "Forest Hts";
 	private static final String FOREST_LAWN = "Forest Lawn";
@@ -461,14 +479,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String HARVEST_HLS = "Harvest Hls";
 	private static final String HAWKWOOD = "Hawkwood";
 	private static final String HERITAGE = "Heritage";
-	private static final String HERITAGE_STN = HERITAGE; // "Heritage Stn";
+	private static final String HERITAGE_STATION = HERITAGE; // "Heritage Sta";
 	private static final String HIDDEN_VLY = "Hidden Vly";
 	private static final String HILLHURST = "Hillhurst";
 	private static final String HUNTINGTON = "Huntington";
 	private static final String KINCORA = "Kincora";
 	private static final String LAKEVIEW = "Lakeview";
 	private static final String LIONS_PARK = "Lions Park";
-	private static final String LIONS_PARK_STN = LIONS_PARK; // "Lions Park Stn";
+	private static final String LIONS_PARK_STATION = LIONS_PARK; // "Lions Park Sta";
 	private static final String LYNNWOOD = "Lynnwood";
 	private static final String M_D_HOUET = "M d'Houet";
 	private static final String MAC_EWAN = "MacEwan";
@@ -500,8 +518,9 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String PANORAMA = "Panorama";
 	private static final String PANORAMA_HLS = PANORAMA + " Hls";
 	private static final String PANORAMA_HLS_NORTH = "N " + PANORAMA_HLS;
-	private static final String PARKHILL_FOOTHILLS = "Parkhill / Foothills";
+	private static final String PARKHILL = "Parkhill";
 	private static final String PARKLAND = "Parkland";
+	private static final String PARK_GATE_HERITAGE = "Pk Gt Heritage";
 	private static final String PRESTWICK = "Prestwick";
 	private static final String QUEEN_ELIZABETH = "Queen Elizabeth";
 	private static final String QUEENSLAND = "Queensland";
@@ -527,16 +546,19 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String SHERWOOD = "Sherwood";
 	private static final String SILVER_SPGS = "Silver Spgs";
 	private static final String SKYVIEW_RANCH = "Skyview Ranch";
-	private static final String SOMERSET_BRIDLEWOOD_STN = SOMERSET + "-Bridlewood Stn";
+	private static final String SOMERSET_BRIDLEWOOD_STATION = SOMERSET + "-Bridlewood Sta";
 	private static final String SOUTH_CALGARY = "South Calgary";
 	private static final String SOUTH_HEALTH = "South Health";
 	private static final String SOUTHCENTER = "Southcentre";
+	private static final String SOUTHLAND = "Southland";
+	private static final String SOUTHLAND_STATION = SOUTHLAND; // "Southland Sta";
 	private static final String ST_AUGUSTINE = "St Augustine";
 	private static final String ST_FRANCIS = "St Francis";
 	private static final String ST_ISABELLA = "St Isabella";
 	private static final String ST_MARGARET = "St Margaret";
 	private static final String ST_MATTHEW = "St Matthew";
 	private static final String ST_STEPHEN = "St Stephen";
+	private static final String STATION_HERITAGE = "Sta Heritage";
 	private static final String STRATHCONA = "Strathcona";
 	private static final String TARADALE = "Taradale";
 	private static final String TOM_BAINES = "Tom Baines";
@@ -545,20 +567,255 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String VARSITY_ACRES = "Varsity Acres";
 	private static final String VINCENT_MASSEY = "V Massey";
 	private static final String VISTA_HTS = "Vista Hts";
-	private static final String WCHS_ST_MARY_S = "WCHS/St Mary''s";
+	private static final String WCHS_ST_MARY_S = "WCHS / St Mary''s";
 	private static final String WESTBROOK = "Westbrook";
-	private static final String WESTBROOK_STN = WESTBROOK + " Stn";
+	private static final String WESTBROOK_STATION = WESTBROOK + " Sta";
 	private static final String WESTERN_CANADA = "Western Canada";
 	private static final String WESTGATE = "Westgate";
 	private static final String WESTHILLS = "Westhills";
 	private static final String WHITEHORN = "Whitehorn";
-	private static final String WHITEHORN_STN = WHITEHORN; // WHITEHORN + " Stn";
+	private static final String WHITEHORN_STATION = WHITEHORN; // WHITEHORN + " Sta";
 	private static final String WISE_WOOD = "Wise Wood";
 	private static final String WOODBINE = "Woodbine";
 	private static final String WOODLANDS = "Woodlands";
 
+	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
+	static {
+		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
+		map2.put(56l, new RouteTripSpec(56l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOUTHLAND_STATION, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, ANDERSON_STATION) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "6461", "6097" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "6097", "6562", "6461" })) //
+				.compileBothTripSort());
+		map2.put(94l, new RouteTripSpec(94l, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, STRATHCONA, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WESTBROOK_STATION) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { "3741", "5315", "8379", "6515" })) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { "6515", "3732", "7597", "3741" })) //
+				.compileBothTripSort());
+		map2.put(98l, new RouteTripSpec(98l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, COUGAR_RDG, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "8374", "8822" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "8822", "8373" })) //
+				.compileBothTripSort());
+		map2.put(419l, new RouteTripSpec(419l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, FOOTHILLS, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, PARKHILL) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "5574", "5299", "5227", "8339" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "8339", "5108", "5580", "5574" })) //
+				.compileBothTripSort());
+		map2.put(439l, new RouteTripSpec(439l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, DISCOVERY_RIDGE) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "9365", "3785" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "3785", "9365" })) //
+				.compileBothTripSort());
+		map2.put(502l, new RouteTripSpec(502l, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, STATION_HERITAGE, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, PARK_GATE_HERITAGE) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { "7592", "5192", "5762" })) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { "5762", "4577", "7592" })) //
+				.compileBothTripSort());
+		ALL_ROUTE_TRIPS2 = map2;
+	}
+
+	@Override
+	public int compareEarly(long routeId, List<MTripStop> list1, List<MTripStop> list2, MTripStop ts1, MTripStop ts2, GStop ts1GStop, GStop ts2GStop) {
+		if (ALL_ROUTE_TRIPS2.containsKey(routeId)) {
+			return ALL_ROUTE_TRIPS2.get(routeId).compare(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop);
+		}
+		return super.compareEarly(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop);
+	}
+
+	@Override
+	public HashSet<MTrip> splitTrip(MRoute mRoute, GTrip gTrip, GSpec gtfs) {
+		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.id)) {
+			return ALL_ROUTE_TRIPS2.get(mRoute.id).getAllTrips();
+		}
+		return super.splitTrip(mRoute, gTrip, gtfs);
+	}
+
+	@Override
+	public Pair<Long[], Integer[]> splitTripStop(MRoute mRoute, GTrip gTrip, GTripStop gTripStop, HashSet<MTrip> splitTrips, GSpec gtfs) {
+		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.id)) {
+			RouteTripSpec rts = ALL_ROUTE_TRIPS2.get(mRoute.id);
+			return splitTripStop(gTrip, gTripStop, gtfs, //
+					rts.getBeforeAfterStopIds(0), //
+					rts.getBeforeAfterStopIds(1), //
+					rts.getBeforeAfterBothStopIds(0), //
+					rts.getBeforeAfterBothStopIds(1), //
+					rts.getTripId(0), //
+					rts.getTripId(1), //
+					rts.getAllBeforeAfterStopIds());
+		}
+		return super.splitTripStop(mRoute, gTrip, gTripStop, splitTrips, gtfs);
+	}
+
+	private Pair<Long[], Integer[]> splitTripStop(GTrip gTrip, GTripStop gTripStop, GSpec gtfs, List<String> stopIdsTowards1, List<String> stopIdsTowards2,
+			List<String> stopIdsTowardsBoth21, List<String> stopIdsTowardsBoth12, long tidTowardsStop1, long tidTowardsStop2, List<String> allBeforeAfterStopIds) {
+		String beforeAfter = getBeforeAfterStopId(gtfs, gTrip, gTripStop, stopIdsTowards1, stopIdsTowards2, stopIdsTowardsBoth21, stopIdsTowardsBoth12,
+				allBeforeAfterStopIds);
+		if (stopIdsTowards1.contains(beforeAfter)) {
+			return new Pair<Long[], Integer[]>(new Long[] { tidTowardsStop1 }, new Integer[] { gTripStop.stop_sequence });
+		} else if (stopIdsTowards2.contains(beforeAfter)) {
+			return new Pair<Long[], Integer[]>(new Long[] { tidTowardsStop2 }, new Integer[] { gTripStop.stop_sequence });
+		} else if (stopIdsTowardsBoth21.contains(beforeAfter)) {
+			return new Pair<Long[], Integer[]>(new Long[] { tidTowardsStop2, tidTowardsStop1 }, new Integer[] { 1, gTripStop.stop_sequence });
+		} else if (stopIdsTowardsBoth12.contains(beforeAfter)) {
+			return new Pair<Long[], Integer[]>(new Long[] { tidTowardsStop1, tidTowardsStop2 }, new Integer[] { 1, gTripStop.stop_sequence });
+		}
+		System.out.printf("\nUnexptected trip stop to split %s.\n", gTripStop);
+		System.exit(-1);
+		return null;
+	}
+
+	private String getBeforeAfterStopId(GSpec gtfs, GTrip gTrip, GTripStop gTripStop, List<String> stopIdsTowards1, List<String> stopIdsTowards2,
+			List<String> stopIdsTowardsBoth21, List<String> stopIdsTowardsBoth12, List<String> allBeforeAfterStopIds) {
+		int gStopMaxSequence = -1;
+		ArrayList<String> afterStopIds = new ArrayList<String>();
+		ArrayList<Integer> afterStopSequence = new ArrayList<Integer>();
+		ArrayList<String> beforeStopIds = new ArrayList<String>();
+		ArrayList<Integer> beforeStopSequence = new ArrayList<Integer>();
+		ArrayList<Pair<String, Integer>> gTripStops = new ArrayList<Pair<String, Integer>>(); // DEBUG
+		for (GStopTime gStopTime : gtfs.stopTimes) {
+			if (!gStopTime.trip_id.equals(gTrip.getTripId())) {
+				continue;
+			}
+			gTripStops.add(new Pair<String, Integer>(gStopTime.stop_id, gStopTime.stop_sequence)); // DEBUG
+			if (allBeforeAfterStopIds.contains(gStopTime.stop_id)) {
+				if (gStopTime.stop_sequence < gTripStop.stop_sequence) {
+					beforeStopIds.add(gStopTime.stop_id);
+					beforeStopSequence.add(gStopTime.stop_sequence);
+				}
+				if (gStopTime.stop_sequence > gTripStop.stop_sequence) {
+					afterStopIds.add(gStopTime.stop_id);
+					afterStopSequence.add(gStopTime.stop_sequence);
+				}
+			}
+			if (gStopTime.stop_sequence > gStopMaxSequence) {
+				gStopMaxSequence = gStopTime.stop_sequence;
+			}
+		}
+		if (allBeforeAfterStopIds.contains(gTripStop.stop_id)) {
+			if (gTripStop.stop_sequence == 1) {
+				beforeStopIds.add(gTripStop.stop_id);
+				beforeStopSequence.add(gTripStop.stop_sequence);
+			}
+			if (gTripStop.stop_sequence == gStopMaxSequence) {
+				afterStopIds.add(gTripStop.stop_id);
+				afterStopSequence.add(gTripStop.stop_sequence);
+			}
+		}
+		String beforeAfterStopIdCandidate = findBeforeAfterStopIdCandidate(gTripStop, stopIdsTowards1, stopIdsTowards2, stopIdsTowardsBoth21,
+				stopIdsTowardsBoth12, afterStopIds, afterStopSequence, beforeStopIds, beforeStopSequence);
+		if (beforeAfterStopIdCandidate != null) {
+			return beforeAfterStopIdCandidate;
+		}
+		System.out.printf("\nUnexpected trip (befores:%s|afters:%s) %s", beforeStopIds, afterStopIds, gTrip);
+		System.exit(-1);
+		return null;
+	}
+
+	private static final String DASH = "-";
+	private static final String ALL = "*";
+
+	private String findBeforeAfterStopIdCandidate(GTripStop gTripStop, List<String> stopIdsTowards1, List<String> stopIdsTowards2,
+			List<String> stopIdsTowardsBoth21, List<String> stopIdsTowardsBoth12, ArrayList<String> afterStopIds, ArrayList<Integer> afterStopSequence,
+			ArrayList<String> beforeStopIds, ArrayList<Integer> beforeStopSequence) {
+		String beforeAfterStopIdCurrent;
+		Pair<Integer, String> beforeAfterStopIdCandidate = null;
+		String beforeStopId, afterStopId;
+		for (int b = 0; b < beforeStopIds.size(); b++) {
+			beforeStopId = beforeStopIds.get(b);
+			for (int a = 0; a < afterStopIds.size(); a++) {
+				afterStopId = afterStopIds.get(a);
+				beforeAfterStopIdCurrent = beforeStopId + DASH + afterStopId;
+				if (stopIdsTowards1.contains(beforeAfterStopIdCurrent) || stopIdsTowards2.contains(beforeAfterStopIdCurrent)) {
+					int size = Math.max(afterStopSequence.get(a) - gTripStop.stop_sequence, gTripStop.stop_sequence - beforeStopSequence.get(b));
+					if (beforeAfterStopIdCandidate == null || size < beforeAfterStopIdCandidate.first) {
+						beforeAfterStopIdCandidate = new Pair<Integer, String>(size, beforeAfterStopIdCurrent);
+					}
+				}
+			}
+		}
+		for (int b = 0; b < beforeStopIds.size(); b++) {
+			beforeStopId = beforeStopIds.get(b);
+			beforeAfterStopIdCurrent = beforeStopId + DASH + ALL;
+			if (stopIdsTowards1.contains(beforeAfterStopIdCurrent) || stopIdsTowards2.contains(beforeAfterStopIdCurrent)) {
+				int size = gTripStop.stop_sequence - beforeStopSequence.get(b);
+				if (beforeAfterStopIdCandidate == null || size < beforeAfterStopIdCandidate.first) {
+					beforeAfterStopIdCandidate = new Pair<Integer, String>(size, beforeAfterStopIdCurrent);
+				}
+			}
+		}
+		for (int a = 0; a < afterStopIds.size(); a++) {
+			afterStopId = afterStopIds.get(a);
+			beforeAfterStopIdCurrent = ALL + DASH + afterStopId;
+			if (stopIdsTowards1.contains(beforeAfterStopIdCurrent) || stopIdsTowards2.contains(beforeAfterStopIdCurrent)) {
+				int size = afterStopSequence.get(a) - gTripStop.stop_sequence;
+				if (beforeAfterStopIdCandidate == null || size < beforeAfterStopIdCandidate.first) {
+					beforeAfterStopIdCandidate = new Pair<Integer, String>(size, beforeAfterStopIdCurrent);
+				}
+			}
+		}
+		for (int b = 0; b < beforeStopIds.size(); b++) {
+			beforeStopId = beforeStopIds.get(b);
+			for (int a = 0; a < afterStopIds.size(); a++) {
+				afterStopId = afterStopIds.get(a);
+				if (gTripStop.stop_id.equals(beforeStopId) && gTripStop.stop_id.equals(afterStopId)) {
+					continue;
+				}
+				beforeAfterStopIdCurrent = beforeStopId + DASH + afterStopId;
+				if (stopIdsTowardsBoth21.contains(beforeAfterStopIdCurrent) || stopIdsTowardsBoth12.contains(beforeAfterStopIdCurrent)) {
+					int size = Math.max(afterStopSequence.get(a) - gTripStop.stop_sequence, gTripStop.stop_sequence - beforeStopSequence.get(b));
+					if (beforeAfterStopIdCandidate == null || size < beforeAfterStopIdCandidate.first) {
+						beforeAfterStopIdCandidate = new Pair<Integer, String>(size, beforeAfterStopIdCurrent);
+					}
+				}
+			}
+		}
+		for (int b = 0; b < beforeStopIds.size(); b++) {
+			beforeStopId = beforeStopIds.get(b);
+			beforeAfterStopIdCurrent = beforeStopId + DASH + ALL;
+			if (stopIdsTowardsBoth21.contains(beforeAfterStopIdCurrent) || stopIdsTowardsBoth12.contains(beforeAfterStopIdCurrent)) {
+				int size = gTripStop.stop_sequence - beforeStopSequence.get(b);
+				if (beforeAfterStopIdCandidate == null || size < beforeAfterStopIdCandidate.first) {
+					beforeAfterStopIdCandidate = new Pair<Integer, String>(size, beforeAfterStopIdCurrent);
+				}
+			}
+		}
+		for (int a = 0; a < afterStopIds.size(); a++) {
+			afterStopId = afterStopIds.get(a);
+			beforeAfterStopIdCurrent = ALL + DASH + afterStopId;
+			if (stopIdsTowardsBoth21.contains(beforeAfterStopIdCurrent) || stopIdsTowardsBoth12.contains(beforeAfterStopIdCurrent)) {
+				int size = afterStopSequence.get(a) - gTripStop.stop_sequence;
+				if (beforeAfterStopIdCandidate == null || size < beforeAfterStopIdCandidate.first) {
+					beforeAfterStopIdCandidate = new Pair<Integer, String>(size, beforeAfterStopIdCurrent);
+				}
+			}
+		}
+		return beforeAfterStopIdCandidate == null ? null : beforeAfterStopIdCandidate.second;
+	}
+
 	@Override
 	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
+		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.id)) {
+			return; // split
+		}
 		if (mRoute.id == 1l) {
 			if (gTrip.direction_id == 0) {
 				mTrip.setHeadsignString(FOREST_LAWN, gTrip.direction_id);
@@ -598,7 +855,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.direction_id);
 				return;
 			} else if (gTrip.direction_id == 1) {
-				mTrip.setHeadsignString(WESTBROOK_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(WESTBROOK_STATION, gTrip.direction_id);
 				return;
 			}
 		} else if (mRoute.id == 7l) {
@@ -712,7 +969,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(VISTA_HTS, gTrip.direction_id);
 				return;
 			} else if (gTrip.direction_id == 1) {
-				mTrip.setHeadsignString(BARLOW_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(BARLOW_STATION, gTrip.direction_id);
 				return;
 			}
 		} else if (mRoute.id == 37l) {
@@ -856,15 +1113,15 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mRoute.id == 91l) {
 			if (gTrip.direction_id == 0) {
-				mTrip.setHeadsignString(LIONS_PARK_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(LIONS_PARK_STATION, gTrip.direction_id);
 				return;
 			} else if (gTrip.direction_id == 1) {
-				mTrip.setHeadsignString(BRENTWOOD_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(BRENTWOOD_STATION, gTrip.direction_id);
 				return;
 			}
 		} else if (mRoute.id == 92l) {
 			if (gTrip.direction_id == 0) {
-				mTrip.setHeadsignString(ANDERSON_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(ANDERSON_STATION, gTrip.direction_id);
 				return;
 			} else if (gTrip.direction_id == 1) {
 				mTrip.setHeadsignString(MC_KENZIE_TOWNE_DR, gTrip.direction_id);
@@ -880,12 +1137,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mRoute.id == 94l) {
 			if (gTrip.direction_id == 0) {
-				mTrip.setHeadsignString(_69_ST_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(_69_ST_STATION, gTrip.direction_id);
 				return;
 			}
 		} else if (mRoute.id == 98l) {
 			if (gTrip.direction_id == 0) {
-				mTrip.setHeadsignString(_69_ST_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(_69_ST_STATION, gTrip.direction_id);
 				return;
 			}
 		} else if (mRoute.id == 100l) {
@@ -1125,11 +1382,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(WESTGATE, gTrip.direction_id);
 				return;
 			}
-		} else if (mRoute.id == 419l) {
-			if (gTrip.direction_id == 0) {
-				mTrip.setHeadsignString(PARKHILL_FOOTHILLS, gTrip.direction_id);
-				return;
-			}
 		} else if (mRoute.id == 425l) {
 			if (gTrip.direction_id == 0) {
 				mTrip.setHeadsignString(SAGE_HILL_KINCORA, gTrip.direction_id);
@@ -1171,7 +1423,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(WCHS_ST_MARY_S, gTrip.direction_id);
 				return;
 			} else if (gTrip.direction_id == 1) {
-				mTrip.setHeadsignString(_69_ST_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(_69_ST_STATION, gTrip.direction_id);
 				return;
 			}
 		} else if (mRoute.id == 699l) {
@@ -1408,7 +1660,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mRoute.id == 743l) {
 			if (gTrip.direction_id == 0) {
-				mTrip.setHeadsignString(WHITEHORN_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(WHITEHORN_STATION, gTrip.direction_id);
 				return;
 			} else if (gTrip.direction_id == 1) {
 				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.direction_id);
@@ -1552,7 +1804,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SCARLETT, gTrip.direction_id);
 				return;
 			} else if (gTrip.direction_id == 1) {
-				mTrip.setHeadsignString(SOMERSET_BRIDLEWOOD_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(SOMERSET_BRIDLEWOOD_STATION, gTrip.direction_id);
 				return;
 			}
 		} else if (mRoute.id == 765l) {
@@ -1560,7 +1812,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SCARLETT, gTrip.direction_id);
 				return;
 			} else if (gTrip.direction_id == 1) {
-				mTrip.setHeadsignString(SOMERSET_BRIDLEWOOD_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(SOMERSET_BRIDLEWOOD_STATION, gTrip.direction_id);
 				return;
 			}
 		} else if (mRoute.id == 766l) {
@@ -1581,7 +1833,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mRoute.id == 771l) {
 			if (gTrip.direction_id == 1) {
-				mTrip.setHeadsignString(CHINOOK_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(CHINOOK_STATION, gTrip.direction_id);
 				return;
 			}
 		} else if (mRoute.id == 773l) {
@@ -1932,7 +2184,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ST_MATTHEW, gTrip.direction_id);
 				return;
 			} else if (gTrip.direction_id == 1) {
-				mTrip.setHeadsignString(HERITAGE_STN, gTrip.direction_id);
+				mTrip.setHeadsignString(HERITAGE_STATION, gTrip.direction_id);
 				return;
 			}
 		} else if (mRoute.id == 883l) {
@@ -1974,6 +2226,8 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public String cleanTripHeadsign(String tripHeadsign) {
 		tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
+		tripHeadsign = MSpec.cleanStreetTypes(tripHeadsign);
+		tripHeadsign = MSpec.cleanNumbers(tripHeadsign);
 		return MSpec.cleanLabel(tripHeadsign);
 	}
 
@@ -1988,9 +2242,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final Pattern AT_SIGN = Pattern.compile("([\\s]*@[\\s]*)", Pattern.CASE_INSENSITIVE);
 	private static final String AT_SIGN_REPLACEMENT = " / ";
-
-	private static final Pattern STATION = Pattern.compile(String.format(REGEX_START_END, "station"), Pattern.CASE_INSENSITIVE);
-	private static final String STATION_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "Stn");
 
 	private static final Pattern AV = Pattern.compile(String.format(REGEX_START_END, "AV|AVE"));
 	private static final String AV_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "Avenue");
@@ -2161,10 +2412,240 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		gStopName = CTR.matcher(gStopName).replaceAll(CTR_REPLACEMENT);
 		gStopName = MOUNT_ROYAL_UNIVERSITY.matcher(gStopName).replaceAll(MOUNT_ROYAL_UNIVERSITY_REPLACEMENT);
 		gStopName = MOUNT.matcher(gStopName).replaceAll(MOUNT_REPLACEMENT);
-		gStopName = STATION.matcher(gStopName).replaceAll(STATION_REPLACEMENT);
 		gStopName = MSpec.cleanStreetTypes(gStopName);
 		gStopName = MSpec.cleanNumbers(gStopName);
 		gStopName = STARTS_WITH_SLASH.matcher(gStopName).replaceAll(StringUtils.EMPTY);
 		return MSpec.cleanLabel(gStopName);
+	}
+	private static class RouteTripSpec {
+
+		private static final String DASH = "-";
+		private static final String ALL = "*";
+
+		private long routeId;
+		private int directionId0;
+		private int headsignType0;
+		private String headsignString0;
+		private int directionId1;
+		private int headsignType1;
+		private String headsignString1;
+
+		public RouteTripSpec(long routeId, int directionId0, int headsignType0, String headsignString0, int directionId1, int headsignType1,
+				String headsignString1) {
+			this.routeId = routeId;
+			this.directionId0 = directionId0;
+			this.headsignType0 = headsignType0;
+			this.headsignString0 = headsignString0;
+			this.directionId1 = directionId1;
+			this.headsignType1 = headsignType1;
+			this.headsignString1 = headsignString1;
+		}
+
+		private ArrayList<String> allBeforeAfterStopIds = new ArrayList<String>();
+
+		public ArrayList<String> getAllBeforeAfterStopIds() {
+			return this.allBeforeAfterStopIds;
+		}
+
+		public long getTripId(int directionIndex) {
+			switch (directionIndex) {
+			case 0:
+				return MTrip.getNewId(this.routeId, this.directionId0);
+			case 1:
+				return MTrip.getNewId(this.routeId, this.directionId1);
+			default:
+				System.out.printf("\ngetTripId() > Unexpected direction index: " + directionIndex);
+				System.exit(-1);
+				return -1l;
+			}
+		}
+
+		private HashMap<Integer, ArrayList<String>> beforeAfterStopIds = new HashMap<Integer, ArrayList<String>>();
+
+		public ArrayList<String> getBeforeAfterStopIds(int directionIndex) {
+			switch (directionIndex) {
+			case 0:
+				if (!this.beforeAfterStopIds.containsKey(this.directionId0)) {
+					this.beforeAfterStopIds.put(this.directionId0, new ArrayList<String>());
+				}
+				return this.beforeAfterStopIds.get(this.directionId0);
+			case 1:
+				if (!this.beforeAfterStopIds.containsKey(this.directionId1)) {
+					this.beforeAfterStopIds.put(this.directionId1, new ArrayList<String>());
+				}
+				return this.beforeAfterStopIds.get(this.directionId1);
+			default:
+				System.out.printf("\ngetBeforeAfterStopIds() > Unexpected direction index: " + directionIndex);
+				System.exit(-1);
+				return null;
+			}
+		}
+
+		private HashMap<Integer, ArrayList<String>> beforeAfterBothStopIds = new HashMap<Integer, ArrayList<String>>();
+
+		public ArrayList<String> getBeforeAfterBothStopIds(int directionIndex) {
+			switch (directionIndex) {
+			case 0:
+				if (!this.beforeAfterBothStopIds.containsKey(this.directionId0)) {
+					this.beforeAfterBothStopIds.put(this.directionId0, new ArrayList<String>());
+				}
+				return this.beforeAfterBothStopIds.get(this.directionId0);
+			case 1:
+				if (!this.beforeAfterBothStopIds.containsKey(this.directionId1)) {
+					this.beforeAfterBothStopIds.put(this.directionId1, new ArrayList<String>());
+				}
+				return this.beforeAfterBothStopIds.get(this.directionId1);
+			default:
+				System.out.printf("\ngetBeforeAfterBothStopIds() > Unexpected direction index: " + directionIndex);
+				System.exit(-1);
+				return null;
+			}
+		}
+
+		private HashSet<MTrip> allTrips = null;
+
+		public HashSet<MTrip> getAllTrips() {
+			if (this.allTrips == null) {
+				initAllTrips();
+			}
+			return this.allTrips;
+		}
+
+		private void initAllTrips() {
+			this.allTrips = new HashSet<MTrip>();
+			if (this.headsignType0 == MTrip.HEADSIGN_TYPE_STRING) {
+				this.allTrips.add(new MTrip(this.routeId).setHeadsignString(this.headsignString0, this.directionId0));
+			} else if (this.headsignType0 == MTrip.HEADSIGN_TYPE_DIRECTION) {
+				this.allTrips.add(new MTrip(this.routeId).setHeadsignDirection(MDirectionType.parse(this.headsignString0)));
+			} else {
+				System.out.printf("\nUnexpected trip type " + this.headsignType0 + " for " + this.routeId);
+				System.exit(-1);
+			}
+			if (this.headsignType1 == MTrip.HEADSIGN_TYPE_STRING) {
+				this.allTrips.add(new MTrip(this.routeId).setHeadsignString(this.headsignString1, this.directionId1));
+			} else if (this.headsignType1 == MTrip.HEADSIGN_TYPE_DIRECTION) {
+				this.allTrips.add(new MTrip(this.routeId).setHeadsignDirection(MDirectionType.parse(this.headsignString1)));
+			} else {
+				System.out.printf("\nUnexpected trip type " + this.headsignType1 + " for " + this.routeId);
+				System.exit(-1);
+			}
+		}
+
+		public RouteTripSpec addTripSort(int directionId, List<String> sortedStopIds) {
+			this.allSortedStopIds.put(directionId, sortedStopIds);
+			ArrayList<String> beforeStopIds = new ArrayList<String>();
+			String currentStopId = null;
+			for (int i = 0; i < sortedStopIds.size(); i++) {
+				currentStopId = sortedStopIds.get(i);
+				for (int b = beforeStopIds.size() - 1; b >= 0; b--) {
+					addFromTo(directionId, beforeStopIds.get(b), currentStopId);
+				}
+				beforeStopIds.add(currentStopId);
+			}
+			return this;
+		}
+
+		private HashMap<Integer, List<String>> allSortedStopIds = new HashMap<Integer, List<String>>();
+
+		public RouteTripSpec compileBothTripSort() {
+			List<String> sortedStopIds0 = this.allSortedStopIds.get(this.directionId0);
+			List<String> sortedStopIds1 = this.allSortedStopIds.get(this.directionId1);
+			for (int i0 = 0; i0 < sortedStopIds0.size(); i0++) {
+				String stopId0 = sortedStopIds0.get(i0);
+				for (int i1 = 0; i1 < sortedStopIds1.size(); i1++) {
+					String stopId1 = sortedStopIds1.get(i1);
+					if (stopId0.equals(stopId1) || //
+							sortedStopIds0.contains(stopId1) || sortedStopIds1.contains(stopId0)) {
+						continue;
+					}
+					addBothFromTo(this.directionId0, stopId0, stopId1);
+					addBothFromTo(this.directionId1, stopId1, stopId0);
+				}
+			}
+			return this;
+		}
+
+		public int compare(long routeId, List<MTripStop> list1, List<MTripStop> list2, MTripStop ts1, MTripStop ts2, GStop ts1GStop, GStop ts2GStop) {
+			int directionId;
+			if (MTrip.getNewId(this.routeId, this.directionId0) == ts1.getTripId()) {
+				directionId = this.directionId0;
+			} else if (MTrip.getNewId(this.routeId, this.directionId1) == ts1.getTripId()) {
+				directionId = this.directionId1;
+			} else {
+				System.out.printf("\nUnexpected trip ID " + ts1.getTripId());
+				System.exit(-1);
+				return 0;
+			}
+			List<String> sortedStopIds = this.allSortedStopIds.get(directionId);
+			if (!sortedStopIds.contains(ts1GStop.stop_code) || !sortedStopIds.contains(ts2GStop.stop_code)) {
+				System.out.printf("\nUnexpected stop IDs " + ts1GStop.stop_code + " AND/OR " + ts2GStop.stop_code);
+				System.exit(-1);
+				return 0;
+			}
+			int ts1StopIndex = sortedStopIds.indexOf(ts1GStop.stop_code);
+			int ts2StopIndex = sortedStopIds.indexOf(ts2GStop.stop_code);
+			return ts2StopIndex - ts1StopIndex;
+		}
+
+		public RouteTripSpec addALLFromTo(int directionId, String stopIdFrom, String stopIdTo) {
+			addBeforeAfter(directionId, stopIdFrom + DASH + ALL);
+			addBeforeAfter(directionId, ALL + DASH + stopIdTo);
+			addBeforeAfter(directionId, stopIdFrom + DASH + stopIdTo);
+			this.allBeforeAfterStopIds.add(stopIdFrom);
+			this.allBeforeAfterStopIds.add(stopIdTo);
+			return this;
+		}
+
+		public RouteTripSpec addAllFrom(int directionId, String stopIdFrom) {
+			addBeforeAfter(directionId, stopIdFrom + DASH + ALL);
+			this.allBeforeAfterStopIds.add(stopIdFrom);
+			return this;
+		}
+
+		public RouteTripSpec addAllTo(int directionId, String stopIdTo) {
+			addBeforeAfter(directionId, ALL + DASH + stopIdTo);
+			this.allBeforeAfterStopIds.add(stopIdTo);
+			return this;
+		}
+
+		public RouteTripSpec addFromTo(int directionId, String stopIdFrom, String stopIdTo) {
+			addBeforeAfter(directionId, stopIdFrom + DASH + stopIdTo);
+			this.allBeforeAfterStopIds.add(stopIdFrom);
+			this.allBeforeAfterStopIds.add(stopIdTo);
+			return this;
+		}
+
+		private void addBeforeAfter(int directionId, String beforeAfterStopId) {
+			if (!this.beforeAfterStopIds.containsKey(directionId)) {
+				this.beforeAfterStopIds.put(directionId, new ArrayList<String>());
+			}
+			this.beforeAfterStopIds.get(directionId).add(beforeAfterStopId);
+		}
+
+		public RouteTripSpec addAllBothFrom(int directionId, String stopIdFrom) {
+			addBeforeAfterBoth(directionId, stopIdFrom + DASH + ALL);
+			this.allBeforeAfterStopIds.add(stopIdFrom);
+			return this;
+		}
+
+		public RouteTripSpec addAllBothTo(int directionId, String stopIdTo) {
+			addBeforeAfterBoth(directionId, ALL + DASH + stopIdTo);
+			this.allBeforeAfterStopIds.add(stopIdTo);
+			return this;
+		}
+
+		public RouteTripSpec addBothFromTo(int directionId, String stopIdFrom, String stopIdTo) {
+			addBeforeAfterBoth(directionId, stopIdFrom + DASH + stopIdTo);
+			this.allBeforeAfterStopIds.add(stopIdFrom);
+			this.allBeforeAfterStopIds.add(stopIdTo);
+			return this;
+		}
+
+		private void addBeforeAfterBoth(int directionId, String beforeAfterStopId) {
+			if (!this.beforeAfterBothStopIds.containsKey(directionId)) {
+				this.beforeAfterBothStopIds.put(directionId, new ArrayList<String>());
+			}
+			this.beforeAfterBothStopIds.get(directionId).add(beforeAfterStopId);
+		}
 	}
 }
