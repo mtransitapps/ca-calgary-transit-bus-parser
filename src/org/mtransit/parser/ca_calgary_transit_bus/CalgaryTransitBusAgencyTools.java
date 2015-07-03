@@ -714,6 +714,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			if (gTripStop.getStopSequence() == 1) {
 				beforeStopIds.add(gTripStop.getStopId());
 				beforeStopSequence.add(gTripStop.getStopSequence());
+			}
 			if (gTripStop.getStopSequence() == gStopMaxSequence) {
 				afterStopIds.add(gTripStop.getStopId());
 				afterStopSequence.add(gTripStop.getStopSequence());
