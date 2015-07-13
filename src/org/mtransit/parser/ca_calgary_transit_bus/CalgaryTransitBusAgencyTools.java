@@ -1,5 +1,6 @@
 package org.mtransit.parser.ca_calgary_transit_bus;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,7 +47,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public void start(String[] args) {
-		System.out.printf("\nGenerating Calgary Transit bus data...\n");
+		System.out.printf("\nGenerating Calgary Transit bus data...");
 		long start = System.currentTimeMillis();
 		this.serviceIds = extractUsefulServiceIds(args, this);
 		super.start(args);
@@ -642,7 +643,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public HashSet<MTrip> splitTrip(MRoute mRoute, GTrip gTrip, GSpec gtfs) {
+	public ArrayList<MTrip> splitTrip(MRoute mRoute, GTrip gTrip, GSpec gtfs) {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.id)) {
 			return ALL_ROUTE_TRIPS2.get(mRoute.id).getAllTrips();
 		}
@@ -650,7 +651,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public Pair<Long[], Integer[]> splitTripStop(MRoute mRoute, GTrip gTrip, GTripStop gTripStop, HashSet<MTrip> splitTrips, GSpec routeGTFS) {
+	public Pair<Long[], Integer[]> splitTripStop(MRoute mRoute, GTrip gTrip, GTripStop gTripStop, ArrayList<MTrip> splitTrips, GSpec routeGTFS) {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.id)) {
 			RouteTripSpec rts = ALL_ROUTE_TRIPS2.get(mRoute.id);
 			return SplitUtils.splitTripStop(mRoute, gTrip, gTripStop, routeGTFS, //
