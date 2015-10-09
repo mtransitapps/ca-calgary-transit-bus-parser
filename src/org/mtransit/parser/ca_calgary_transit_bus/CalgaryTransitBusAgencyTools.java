@@ -649,16 +649,16 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public ArrayList<MTrip> splitTrip(MRoute mRoute, GTrip gTrip, GSpec gtfs) {
-		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.id)) {
-			return ALL_ROUTE_TRIPS2.get(mRoute.id).getAllTrips();
+		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
+			return ALL_ROUTE_TRIPS2.get(mRoute.getId()).getAllTrips();
 		}
 		return super.splitTrip(mRoute, gTrip, gtfs);
 	}
 
 	@Override
 	public Pair<Long[], Integer[]> splitTripStop(MRoute mRoute, GTrip gTrip, GTripStop gTripStop, ArrayList<MTrip> splitTrips, GSpec routeGTFS) {
-		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.id)) {
-			return SplitUtils.splitTripStop(mRoute, gTrip, gTripStop, routeGTFS, ALL_ROUTE_TRIPS2.get(mRoute.id));
+		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
+			return SplitUtils.splitTripStop(mRoute, gTrip, gTripStop, routeGTFS, ALL_ROUTE_TRIPS2.get(mRoute.getId()));
 		}
 		return super.splitTripStop(mRoute, gTrip, gTripStop, splitTrips, routeGTFS);
 	}
@@ -666,10 +666,10 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
-		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.id)) {
+		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
 			return; // split
 		}
-		if (mRoute.id == 1l) {
+		if (mRoute.getId() == 1l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(FOREST_LAWN, gTrip.getDirectionId());
 				return;
@@ -677,7 +677,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BOWNESS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 2l) {
+		} else if (mRoute.getId() == 2l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -685,7 +685,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 3l) {
+		} else if (mRoute.getId() == 3l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SANDSTONE, gTrip.getDirectionId());
 				return;
@@ -693,17 +693,17 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ELBOW_DR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 4l) {
+		} else if (mRoute.getId() == 4l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HUNTINGTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 5l) {
+		} else if (mRoute.getId() == 5l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(NORTH_HAVEN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 6l) {
+		} else if (mRoute.getId() == 6l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -711,7 +711,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(WESTBROOK_STATION, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 7l) {
+		} else if (mRoute.getId() == 7l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -719,7 +719,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SOUTH_CALGARY, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 9l) {
+		} else if (mRoute.getId() == 9l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BRIDGELAND, gTrip.getDirectionId());
 				return;
@@ -727,7 +727,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(VARSITY_ACRES, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 10l) {
+		} else if (mRoute.getId() == 10l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DALHOUSIE, gTrip.getDirectionId());
 				return;
@@ -735,7 +735,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SOUTHCENTER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 13l) {
+		} else if (mRoute.getId() == 13l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -743,7 +743,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(WESTHILLS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 15l) {
+		} else if (mRoute.getId() == 15l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -751,7 +751,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 17l) {
+		} else if (mRoute.getId() == 17l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(RENFREW, gTrip.getDirectionId());
 				return;
@@ -759,7 +759,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(RAMSAY, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 18l) {
+		} else if (mRoute.getId() == 18l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -767,7 +767,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MT_ROYAL_U, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 19l) {
+		} else if (mRoute.getId() == 19l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
@@ -775,7 +775,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 20l) {
+		} else if (mRoute.getId() == 20l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(NORTHMOUNT_DR, gTrip.getDirectionId());
 				return;
@@ -783,12 +783,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(HERITAGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 22l) {
+		} else if (mRoute.getId() == 22l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DALHOUSIE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 23l) {
+		} else if (mRoute.getId() == 23l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
 				return;
@@ -796,12 +796,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOOTHILLS_IND, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 24l) {
+		} else if (mRoute.getId() == 24l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 26l) {
+		} else if (mRoute.getId() == 26l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(FRANKLIN, gTrip.getDirectionId());
 				return;
@@ -809,7 +809,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MARLBOROUGH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 30l) {
+		} else if (mRoute.getId() == 30l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -817,7 +817,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 33l) {
+		} else if (mRoute.getId() == 33l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(VISTA_HTS, gTrip.getDirectionId());
 				return;
@@ -825,32 +825,32 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BARLOW_STATION, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 37l) {
+		} else if (mRoute.getId() == 37l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(NORTHWEST_LOOP, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 41l) {
+		} else if (mRoute.getId() == 41l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(LYNNWOOD, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 49l) {
+		} else if (mRoute.getId() == 49l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(FOREST_HTS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 52l) {
+		} else if (mRoute.getId() == 52l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(EVERGREEN_SOMERSET, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 55l) {
+		} else if (mRoute.getId() == 55l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(FALCONRIDGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 57l) {
+		} else if (mRoute.getId() == 57l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MC_CALL_WAY, gTrip.getDirectionId());
 				return;
@@ -858,7 +858,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ERINWOODS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 62l) {
+		} else if (mRoute.getId() == 62l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HIDDEN_VLY, gTrip.getDirectionId());
 				return;
@@ -866,8 +866,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-
-		} else if (mRoute.id == 63l) {
+		} else if (mRoute.getId() == 63l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -875,7 +874,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(LAKEVIEW, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 64l) {
+		} else if (mRoute.getId() == 64l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MAC_EWAN, gTrip.getDirectionId());
 				return;
@@ -883,7 +882,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 66l) {
+		} else if (mRoute.getId() == 66l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
 				return;
@@ -891,7 +890,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CHINOOK, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 69l) {
+		} else if (mRoute.getId() == 69l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DEERFOOT_CTR, gTrip.getDirectionId());
 				return;
@@ -899,7 +898,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 70l) {
+		} else if (mRoute.getId() == 70l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -907,7 +906,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(VALLEY_RIDGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 71l) {
+		} else if (mRoute.getId() == 71l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
 				return;
@@ -915,32 +914,32 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MC_KINGHT_WESTWINDS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 72l) {
+		} else if (mRoute.getId() == 72l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CIRCLE_ROUTE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 73l) {
+		} else if (mRoute.getId() == 73l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(CIRCLE_ROUTE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 74l) {
+		} else if (mRoute.getId() == 74l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(TUSCANY, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 79l) {
+		} else if (mRoute.getId() == 79l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ACADIA_OAKRIDGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 80l) {
+		} else if (mRoute.getId() == 80l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(OAKRIDGE_ACADIA, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 81l) {
+		} else if (mRoute.getId() == 81l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -948,7 +947,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 85l) {
+		} else if (mRoute.getId() == 85l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
 				return;
@@ -956,7 +955,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MC_KNIGHT_WESTWINDS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 86l) {
+		} else if (mRoute.getId() == 86l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -964,7 +963,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 91l) {
+		} else if (mRoute.getId() == 91l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(LIONS_PARK_STATION, gTrip.getDirectionId());
 				return;
@@ -972,7 +971,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BRENTWOOD_STATION, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 92l) {
+		} else if (mRoute.getId() == 92l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ANDERSON_STATION, gTrip.getDirectionId());
 				return;
@@ -980,7 +979,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MC_KENZIE_TOWNE_DR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 93l) {
+		} else if (mRoute.getId() == 93l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WESTBROOK, gTrip.getDirectionId());
 				return;
@@ -988,12 +987,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(COACH_HL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 94l) {
+		} else if (mRoute.getId() == 94l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(_69_ST_STATION, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 96l) {
+		} else if (mRoute.getId() == 96l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -1001,12 +1000,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 98l) {
+		} else if (mRoute.getId() == 98l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(_69_ST_STATION, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 100l) {
+		} else if (mRoute.getId() == 100l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(AIRPORT, gTrip.getDirectionId());
 				return;
@@ -1014,7 +1013,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MC_KNIGHT_WESTWINDS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 102l) {
+		} else if (mRoute.getId() == 102l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -1022,7 +1021,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DOUGLASDALE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 103l) {
+		} else if (mRoute.getId() == 103l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -1030,7 +1029,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MC_KENZIE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 107l) {
+		} else if (mRoute.getId() == 107l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -1038,7 +1037,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SOUTH_CALGARY, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 109l) {
+		} else if (mRoute.getId() == 109l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HARVEST_HLS, gTrip.getDirectionId());
 				return;
@@ -1046,12 +1045,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 110l) {
+		} else if (mRoute.getId() == 110l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 112l) {
+		} else if (mRoute.getId() == 112l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -1059,7 +1058,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SARCEE_RD, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 116l) {
+		} else if (mRoute.getId() == 116l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(COVENTRY_HLS, gTrip.getDirectionId());
 				return;
@@ -1067,7 +1066,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 117l) {
+		} else if (mRoute.getId() == 117l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -1075,7 +1074,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MC_KENZIE_TOWNE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 125l) {
+		} else if (mRoute.getId() == 125l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ERIN_WOODS, gTrip.getDirectionId());
 				return;
@@ -1083,7 +1082,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 126l) {
+		} else if (mRoute.getId() == 126l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(APPLEWOOD, gTrip.getDirectionId());
 				return;
@@ -1091,7 +1090,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 133l) {
+		} else if (mRoute.getId() == 133l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -1099,7 +1098,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CRANSTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 142l) {
+		} else if (mRoute.getId() == 142l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(PANORAMA, gTrip.getDirectionId());
 				return;
@@ -1107,7 +1106,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 145l) {
+		} else if (mRoute.getId() == 145l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(NORTHLAND, gTrip.getDirectionId());
 				return;
@@ -1115,7 +1114,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 151l) {
+		} else if (mRoute.getId() == 151l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -1123,12 +1122,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(NEW_BRIGHTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 152l) {
+		} else if (mRoute.getId() == 152l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(NEW_BRIGHTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 157l) {
+		} else if (mRoute.getId() == 157l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -1136,17 +1135,17 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 158l) {
+		} else if (mRoute.getId() == 158l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ROYAL_OAK, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 174l) {
+		} else if (mRoute.getId() == 174l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(TUSCANY, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 176l) {
+		} else if (mRoute.getId() == 176l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -1154,22 +1153,22 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 178l) {
+		} else if (mRoute.getId() == 178l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(CHAPARRAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 181l) {
+		} else if (mRoute.getId() == 181l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MRU_NORTH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 182l) {
+		} else if (mRoute.getId() == 182l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MRU_SOUTH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 300l) {
+		} else if (mRoute.getId() == 300l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(AIRPORT, gTrip.getDirectionId());
 				return;
@@ -1177,7 +1176,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DOWNTOWN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 301l) {
+		} else if (mRoute.getId() == 301l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(COUNTRY_VLG, gTrip.getDirectionId());
 				return;
@@ -1185,7 +1184,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 302l) {
+		} else if (mRoute.getId() == 302l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
@@ -1193,7 +1192,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SOUTH_HEALTH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 305l) {
+		} else if (mRoute.getId() == 305l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
@@ -1201,7 +1200,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == 306l) {
+		} else if (mRoute.getId() == 306l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WESTBROOK, gTrip.getDirectionId());
 				return;
@@ -1209,7 +1208,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(HERITAGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 405l) {
+		} else if (mRoute.getId() == 405l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BRENTWOOD, gTrip.getDirectionId());
 				return;
@@ -1217,7 +1216,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(HILLHURST, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 406l) {
+		} else if (mRoute.getId() == 406l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MC_KENZIE_TOWNE, gTrip.getDirectionId());
 				return;
@@ -1225,7 +1224,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SHAWVILLE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 407l) {
+		} else if (mRoute.getId() == 407l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BRENTWOOD, gTrip.getDirectionId());
 				return;
@@ -1233,7 +1232,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(GREENWOOD, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 408l) {
+		} else if (mRoute.getId() == 408l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BRENTWOOD, gTrip.getDirectionId());
 				return;
@@ -1241,32 +1240,32 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(VALLEY_RIDGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 411l) {
+		} else if (mRoute.getId() == 411l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 412l) {
+		} else if (mRoute.getId() == 412l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(WESTGATE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 425l) {
+		} else if (mRoute.getId() == 425l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SAGE_HILL_KINCORA, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 430l) {
+		} else if (mRoute.getId() == 430l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SANDSTONE_AIRPORT, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 439l) {
+		} else if (mRoute.getId() == 439l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DISCOVERY_RIDGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 440l) {
+		} else if (mRoute.getId() == 440l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CHATEAU_ESTS, gTrip.getDirectionId());
 				return;
@@ -1274,7 +1273,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FRANKLIN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 445l) {
+		} else if (mRoute.getId() == 445l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SKYVIEW_RANCH, gTrip.getDirectionId());
 				return;
@@ -1282,12 +1281,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SADDLETOWN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 697l) {
+		} else if (mRoute.getId() == 697l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(EVANSTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 698l) {
+		} else if (mRoute.getId() == 698l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WCHS_ST_MARY_S, gTrip.getDirectionId());
 				return;
@@ -1295,7 +1294,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(_69_ST_STATION, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 699l) {
+		} else if (mRoute.getId() == 699l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -1303,7 +1302,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 702l) {
+		} else if (mRoute.getId() == 702l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.NORTH);
 				return;
@@ -1311,7 +1310,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 				return;
 			}
-		} else if (mRoute.id == 703l) {
+		} else if (mRoute.getId() == 703l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SHERWOOD, gTrip.getDirectionId());
 				return;
@@ -1319,7 +1318,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CHURCHILL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 704l) {
+		} else if (mRoute.getId() == 704l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(COUNTRY_HLS, gTrip.getDirectionId());
 				return;
@@ -1327,7 +1326,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CHURCHILL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 705l) {
+		} else if (mRoute.getId() == 705l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(EDGEBROOK_RISE, gTrip.getDirectionId());
 				return;
@@ -1335,7 +1334,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CHURCHILL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 706l) {
+		} else if (mRoute.getId() == 706l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HAMPTONS, gTrip.getDirectionId());
 				return;
@@ -1343,7 +1342,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CHURCHILL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 710l) {
+		} else if (mRoute.getId() == 710l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
 				return;
@@ -1351,7 +1350,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CRANSTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 711l) {
+		} else if (mRoute.getId() == 711l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
 				return;
@@ -1359,7 +1358,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DOUGLAS_GLEN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 712l) {
+		} else if (mRoute.getId() == 712l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
 				return;
@@ -1367,7 +1366,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(PARKLAND, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 713l) {
+		} else if (mRoute.getId() == 713l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
 				return;
@@ -1375,7 +1374,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DEER_RUN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 714l) {
+		} else if (mRoute.getId() == 714l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
 				return;
@@ -1383,7 +1382,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(PRESTWICK, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 715l) {
+		} else if (mRoute.getId() == 715l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
 				return;
@@ -1391,7 +1390,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(QUEENSLAND, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 716l) {
+		} else if (mRoute.getId() == 716l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
 				return;
@@ -1399,7 +1398,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(NEW_BRIGHTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 717l) {
+		} else if (mRoute.getId() == 717l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
 				return;
@@ -1407,7 +1406,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(COPPERFIELD, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 718l) {
+		} else if (mRoute.getId() == 718l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
 				return;
@@ -1415,7 +1414,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DOUGLASDALE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 719l) {
+		} else if (mRoute.getId() == 719l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
 				return;
@@ -1423,7 +1422,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MC_KENZIE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 721l) {
+		} else if (mRoute.getId() == 721l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(TUSCANY, gTrip.getDirectionId());
 				return;
@@ -1431,7 +1430,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BOWNESS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 724l) {
+		} else if (mRoute.getId() == 724l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(TUSCANY, gTrip.getDirectionId());
 				return;
@@ -1439,7 +1438,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BOWNESS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 725l) {
+		} else if (mRoute.getId() == 725l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SILVER_SPGS, gTrip.getDirectionId());
 				return;
@@ -1447,7 +1446,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BOWNESS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 731l) {
+		} else if (mRoute.getId() == 731l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(RIVERBEND, gTrip.getDirectionId());
 				return;
@@ -1455,7 +1454,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CENTRAL_MEMORIAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 732l) {
+		} else if (mRoute.getId() == 732l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CENTRAL_MEMORIAL, gTrip.getDirectionId());
 				return;
@@ -1463,7 +1462,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(GLAMORGAN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 733l) {
+		} else if (mRoute.getId() == 733l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CENTRAL_MEMORIAL, gTrip.getDirectionId());
 				return;
@@ -1471,7 +1470,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(LAKEVIEW, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 734l) {
+		} else if (mRoute.getId() == 734l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(OGDEN, gTrip.getDirectionId());
 				return;
@@ -1479,7 +1478,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CENTRAL_MEMORIAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 735l) {
+		} else if (mRoute.getId() == 735l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(OGDEN_NORTH, gTrip.getDirectionId());
 				return;
@@ -1487,7 +1486,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CENTRAL_MEMORIAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 737l) {
+		} else if (mRoute.getId() == 737l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HARVEST_HLS, gTrip.getDirectionId());
 				return;
@@ -1495,7 +1494,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DIEFENBAKER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 738l) {
+		} else if (mRoute.getId() == 738l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(PANORAMA_HLS_NORTH, gTrip.getDirectionId());
 				return;
@@ -1503,7 +1502,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DIEFENBAKER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 739l) {
+		} else if (mRoute.getId() == 739l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(PANORAMA_HLS, gTrip.getDirectionId());
 				return;
@@ -1511,7 +1510,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DIEFENBAKER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 740l) {
+		} else if (mRoute.getId() == 740l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
 				return;
@@ -1519,7 +1518,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 741l) {
+		} else if (mRoute.getId() == 741l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SADDLECREST, gTrip.getDirectionId());
 				return;
@@ -1527,7 +1526,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 742l) {
+		} else if (mRoute.getId() == 742l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SADDLE_RIDGE, gTrip.getDirectionId());
 				return;
@@ -1535,7 +1534,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 743l) {
+		} else if (mRoute.getId() == 743l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WHITEHORN_STATION, gTrip.getDirectionId());
 				return;
@@ -1543,7 +1542,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 744l) {
+		} else if (mRoute.getId() == 744l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(COVENTRY_SOUTH, gTrip.getDirectionId());
 				return;
@@ -1551,7 +1550,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 745l) {
+		} else if (mRoute.getId() == 745l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(VISTA_HTS, gTrip.getDirectionId());
 				return;
@@ -1559,7 +1558,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 746l) {
+		} else if (mRoute.getId() == 746l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(COVENTRY_HLS, gTrip.getDirectionId());
 				return;
@@ -1567,7 +1566,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 747l) {
+		} else if (mRoute.getId() == 747l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HIDDEN_VLY, gTrip.getDirectionId());
 				return;
@@ -1575,7 +1574,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 751l) {
+		} else if (mRoute.getId() == 751l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(TARADALE, gTrip.getDirectionId());
 				return;
@@ -1583,7 +1582,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 752l) {
+		} else if (mRoute.getId() == 752l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MARTINDALE, gTrip.getDirectionId());
 				return;
@@ -1591,12 +1590,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 753l) {
+		} else if (mRoute.getId() == 753l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(EVANSTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 754l) {
+		} else if (mRoute.getId() == 754l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
 				return;
@@ -1604,7 +1603,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 755l) {
+		} else if (mRoute.getId() == 755l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CASTLERIDGE, gTrip.getDirectionId());
 				return;
@@ -1612,7 +1611,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 756l) {
+		} else if (mRoute.getId() == 756l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MARTINDALE, gTrip.getDirectionId());
 				return;
@@ -1620,7 +1619,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 757l) {
+		} else if (mRoute.getId() == 757l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CORAL_SPGS, gTrip.getDirectionId());
 				return;
@@ -1628,7 +1627,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 758l) {
+		} else if (mRoute.getId() == 758l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(TARADALE, gTrip.getDirectionId());
 				return;
@@ -1636,7 +1635,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 759l) {
+		} else if (mRoute.getId() == 759l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(FALCONRIDGE, gTrip.getDirectionId());
 				return;
@@ -1644,7 +1643,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 760l) {
+		} else if (mRoute.getId() == 760l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BONAVISTA_WEST, gTrip.getDirectionId());
 				return;
@@ -1652,7 +1651,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 761l) {
+		} else if (mRoute.getId() == 761l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
 				return;
@@ -1660,7 +1659,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(AUBURN_BAY, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 762l) {
+		} else if (mRoute.getId() == 762l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BONAVISTA, gTrip.getDirectionId());
 				return;
@@ -1668,7 +1667,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 763l) {
+		} else if (mRoute.getId() == 763l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
 				return;
@@ -1676,7 +1675,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(WOODBINE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 764l) {
+		} else if (mRoute.getId() == 764l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
 				return;
@@ -1684,7 +1683,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SOMERSET_BRIDLEWOOD_STATION, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 765l) {
+		} else if (mRoute.getId() == 765l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
 				return;
@@ -1692,7 +1691,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SOMERSET_BRIDLEWOOD_STATION, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 766l) {
+		} else if (mRoute.getId() == 766l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
 				return;
@@ -1700,7 +1699,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(EVERGREEN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 770l) {
+		} else if (mRoute.getId() == 770l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WESTERN_CANADA, gTrip.getDirectionId());
 				return;
@@ -1708,12 +1707,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(OGDEN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 771l) {
+		} else if (mRoute.getId() == 771l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(CHINOOK_STATION, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 773l) {
+		} else if (mRoute.getId() == 773l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(R_THIRSK, gTrip.getDirectionId());
 				return;
@@ -1721,7 +1720,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ROCKY_RIDGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 774l) {
+		} else if (mRoute.getId() == 774l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(R_THIRSK, gTrip.getDirectionId());
 				return;
@@ -1729,7 +1728,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ROYAL_OAK, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 775l) {
+		} else if (mRoute.getId() == 775l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITADEL, gTrip.getDirectionId());
 				return;
@@ -1737,7 +1736,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(R_THIRSK, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 776l) {
+		} else if (mRoute.getId() == 776l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WISE_WOOD, gTrip.getDirectionId());
 				return;
@@ -1745,7 +1744,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(PALLISER_OAKRIDGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 777l) {
+		} else if (mRoute.getId() == 777l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WISE_WOOD, gTrip.getDirectionId());
 				return;
@@ -1753,7 +1752,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(EVERGREEN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 778l) {
+		} else if (mRoute.getId() == 778l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WISE_WOOD, gTrip.getDirectionId());
 				return;
@@ -1761,7 +1760,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(WOODLANDS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 779l) {
+		} else if (mRoute.getId() == 779l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WISE_WOOD, gTrip.getDirectionId());
 				return;
@@ -1769,7 +1768,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(WOODBINE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 780l) {
+		} else if (mRoute.getId() == 780l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WISE_WOOD, gTrip.getDirectionId());
 				return;
@@ -1777,7 +1776,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(OAKRIDGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 791l) {
+		} else if (mRoute.getId() == 791l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MAC_EWAN, gTrip.getDirectionId());
 				return;
@@ -1785,7 +1784,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(QUEEN_ELIZABETH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 792l) {
+		} else if (mRoute.getId() == 792l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SANDSTONE, gTrip.getDirectionId());
 				return;
@@ -1793,7 +1792,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(QUEEN_ELIZABETH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 795l) {
+		} else if (mRoute.getId() == 795l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(VINCENT_MASSEY, gTrip.getDirectionId());
 				return;
@@ -1801,7 +1800,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(STRATHCONA, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 796l) {
+		} else if (mRoute.getId() == 796l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(EDGEMONT, gTrip.getDirectionId());
 				return;
@@ -1809,7 +1808,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(TOM_BAINES, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 798l) {
+		} else if (mRoute.getId() == 798l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(TARADALE, gTrip.getDirectionId());
 				return;
@@ -1817,7 +1816,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ANNIE_GALE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 799l) {
+		} else if (mRoute.getId() == 799l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CORAL_SPGS, gTrip.getDirectionId());
 				return;
@@ -1825,7 +1824,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ANNIE_GALE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 801l) {
+		} else if (mRoute.getId() == 801l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BREBEUF, gTrip.getDirectionId());
 				return;
@@ -1833,7 +1832,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ROYAL_OAK, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 802l) {
+		} else if (mRoute.getId() == 802l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BREBEUF, gTrip.getDirectionId());
 				return;
@@ -1841,7 +1840,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(HAWKWOOD, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 804l) {
+		} else if (mRoute.getId() == 804l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SHERWOOD, gTrip.getDirectionId());
 				return;
@@ -1849,7 +1848,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BREBEUF, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 805l) {
+		} else if (mRoute.getId() == 805l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HAMPTONS, gTrip.getDirectionId());
 				return;
@@ -1857,7 +1856,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BREBEUF, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 807l) {
+		} else if (mRoute.getId() == 807l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BREBEUF, gTrip.getDirectionId());
 				return;
@@ -1865,7 +1864,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ROCKY_RIDGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 811l) {
+		} else if (mRoute.getId() == 811l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
 				return;
@@ -1873,7 +1872,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(TUSCANY, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 812l) {
+		} else if (mRoute.getId() == 812l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
 				return;
@@ -1881,7 +1880,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITADEL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 813l) {
+		} else if (mRoute.getId() == 813l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
 				return;
@@ -1889,7 +1888,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ARBOUR_LK, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 814l) {
+		} else if (mRoute.getId() == 814l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
 				return;
@@ -1897,7 +1896,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ROYAL_OAK, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 815l) {
+		} else if (mRoute.getId() == 815l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
 				return;
@@ -1905,7 +1904,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ARBOUR_LK, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 816l) {
+		} else if (mRoute.getId() == 816l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
 				return;
@@ -1913,7 +1912,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CITADEL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 817l) {
+		} else if (mRoute.getId() == 817l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
 				return;
@@ -1921,7 +1920,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ROCKY_RIDGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 818l) {
+		} else if (mRoute.getId() == 818l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HAMPTONS, gTrip.getDirectionId());
 				return;
@@ -1929,7 +1928,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 819l) {
+		} else if (mRoute.getId() == 819l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SHERWOOD, gTrip.getDirectionId());
 				return;
@@ -1937,7 +1936,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 821l) {
+		} else if (mRoute.getId() == 821l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MTN_PARK, gTrip.getDirectionId());
 				return;
@@ -1945,7 +1944,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BISHOP_O_BYRNE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 822l) {
+		} else if (mRoute.getId() == 822l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MC_KENZIE_LK_WAY, gTrip.getDirectionId());
 				return;
@@ -1953,7 +1952,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BISHOP_O_BYRNE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 830l) {
+		} else if (mRoute.getId() == 830l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SANDSTONE, gTrip.getDirectionId());
 				return;
@@ -1961,7 +1960,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(M_D_HOUET, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 831l) {
+		} else if (mRoute.getId() == 831l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
 				return;
@@ -1969,7 +1968,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SCENIC_ACRES_NORTH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 832l) {
+		} else if (mRoute.getId() == 832l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
 				return;
@@ -1977,7 +1976,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SCENIC_ACRES_SOUTH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 833l) {
+		} else if (mRoute.getId() == 833l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DALHOUSIE, gTrip.getDirectionId());
 				return;
@@ -1985,7 +1984,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(M_D_HOUET, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 834l) {
+		} else if (mRoute.getId() == 834l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DALHOUSIE, gTrip.getDirectionId());
 				return;
@@ -1993,22 +1992,22 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(M_D_HOUET, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 835l) {
+		} else if (mRoute.getId() == 835l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ANDERSON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 837l) {
+		} else if (mRoute.getId() == 837l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(SCENIC_ACRES_SOUTH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 838l) {
+		} else if (mRoute.getId() == 838l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(SCENIC_ACRES_NORTH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 841l) {
+		} else if (mRoute.getId() == 841l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(NOTRE_DAME, gTrip.getDirectionId());
 				return;
@@ -2016,7 +2015,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(HIDDEN_VLY, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 842l) {
+		} else if (mRoute.getId() == 842l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(NOTRE_DAME, gTrip.getDirectionId());
 				return;
@@ -2024,7 +2023,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MAC_EWAN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 851l) {
+		} else if (mRoute.getId() == 851l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(LYNNWOOD, gTrip.getDirectionId());
 				return;
@@ -2032,7 +2031,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ST_AUGUSTINE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 853l) {
+		} else if (mRoute.getId() == 853l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(RIVERBEND, gTrip.getDirectionId());
 				return;
@@ -2040,7 +2039,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ST_AUGUSTINE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 857l) {
+		} else if (mRoute.getId() == 857l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_STEPHEN, gTrip.getDirectionId());
 				return;
@@ -2048,7 +2047,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(EVERGREEN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 860l) {
+		} else if (mRoute.getId() == 860l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(B_GRANDIN, gTrip.getDirectionId());
 				return;
@@ -2056,7 +2055,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CRANSTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 861l) {
+		} else if (mRoute.getId() == 861l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(B_GRANDIN, gTrip.getDirectionId());
 				return;
@@ -2064,7 +2063,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(AUBURN_BAY, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 878l) {
+		} else if (mRoute.getId() == 878l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(F_WHELIHAN, gTrip.getDirectionId());
 				return;
@@ -2072,7 +2071,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CHAPARRAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 880l) {
+		} else if (mRoute.getId() == 880l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_MATTHEW, gTrip.getDirectionId());
 				return;
@@ -2080,17 +2079,17 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(HERITAGE_STATION, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 883l) {
+		} else if (mRoute.getId() == 883l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(EVANSTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 884l) {
+		} else if (mRoute.getId() == 884l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(KINCORA, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 888l) {
+		} else if (mRoute.getId() == 888l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(NORTH_POINTE, gTrip.getDirectionId());
 				return;
@@ -2098,12 +2097,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ST_MARGARET, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 889l) {
+		} else if (mRoute.getId() == 889l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BEDDINGTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 892l) {
+		} else if (mRoute.getId() == 892l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_ISABELLA, gTrip.getDirectionId());
 				return;
