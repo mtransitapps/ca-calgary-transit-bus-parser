@@ -410,13 +410,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		}
 	}
 
+	private static final String SLASH = " / ";
 	private static final String _69_ST_STATION = "69 St Sta";
-	private static final String ACADIA = "Acadia";
 	private static final String OAKRIDGE = "Oakridge";
-	private static final String ACADIA_OAKRIDGE = ACADIA + " / " + OAKRIDGE;
 	private static final String AIRPORT = "Airport";
 	private static final String ANDERSON = "Anderson";
-	private static final String ANDERSON_STATION = ANDERSON; // "Anderson Sta";
+	private static final String ANDERSON_STATION = ANDERSON + " Sta";
 	private static final String ANNIE_GALE = "Annie Gale";
 	private static final String APPLEWOOD = "Applewood";
 	private static final String ARBOUR_LK = "Arbour Lk";
@@ -431,14 +430,16 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String BOWNESS = "Bowness";
 	private static final String BREBEUF = "Brebeuf";
 	private static final String BRENTWOOD = "Brentwood";
-	private static final String BRENTWOOD_STATION = BRENTWOOD; // "Brentwood Sta";
+	private static final String BRENTWOOD_STATION = BRENTWOOD + " Sta";
 	private static final String BRIDGELAND = "Bridgeland";
+	private static final String BRIDLEWOOD = "Bridlewood";
+	private static final String BRIDLEWOOD_STATION = BRIDLEWOOD + " Sta";
 	private static final String CASTLERIDGE = "Castleridge";
 	private static final String CENTRAL_MEMORIAL = "Central Memorial";
 	private static final String CHAPARRAL = "Chaparral";
 	private static final String CHATEAU_ESTS = "Chateau Ests";
 	private static final String CHINOOK = "Chinook";
-	private static final String CHINOOK_STATION = CHINOOK; // "Chinook Sta";
+	private static final String CHINOOK_STATION = CHINOOK + " Sta";
 	private static final String CHURCHILL = "Churchill";
 	private static final String CIRCLE_ROUTE = "Circle Route";
 	private static final String CITADEL = "Citadel";
@@ -470,7 +471,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String EVANSTON = "Evanston";
 	private static final String EVERGREEN = "Evergreen";
 	private static final String SOMERSET = "Somerset";
-	private static final String EVERGREEN_SOMERSET = EVERGREEN + " / " + SOMERSET;
 	private static final String F_WHELIHAN = "F Whelihan";
 	private static final String FALCONRIDGE = "Falconridge";
 	private static final String FOOTHILLS = "Foothills";
@@ -485,14 +485,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String HARVEST_HLS = "Harvest Hls";
 	private static final String HAWKWOOD = "Hawkwood";
 	private static final String HERITAGE = "Heritage";
-	private static final String HERITAGE_STATION = HERITAGE; // "Heritage Sta";
+	private static final String HERITAGE_STATION = HERITAGE + " Sta";
 	private static final String HIDDEN_VLY = "Hidden Vly";
 	private static final String HILLHURST = "Hillhurst";
 	private static final String HUNTINGTON = "Huntington";
 	private static final String KINCORA = "Kincora";
 	private static final String LAKEVIEW = "Lakeview";
-	private static final String LIONS_PARK = "Lions Park";
-	private static final String LIONS_PARK_STATION = LIONS_PARK; // "Lions Park Sta";
+	private static final String LIONS_PARK = "Lions Pk";
+	private static final String LIONS_PARK_STATION = LIONS_PARK + " Sta";
 	private static final String LYNNWOOD = "Lynnwood";
 	private static final String M_D_HOUET = "M d'Houet";
 	private static final String MAC_EWAN = "MacEwan";
@@ -502,8 +502,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String MC_KENZIE = "McKenzie";
 	private static final String MC_KENZIE_LK_WAY = MC_KENZIE + " Lk Way";
 	private static final String MC_KENZIE_TOWNE = MC_KENZIE + " Towne";
-	private static final String MC_KENZIE_TOWNE_DR = MC_KENZIE_TOWNE; // "McKenzie Towne Dr";
-	private static final String MC_KINGHT_WESTWINDS = "McKinght-Westwinds";
 	private static final String MC_KNIGHT_WESTWINDS = "McKnight-Westwinds";
 	private static final String MRU = "MRU";
 	private static final String MRU_NORTH = MRU + " North";
@@ -517,10 +515,10 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String NORTHMOUNT_DR = "Northmount Dr";
 	private static final String NORTHWEST_LOOP = "Northwest Loop";
 	private static final String NOTRE_DAME = "Notre Dame";
-	private static final String OAKRIDGE_ACADIA = OAKRIDGE + " / " + ACADIA;
 	private static final String OGDEN = "Ogden";
 	private static final String OGDEN_NORTH = "North " + OGDEN;
-	private static final String PALLISER_OAKRIDGE = "Palliser / Oakridge";
+	private static final String PALLISER = "Palliser";
+	private static final String PALLISER_OAKRIDGE = PALLISER + SLASH + OAKRIDGE;
 	private static final String PANORAMA = "Panorama";
 	private static final String PANORAMA_HLS = PANORAMA + " Hls";
 	private static final String PANORAMA_HLS_NORTH = "N " + PANORAMA_HLS;
@@ -540,9 +538,8 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String SADDLE_RIDGE = "Saddle Rdg";
 	private static final String SADDLETOWN = "Saddletown";
 	private static final String SADDLETOWNE = "Saddletowne";
-	private static final String SAGE_HILL_KINCORA = "Sage Hill / Kincora";
+	private static final String SAGE_HILL = "Sage Hl";
 	private static final String SANDSTONE = "Sandstone";
-	private static final String SANDSTONE_AIRPORT = "Sandstone / " + AIRPORT;
 	private static final String SARCEE_RD = "Sarcee Rd";
 	private static final String SCARLETT = "Scarlett";
 	private static final String SCENIC_ACRES = "Scenic Acres";
@@ -552,19 +549,18 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String SHERWOOD = "Sherwood";
 	private static final String SILVER_SPGS = "Silver Spgs";
 	private static final String SKYVIEW_RANCH = "Skyview Ranch";
-	private static final String SOMERSET_BRIDLEWOOD_STATION = SOMERSET + "-Bridlewood Sta";
+	private static final String SOMERSET_BRIDLEWOOD_STATION = SOMERSET + "-" + BRIDLEWOOD_STATION;
 	private static final String SOUTH_CALGARY = "South Calgary";
 	private static final String SOUTH_HEALTH = "South Health";
 	private static final String SOUTHCENTER = "Southcentre";
 	private static final String SOUTHLAND = "Southland";
-	private static final String SOUTHLAND_STATION = SOUTHLAND; // "Southland Sta";
+	private static final String SOUTHLAND_STATION = SOUTHLAND + " Sta";
 	private static final String ST_AUGUSTINE = "St Augustine";
 	private static final String ST_FRANCIS = "St Francis";
 	private static final String ST_ISABELLA = "St Isabella";
 	private static final String ST_MARGARET = "St Margaret";
 	private static final String ST_MATTHEW = "St Matthew";
 	private static final String ST_STEPHEN = "St Stephen";
-	private static final String STATION_HERITAGE = "Sta Heritage";
 	private static final String STRATHCONA = "Strathcona";
 	private static final String TARADALE = "Taradale";
 	private static final String TOM_BAINES = "Tom Baines";
@@ -573,14 +569,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String VARSITY_ACRES = "Varsity Acres";
 	private static final String VINCENT_MASSEY = "V Massey";
 	private static final String VISTA_HTS = "Vista Hts";
-	private static final String WCHS_ST_MARY_S = "WCHS / St Mary''s";
+	private static final String WCHS_ST_MARY_S = "WCHS" + SLASH + "St Mary''s";
 	private static final String WESTBROOK = "Westbrook";
 	private static final String WESTBROOK_STATION = WESTBROOK + " Sta";
 	private static final String WESTERN_CANADA = "Western Canada";
 	private static final String WESTGATE = "Westgate";
 	private static final String WESTHILLS = "Westhills";
 	private static final String WHITEHORN = "Whitehorn";
-	private static final String WHITEHORN_STATION = WHITEHORN; // WHITEHORN + " Sta";
+	private static final String WHITEHORN_STATION = WHITEHORN + " Sta";
 	private static final String WISE_WOOD = "Wise Wood";
 	private static final String WOODBINE = "Woodbine";
 	private static final String WOODLANDS = "Woodlands";
@@ -588,6 +584,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
+		map2.put(52l, new RouteTripSpec(52l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, EVERGREEN, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOMERSET) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "9207", "4994", "7997", "6863", "9189" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "9189", "4798", "9199", "9207" })) //
+				.compileBothTripSort());
 		map2.put(56l, new RouteTripSpec(56l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOUTHLAND_STATION, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, ANDERSON_STATION) //
@@ -595,6 +599,22 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "6461", "6097" })) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "6097", "6562", "6461" })) //
+				.compileBothTripSort());
+		map2.put(79l, new RouteTripSpec(79l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, HERITAGE_STATION, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOUTHLAND_STATION) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "6420", "6423", "4244", "6412" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "6412", "6416", "6420" })) //
+				.compileBothTripSort());
+		map2.put(80l, new RouteTripSpec(80l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, HERITAGE_STATION, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOUTHLAND_STATION) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "6440", "6116", "5762" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "5762", "6433", "6440" })) //
 				.compileBothTripSort());
 		map2.put(94l, new RouteTripSpec(94l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, STRATHCONA, //
@@ -619,6 +639,22 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "5574", "5299", "5227", "8339" })) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "8339", "5108", "5580", "5574" })) //
+				.compileBothTripSort());
+		map2.put(425l, new RouteTripSpec(425l, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, COUNTRY_VLG, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SAGE_HILL) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { "4734", "4442", "3497" })) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { "3497", "4450", "4734" })) //
+				.compileBothTripSort());
+		map2.put(430l, new RouteTripSpec(430l, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, AIRPORT, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SANDSTONE) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { "9873", "4100", "7557" })) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { "7557", "4085", "9873" })) //
 				.compileBothTripSort());
 		map2.put(439l, new RouteTripSpec(439l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION, //
@@ -840,11 +876,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOREST_HTS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.getId() == 52l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(EVERGREEN_SOMERSET, gTrip.getDirectionId());
-				return;
-			}
 		} else if (mRoute.getId() == 55l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(FALCONRIDGE, gTrip.getDirectionId());
@@ -911,7 +942,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
 				return;
 			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(MC_KINGHT_WESTWINDS, gTrip.getDirectionId());
+				mTrip.setHeadsignString(MC_KNIGHT_WESTWINDS, gTrip.getDirectionId());
 				return;
 			}
 		} else if (mRoute.getId() == 72l) {
@@ -927,16 +958,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mRoute.getId() == 74l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(TUSCANY, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 79l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ACADIA_OAKRIDGE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 80l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(OAKRIDGE_ACADIA, gTrip.getDirectionId());
 				return;
 			}
 		} else if (mRoute.getId() == 81l) {
@@ -976,7 +997,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ANDERSON_STATION, gTrip.getDirectionId());
 				return;
 			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(MC_KENZIE_TOWNE_DR, gTrip.getDirectionId());
+				mTrip.setHeadsignString(MC_KENZIE_TOWNE, gTrip.getDirectionId());
 				return;
 			}
 		} else if (mRoute.getId() == 93l) {
@@ -1248,16 +1269,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mRoute.getId() == 412l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(WESTGATE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 425l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SAGE_HILL_KINCORA, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 430l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SANDSTONE_AIRPORT, gTrip.getDirectionId());
 				return;
 			}
 		} else if (mRoute.getId() == 439l) {
@@ -2076,7 +2087,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ST_MATTHEW, gTrip.getDirectionId());
 				return;
 			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(HERITAGE_STATION, gTrip.getDirectionId());
+				mTrip.setHeadsignString(HERITAGE, gTrip.getDirectionId());
 				return;
 			}
 		} else if (mRoute.getId() == 883l) {
@@ -2130,9 +2141,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final String REGEX_START_END = "((^|[^A-Z]){1}(%s)([^a-zA-Z]|$){1})";
 	private static final String REGEX_START_END_REPLACEMENT = "$2 %s $4";
-
-	private static final Pattern AT_SIGN = Pattern.compile("([\\s]*@[\\s]*)", Pattern.CASE_INSENSITIVE);
-	private static final String AT_SIGN_REPLACEMENT = " / ";
 
 	private static final Pattern AV = Pattern.compile(String.format(REGEX_START_END, "AV|AVE"));
 	private static final String AV_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "Avenue");
@@ -2261,7 +2269,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	public String cleanStopName(String gStopName) {
 		gStopName = STARTS_WITH_BOUND.matcher(gStopName).replaceAll(StringUtils.EMPTY);
 		gStopName = ENDS_WITH_BOUND.matcher(gStopName).replaceAll(StringUtils.EMPTY);
-		gStopName = AT_SIGN.matcher(gStopName).replaceAll(AT_SIGN_REPLACEMENT);
 		gStopName = AV.matcher(gStopName).replaceAll(AV_REPLACEMENT);
 		gStopName = PA.matcher(gStopName).replaceAll(PA_REPLACEMENT);
 		gStopName = HT.matcher(gStopName).replaceAll(HT_REPLACEMENT);
@@ -2308,5 +2315,4 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		gStopName = STARTS_WITH_SLASH.matcher(gStopName).replaceAll(StringUtils.EMPTY);
 		return CleanUtils.cleanLabel(gStopName);
 	}
-
 }
