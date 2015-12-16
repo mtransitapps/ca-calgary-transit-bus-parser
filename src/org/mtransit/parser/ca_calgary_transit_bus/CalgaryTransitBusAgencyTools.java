@@ -187,6 +187,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		case 55: return null;
 		case 56: return null;
 		case 57: return null;
+		case 59: return null; // TODO really?
 		case 60: return null;
 		case 61: return COLOR_BUS_ROUTES;
 		case 62: return COLOR_BUS_ROUTES_EXPRESS;
@@ -369,6 +370,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		case 804: return COLOR_BUS_ROUTES_SCHOOL;
 		case 805: return COLOR_BUS_ROUTES_SCHOOL;
 		case 807: return COLOR_BUS_ROUTES_SCHOOL;
+		case 810: return COLOR_BUS_ROUTES_SCHOOL;
 		case 811: return COLOR_BUS_ROUTES_SCHOOL;
 		case 812: return COLOR_BUS_ROUTES_SCHOOL;
 		case 813: return COLOR_BUS_ROUTES_SCHOOL;
@@ -380,6 +382,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		case 819: return COLOR_BUS_ROUTES_SCHOOL;
 		case 821: return COLOR_BUS_ROUTES_SCHOOL;
 		case 822: return COLOR_BUS_ROUTES_SCHOOL;
+		case 825: return COLOR_BUS_ROUTES_SCHOOL;
 		case 830: return COLOR_BUS_ROUTES_SCHOOL;
 		case 831: return COLOR_BUS_ROUTES_SCHOOL;
 		case 832: return COLOR_BUS_ROUTES_SCHOOL;
@@ -425,6 +428,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String BEAVERBROOK = "Beaverbrook";
 	private static final String BEDDINGTON = "Beddington";
 	private static final String BISHOP_O_BYRNE = "B O'Byrne";
+	private static final String BISHOP_CARROLL = "B Carroll";
 	private static final String BONAVISTA = "Bonavista";
 	private static final String BONAVISTA_WEST = "W " + BONAVISTA;
 	private static final String BOWNESS = "Bowness";
@@ -561,6 +565,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String ST_MARGARET = "St Margaret";
 	private static final String ST_MATTHEW = "St Matthew";
 	private static final String ST_STEPHEN = "St Stephen";
+	private static final String STATION_HERITAGE = "Sta " + HERITAGE;
 	private static final String STRATHCONA = "Strathcona";
 	private static final String TARADALE = "Taradale";
 	private static final String TOM_BAINES = "Tom Baines";
@@ -636,9 +641,9 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, FOOTHILLS, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, PARKHILL) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "5574", "5299", "5227", "8339" })) //
+						Arrays.asList(new String[] { "5574", "5299", "5227", "8339", "8340", })) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "8339", "5108", "5580", "5574" })) //
+						Arrays.asList(new String[] { "8340", "8339", "5108", "5580", "5574" })) //
 				.compileBothTripSort());
 		map2.put(425l, new RouteTripSpec(425l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, COUNTRY_VLG, //
@@ -1875,6 +1880,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ROCKY_RIDGE, gTrip.getDirectionId());
 				return;
 			}
+		} else if (mRoute.getId() == 810l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignString(NORTH_POINTE, gTrip.getDirectionId());
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
+				return;
+			}
 		} else if (mRoute.getId() == 811l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
@@ -1961,6 +1974,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				return;
 			} else if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(BISHOP_O_BYRNE, gTrip.getDirectionId());
+				return;
+			}
+		} else if (mRoute.getId() == 825l) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignString(MC_KENZIE_TOWNE, gTrip.getDirectionId());
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignString(BISHOP_CARROLL, gTrip.getDirectionId());
 				return;
 			}
 		} else if (mRoute.getId() == 830l) {
