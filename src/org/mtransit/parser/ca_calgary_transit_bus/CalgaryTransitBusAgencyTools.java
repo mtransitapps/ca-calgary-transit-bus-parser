@@ -606,7 +606,35 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { "5252", "7295", "9066" })) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "9066", "5047", "5252" })) //
+						Arrays.asList(new String[] { "9066", "3944", "5252" })) //
+				.compileBothTripSort());
+		map2.put(6l, new RouteTripSpec(6l, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, KILLARNEY_26_AVE) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"3711", "8771", "5303" //
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"5303", // ==
+								"5117", // !=
+								"5118", // !=
+								"5120", // ==
+								"5122", "7941", "3711" //
+						})) //
+				.compileBothTripSort());
+		map2.put(13l, new RouteTripSpec(13l, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WESTHILLS) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"6866", "3797", "5144", "5580" //
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"5580", "3798", "6866" //
+						})) //
 				.compileBothTripSort());
 		map2.put(15l, new RouteTripSpec(15l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.NORTH.getId(), // Fish Crk-Lacombe Sta
@@ -620,9 +648,15 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.EAST.getId(), // Rundle LRT Sta
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.WEST.getId()) // WB University WY @ Craigie Hall
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "5697", "5703", "5706", "5710", "5725", "5718" })) //
+						Arrays.asList(new String[] { //
+						"5408", "5703", "5706", "5710", "5725", "5718" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "5718", "9413", "5735", "5697" })) //
+						Arrays.asList(new String[] { //
+						"5718", "9413", "5735", "7573", // ==
+								"5697", // !=
+								"5408" // !=
+						})) //
 				.compileBothTripSort());
 		map2.put(26l, new RouteTripSpec(26l, //
 				MInboundType.INBOUND.intValue(), MTrip.HEADSIGN_TYPE_INBOUND, MInboundType.INBOUND.getId(), //
@@ -668,9 +702,9 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRENTWOOD, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHINOOK) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "6374", "8118", "8144", "6592", "5742", "8979", "7273" })) //
+						Arrays.asList(new String[] { "6374", "8118", "8144", "6592", "5742", "8979", "3845" })) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "7273", "6369", "6374" })) //
+						Arrays.asList(new String[] { "3845", "6369", "6374" })) //
 				.compileBothTripSort());
 		map2.put(79l, new RouteTripSpec(79l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, HERITAGE_STATION, //
@@ -715,6 +749,22 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"6545", //
 								"6542", "6866" })) //
 				.compileBothTripSort());
+		map2.put(120l, new RouteTripSpec(120l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CROWFOOT, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, DALHOUSIE) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "4003", "3857" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "3857", "4003" })) //
+				.compileBothTripSort());
+		map2.put(134l, new RouteTripSpec(134l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CROWFOOT, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, DALHOUSIE) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "4003", "3857" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "3857", "4003" })) //
+				.compileBothTripSort());
 		map2.put(158l, new RouteTripSpec(158l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, ROYAL_OAK, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, TUSCANY) //
@@ -722,6 +772,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "2150", "3533", "3535" })) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "3535", "8892", "2150" })) //
+				.compileBothTripSort());
+		map2.put(404l, new RouteTripSpec(404l, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.EAST.getId(), //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.WEST.getId()) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { "6628", "6730" })) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { "6730", "6628" })) //
 				.compileBothTripSort());
 		map2.put(419l, new RouteTripSpec(419l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, FOOTHILLS, //
@@ -789,6 +847,22 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"4093", "4100" })) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "4100", "8421", "5783" })) //
+				.compileBothTripSort());
+		map2.put(748l, new RouteTripSpec(748l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Hidden Ranch", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CRESCENT_HTS) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "112113", "9705" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "9344", "112112" })) //
+				.compileBothTripSort());
+		map2.put(750l, new RouteTripSpec(750l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Nelson Mandela", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CORAL_SPGS) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "9625", "5792" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "7671", "9440" })) //
 				.compileBothTripSort());
 		map2.put(797l, new RouteTripSpec(797l, //
 				0, MTrip.HEADSIGN_TYPE_STRING, TOM_BAINES, // AM
@@ -1951,6 +2025,11 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SOUTH_CALGARY, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 8l) {
+			if (mTrip.getHeadsignId() == 0) {
+				mTrip.setHeadsignString(NORTH_POINTE, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 9l) {
 			if (mTrip.getHeadsignId() == 0) {
 				mTrip.setHeadsignString(BRIDGELAND, mTrip.getHeadsignId());
@@ -2028,6 +2107,11 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ERINWOODS, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 59l) {
+			if (mTrip.getHeadsignId() == 0) {
+				mTrip.setHeadsignString(SADDLECREST, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 85l) {
 			if (mTrip.getHeadsignId() == 0) {
 				mTrip.setHeadsignString(SADDLERIDGE, mTrip.getHeadsignId());
@@ -2063,6 +2147,11 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			} else if (mTrip.getHeadsignId() == 1) {
 				mTrip.setHeadsignString(CRANSTON, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 159l) {
+			if (mTrip.getHeadsignId() == 1) {
+				mTrip.setHeadsignString("Saddlebrook", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 300l) {
