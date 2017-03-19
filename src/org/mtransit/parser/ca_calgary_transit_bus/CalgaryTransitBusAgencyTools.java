@@ -34,6 +34,7 @@ import org.mtransit.parser.mt.data.MTripStop;
 // https://data.calgary.ca/en/Transportation-Transit/Calgary-Transit-Scheduling-Data/npk7-z3bj
 // https://data.calgary.ca/download/npk7-z3bj/application%2Fzip
 // https://data.calgary.ca/Transportation-Transit/Calgary-Transit-Scheduling-Data/npk7-z3bj
+// https://data.calgary.ca/download/npk7-z3bj/application%2Fzip
 // https://data.calgary.ca/d/npk7-z3bj?category=Transportation-Transit&view_name=Calgary-Transit-Scheduling-Data
 // https://data.calgary.ca/api/file_data/38ff3c2d-efde-4d50-b83c-3a2f49f390e5?filename=CT_GTFS.zip
 public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
@@ -215,6 +216,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		case 79: return null;
 		case 80: return null;
 		case 81: return COLOR_BUS_ROUTES;
+		case 82: return null; // TODO ?
 		case 83: return null;
 		case 84: return COLOR_BUS_ROUTES;
 		case 85: return null;
@@ -249,6 +251,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		case 125: return COLOR_BUS_ROUTES_EXPRESS;
 		case 126: return COLOR_BUS_ROUTES_EXPRESS;
 		case 127: return null;
+		case 129: return null; // TODO ?
 		case 133: return COLOR_BUS_ROUTES_EXPRESS;
 		case 134: return null; // TODO ?
 		case 136: return COLOR_BUS_ROUTES;
@@ -781,9 +784,17 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, COUGAR_RDG, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "8374", "8822" })) //
+						Arrays.asList(new String[] { //
+						"8374", // 69 Street West LRT Station
+								"8822", // NB 77 ST SW @ Old Banff Coach RD
+								"3717", // EB Old Banff Coach RD @ 89 ST SW
+						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "8822", "8373" })) //
+						Arrays.asList(new String[] { //
+						"8822", // NB 77 ST SW @ Old Banff Coach RD
+								"3717", // EB Old Banff Coach RD @ 89 ST SW
+								"8373", // 69 Street West LRT Station
+						})) //
 				.compileBothTripSort());
 		map2.put(112l, new RouteTripSpec(112l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR, //
@@ -883,9 +894,16 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, DISCOVERY_RIDGE) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "9365", "3785" })) //
+						Arrays.asList(new String[] { //
+						"9365", // EB Discovery Ridge BV @ Discovery Ridge LN SW
+								"3785", // NB 69 ST SW @ 69 Street West LRT Station
+						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "3785", "9365" })) //
+						Arrays.asList(new String[] { //
+						"3785", // NB 69 ST SW @ 69 Street West LRT Station
+								"9366", // WB Discovery Ridge BV @ Discovery Ridge GA SW
+								"9365", // EB Discovery Ridge BV @ Discovery Ridge LN SW
+						})) //
 				.compileBothTripSort());
 		map2.put(502l, new RouteTripSpec(502l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, STATION_HERITAGE, //
