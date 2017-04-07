@@ -313,6 +313,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		case 502: return null;
 		case 506: return COLOR_BUS_ROUTES;
 		case 555: return null;
+		case 627: return COLOR_BUS_ROUTES_SCHOOL;
 		case 695: return COLOR_BUS_ROUTES_SCHOOL;
 		case 696: return COLOR_BUS_ROUTES_SCHOOL;
 		case 697: return COLOR_BUS_ROUTES_SCHOOL;
