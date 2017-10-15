@@ -49,6 +49,13 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		new CalgaryTransitBusAgencyTools().start(args);
 	}
 
+	public boolean isGoodEnoughAcceptedForSchoolsRoutes(long routeId) {
+		if (routeId >= 732L && routeId <= 899L) {
+			return true; // TODO clean school trip splitting
+		}
+		return super.isGoodEnoughAccepted();
+	}
+
 	private HashSet<String> serviceIds;
 
 	@Override
@@ -90,6 +97,11 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
+	public boolean excludeRoute(GRoute gRoute) {
+		return super.excludeRoute(gRoute);
+	}
+
+	@Override
 	public Integer getAgencyRouteType() {
 		return MAgency.ROUTE_TYPE_BUS;
 	}
@@ -128,6 +140,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		return AGENCY_COLOR;
 	}
 
+	@SuppressWarnings("unused")
 	private static final String COLOR_BUS_ROUTES = "004B85"; // BLUE (from PDF map)
 	private static final String COLOR_BUS_ROUTES_EXPRESS = "00BBE5"; // LIGHT BLUE (from PDF map)
 	private static final String COLOR_BUS_ROUTES_BRT = "ED1C2E"; // RED (from PDF map)
@@ -141,364 +154,63 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		}
 		int rsn = Integer.parseInt(gRoute.getRouteShortName());
-		switch (rsn) {
-		// @formatter:off
-		case 1: return null;
-		case 2: return null;
-		case 3: return null;
-		case 4: return null;
-		case 5: return null;
-		case 6: return null;
-		case 7: return null;
-		case 8: return null;
-		case 9: return null;
-		case 10: return null;
-		case 11: return null;
-		case 12: return null;
-		case 13: return null;
-		case 14: return null;
-		case 15: return null;
-		case 16: return null;
-		case 17: return null;
-		case 18: return null;
-		case 19: return null;
-		case 20: return null;
-		case 21: return null;
-		case 22: return COLOR_BUS_ROUTES_EXPRESS;
-		case 23: return COLOR_BUS_ROUTES_EXPRESS;
-		case 24: return null;
-		case 25: return null;
-		case 26: return null;
-		case 27: return COLOR_BUS_ROUTES;
-		case 28: return null;
-		case 29: return null;
-		case 30: return COLOR_BUS_ROUTES;
-		case 31: return null; // TODO ?
-		case 32: return null;
-		case 33: return COLOR_BUS_ROUTES;
-		case 34: return COLOR_BUS_ROUTES;
-		case 35: return COLOR_BUS_ROUTES;
-		case 36: return null;
-		case 37: return null;
-		case 38: return null;
-		case 39: return COLOR_BUS_ROUTES;
-		case 40: return null;
-		case 41: return null;
-		case 42: return null;
-		case 43: return null;
-		case 44: return COLOR_BUS_ROUTES;
-		case 45: return null;
-		case 46: return null;
-		case 47: return COLOR_BUS_ROUTES;
-		case 48: return null;
-		case 49: return null;
-		case 50: return null;
-		case 51: return null;
-		case 52: return null;
-		case 53: return null; // TODO ?
-		case 54: return null;
-		case 55: return null;
-		case 56: return null;
-		case 57: return null;
-		case 59: return null; // TODO ?
-		case 60: return null;
-		case 61: return COLOR_BUS_ROUTES;
-		case 62: return COLOR_BUS_ROUTES_EXPRESS;
-		case 63: return COLOR_BUS_ROUTES_EXPRESS;
-		case 64: return COLOR_BUS_ROUTES_EXPRESS;
-		case 65: return COLOR_BUS_ROUTES_EXPRESS;
-		case 66: return COLOR_BUS_ROUTES_EXPRESS;
-		case 69: return COLOR_BUS_ROUTES;
-		case 70: return COLOR_BUS_ROUTES_EXPRESS;
-		case 71: return COLOR_BUS_ROUTES;
-		case 72: return null;
-		case 73: return null;
-		case 74: return null;
-		case 75: return COLOR_BUS_ROUTES_EXPRESS;
-		case 76: return null;
-		case 77: return COLOR_BUS_ROUTES;
-		case 78: return null;
-		case 79: return null;
-		case 80: return null;
-		case 81: return COLOR_BUS_ROUTES;
-		case 82: return null; // TODO ?
-		case 83: return null;
-		case 84: return COLOR_BUS_ROUTES;
-		case 85: return null;
-		case 86: return null;
-		case 88: return null;
-		case 89: return COLOR_BUS_ROUTES;
-		case 90: return null; // TODO ?
-		case 91: return COLOR_BUS_ROUTES;
-		case 92: return null;
-		case 93: return COLOR_BUS_ROUTES;
-		case 94: return COLOR_BUS_ROUTES;
-		case 95: return COLOR_BUS_ROUTES;
-		case 96: return null;
-		case 97: return null; // TODO ?
-		case 98: return COLOR_BUS_ROUTES;
-		case 100: return null;
-		case 102: return COLOR_BUS_ROUTES_EXPRESS;
-		case 103: return COLOR_BUS_ROUTES_EXPRESS;
-		case 104: return null; // TODO ?
-		case 105: return null; // TODO ?
-		case 107: return COLOR_BUS_ROUTES;
-		case 109: return COLOR_BUS_ROUTES_EXPRESS;
-		case 110: return COLOR_BUS_ROUTES_EXPRESS;
-		case 112: return null;
-		case 113: return null; // TODO ?
-		case 114: return null;
-		case 116: return COLOR_BUS_ROUTES_EXPRESS;
-		case 117: return COLOR_BUS_ROUTES_EXPRESS;
-		case 118: return null;
-		case 120: return null; // TODO ?
-		case 122: return COLOR_BUS_ROUTES;
-		case 125: return COLOR_BUS_ROUTES_EXPRESS;
-		case 126: return COLOR_BUS_ROUTES_EXPRESS;
-		case 127: return null;
-		case 129: return null; // TODO ?
-		case 133: return COLOR_BUS_ROUTES_EXPRESS;
-		case 134: return null; // TODO ?
-		case 136: return COLOR_BUS_ROUTES;
-		case 137: return null;
-		case 142: return COLOR_BUS_ROUTES_EXPRESS;
-		case 143: return null;
-		case 145: return COLOR_BUS_ROUTES;
-		case 146: return COLOR_BUS_ROUTES;
-		case 151: return COLOR_BUS_ROUTES_EXPRESS;
-		case 152: return COLOR_BUS_ROUTES;
-		case 153: return COLOR_BUS_ROUTES;
-		case 154: return null;
-		case 157: return null;
-		case 158: return null;
-		case 159: return COLOR_BUS_ROUTES;
-		case 169: return null;
-		case 174: return null;
-		case 176: return COLOR_BUS_ROUTES_EXPRESS;
-		case 178: return COLOR_BUS_ROUTES;
-		case 181: return COLOR_BUS_ROUTES_EXPRESS;
-		case 182: return COLOR_BUS_ROUTES_EXPRESS;
-		case 199: return null;
-		case 299: return null;
-		case 300: return COLOR_BUS_ROUTES_BRT;
-		case 301: return COLOR_BUS_ROUTES_BRT;
-		case 302: return COLOR_BUS_ROUTES_BRT;
-		case 304: return COLOR_BUS_ROUTES_BRT;
-		case 305: return COLOR_BUS_ROUTES_BRT;
-		case 306: return COLOR_BUS_ROUTES_BRT;
-		case 308: return COLOR_BUS_ROUTES_BRT;
-		case 402: return COLOR_BUS_ROUTES;
-		case 404: return COLOR_BUS_ROUTES;
-		case 405: return COLOR_BUS_ROUTES;
-		case 406: return COLOR_BUS_ROUTES;
-		case 407: return COLOR_BUS_ROUTES;
-		case 408: return null;
-		case 409: return COLOR_BUS_ROUTES;
-		case 410: return COLOR_BUS_ROUTES;
-		case 411: return COLOR_BUS_ROUTES;
-		case 412: return COLOR_BUS_ROUTES;
-		case 414: return COLOR_BUS_ROUTES;
-		case 419: return COLOR_BUS_ROUTES;
-		case 420: return COLOR_BUS_ROUTES;
-		case 421: return COLOR_BUS_ROUTES;
-		case 422: return COLOR_BUS_ROUTES;
-		case 425: return COLOR_BUS_ROUTES;
-		case 429: return COLOR_BUS_ROUTES;
-		case 430: return COLOR_BUS_ROUTES;
-		case 439: return COLOR_BUS_ROUTES;
-		case 440: return COLOR_BUS_ROUTES;
-		case 444: return COLOR_BUS_ROUTES;
-		case 445: return COLOR_BUS_ROUTES;
-		case 449: return COLOR_BUS_ROUTES;
-		case 452: return COLOR_BUS_ROUTES;
-		case 453: return COLOR_BUS_ROUTES;
-		case 454: return COLOR_BUS_ROUTES;
-		case 456: return COLOR_BUS_ROUTES;
-		case 468: return COLOR_BUS_ROUTES;
-		case 502: return null;
-		case 506: return COLOR_BUS_ROUTES;
-		case 555: return null;
-		case 627: return COLOR_BUS_ROUTES_SCHOOL;
-		case 695: return COLOR_BUS_ROUTES_SCHOOL;
-		case 696: return COLOR_BUS_ROUTES_SCHOOL;
-		case 697: return COLOR_BUS_ROUTES_SCHOOL;
-		case 698: return COLOR_BUS_ROUTES_SCHOOL;
-		case 699: return COLOR_BUS_ROUTES_SCHOOL;
-		case 702: return COLOR_BUS_ROUTES_SCHOOL;
-		case 703: return COLOR_BUS_ROUTES_SCHOOL;
-		case 704: return COLOR_BUS_ROUTES_SCHOOL;
-		case 705: return COLOR_BUS_ROUTES_SCHOOL;
-		case 706: return COLOR_BUS_ROUTES_SCHOOL;
-		case 710: return COLOR_BUS_ROUTES_SCHOOL;
-		case 711: return COLOR_BUS_ROUTES_SCHOOL;
-		case 712: return COLOR_BUS_ROUTES_SCHOOL;
-		case 713: return COLOR_BUS_ROUTES_SCHOOL;
-		case 714: return COLOR_BUS_ROUTES_SCHOOL;
-		case 715: return COLOR_BUS_ROUTES_SCHOOL;
-		case 716: return COLOR_BUS_ROUTES_SCHOOL;
-		case 717: return COLOR_BUS_ROUTES_SCHOOL;
-		case 718: return COLOR_BUS_ROUTES_SCHOOL;
-		case 719: return COLOR_BUS_ROUTES_SCHOOL;
-		case 720: return COLOR_BUS_ROUTES_SCHOOL;
-		case 721: return COLOR_BUS_ROUTES_SCHOOL;
-		case 722: return COLOR_BUS_ROUTES_SCHOOL;
-		case 724: return COLOR_BUS_ROUTES_SCHOOL;
-		case 725: return COLOR_BUS_ROUTES_SCHOOL;
-		case 731: return COLOR_BUS_ROUTES_SCHOOL;
-		case 732: return COLOR_BUS_ROUTES_SCHOOL;
-		case 733: return COLOR_BUS_ROUTES_SCHOOL;
-		case 734: return COLOR_BUS_ROUTES_SCHOOL;
-		case 735: return COLOR_BUS_ROUTES_SCHOOL;
-		case 737: return COLOR_BUS_ROUTES_SCHOOL;
-		case 738: return COLOR_BUS_ROUTES_SCHOOL;
-		case 739: return COLOR_BUS_ROUTES_SCHOOL;
-		case 740: return COLOR_BUS_ROUTES_SCHOOL;
-		case 741: return COLOR_BUS_ROUTES_SCHOOL;
-		case 742: return COLOR_BUS_ROUTES_SCHOOL;
-		case 743: return COLOR_BUS_ROUTES_SCHOOL;
-		case 744: return COLOR_BUS_ROUTES_SCHOOL;
-		case 745: return COLOR_BUS_ROUTES_SCHOOL;
-		case 746: return COLOR_BUS_ROUTES_SCHOOL;
-		case 747: return COLOR_BUS_ROUTES_SCHOOL;
-		case 748: return COLOR_BUS_ROUTES_SCHOOL;
-		case 750: return COLOR_BUS_ROUTES_SCHOOL;
-		case 751: return COLOR_BUS_ROUTES_SCHOOL;
-		case 752: return COLOR_BUS_ROUTES_SCHOOL;
-		case 753: return COLOR_BUS_ROUTES_SCHOOL;
-		case 754: return COLOR_BUS_ROUTES_SCHOOL;
-		case 755: return COLOR_BUS_ROUTES_SCHOOL;
-		case 756: return COLOR_BUS_ROUTES_SCHOOL;
-		case 757: return COLOR_BUS_ROUTES_SCHOOL;
-		case 758: return COLOR_BUS_ROUTES_SCHOOL;
-		case 759: return COLOR_BUS_ROUTES_SCHOOL;
-		case 760: return COLOR_BUS_ROUTES_SCHOOL;
-		case 761: return COLOR_BUS_ROUTES_SCHOOL;
-		case 762: return COLOR_BUS_ROUTES_SCHOOL;
-		case 763: return COLOR_BUS_ROUTES_SCHOOL;
-		case 764: return COLOR_BUS_ROUTES_SCHOOL;
-		case 765: return COLOR_BUS_ROUTES_SCHOOL;
-		case 766: return COLOR_BUS_ROUTES_SCHOOL;
-		case 770: return COLOR_BUS_ROUTES_SCHOOL;
-		case 771: return COLOR_BUS_ROUTES_SCHOOL;
-		case 773: return COLOR_BUS_ROUTES_SCHOOL;
-		case 774: return COLOR_BUS_ROUTES_SCHOOL;
-		case 775: return COLOR_BUS_ROUTES_SCHOOL;
-		case 776: return COLOR_BUS_ROUTES_SCHOOL;
-		case 777: return COLOR_BUS_ROUTES_SCHOOL;
-		case 778: return COLOR_BUS_ROUTES_SCHOOL;
-		case 779: return COLOR_BUS_ROUTES_SCHOOL;
-		case 780: return COLOR_BUS_ROUTES_SCHOOL;
-		case 791: return COLOR_BUS_ROUTES_SCHOOL;
-		case 792: return COLOR_BUS_ROUTES_SCHOOL;
-		case 793: return COLOR_BUS_ROUTES_SCHOOL;
-		case 795: return COLOR_BUS_ROUTES_SCHOOL;
-		case 796: return COLOR_BUS_ROUTES_SCHOOL;
-		case 797: return COLOR_BUS_ROUTES_SCHOOL;
-		case 798: return COLOR_BUS_ROUTES_SCHOOL;
-		case 799: return COLOR_BUS_ROUTES_SCHOOL;
-		case 801: return COLOR_BUS_ROUTES_SCHOOL;
-		case 802: return COLOR_BUS_ROUTES_SCHOOL;
-		case 803: return COLOR_BUS_ROUTES_SCHOOL;
-		case 804: return COLOR_BUS_ROUTES_SCHOOL;
-		case 805: return COLOR_BUS_ROUTES_SCHOOL;
-		case 807: return COLOR_BUS_ROUTES_SCHOOL;
-		case 810: return COLOR_BUS_ROUTES_SCHOOL;
-		case 811: return COLOR_BUS_ROUTES_SCHOOL;
-		case 812: return COLOR_BUS_ROUTES_SCHOOL;
-		case 813: return COLOR_BUS_ROUTES_SCHOOL;
-		case 814: return COLOR_BUS_ROUTES_SCHOOL;
-		case 815: return COLOR_BUS_ROUTES_SCHOOL;
-		case 816: return COLOR_BUS_ROUTES_SCHOOL;
-		case 817: return COLOR_BUS_ROUTES_SCHOOL;
-		case 818: return COLOR_BUS_ROUTES_SCHOOL;
-		case 819: return COLOR_BUS_ROUTES_SCHOOL;
-		case 820: return COLOR_BUS_ROUTES_SCHOOL;
-		case 821: return COLOR_BUS_ROUTES_SCHOOL;
-		case 822: return COLOR_BUS_ROUTES_SCHOOL;
-		case 825: return COLOR_BUS_ROUTES_SCHOOL;
-		case 830: return COLOR_BUS_ROUTES_SCHOOL;
-		case 831: return COLOR_BUS_ROUTES_SCHOOL;
-		case 832: return COLOR_BUS_ROUTES_SCHOOL;
-		case 833: return COLOR_BUS_ROUTES_SCHOOL;
-		case 834: return COLOR_BUS_ROUTES_SCHOOL;
-		case 835: return COLOR_BUS_ROUTES_SCHOOL;
-		case 836: return COLOR_BUS_ROUTES_SCHOOL;
-		case 837: return COLOR_BUS_ROUTES_SCHOOL;
-		case 838: return COLOR_BUS_ROUTES_SCHOOL;
-		case 841: return COLOR_BUS_ROUTES_SCHOOL;
-		case 842: return COLOR_BUS_ROUTES_SCHOOL;
-		case 851: return COLOR_BUS_ROUTES_SCHOOL;
-		case 853: return COLOR_BUS_ROUTES_SCHOOL;
-		case 857: return COLOR_BUS_ROUTES_SCHOOL;
-		case 860: return COLOR_BUS_ROUTES_SCHOOL;
-		case 861: return COLOR_BUS_ROUTES_SCHOOL;
-		case 871: return COLOR_BUS_ROUTES_SCHOOL;
-		case 872: return COLOR_BUS_ROUTES_SCHOOL;
-		case 878: return COLOR_BUS_ROUTES_SCHOOL;
-		case 880: return COLOR_BUS_ROUTES_SCHOOL;
-		case 883: return COLOR_BUS_ROUTES_SCHOOL;
-		case 884: return COLOR_BUS_ROUTES_SCHOOL;
-		case 888: return COLOR_BUS_ROUTES_SCHOOL;
-		case 889: return COLOR_BUS_ROUTES_SCHOOL;
-		case 892: return COLOR_BUS_ROUTES_SCHOOL;
-		case 894: return COLOR_BUS_ROUTES_SCHOOL;
-		// @formatter:on
-		default:
-			if (isGoodEnoughAccepted()) {
-				return null;
-			}
-			System.out.printf("\nUnexpected route color %s!\n", gRoute);
-			System.exit(-1);
+		if (rsn >= 600 && rsn <= 899) {
+			return COLOR_BUS_ROUTES_SCHOOL;
+		}
+		if (ENDS_WITH_EXPRESS.matcher(gRoute.getRouteLongName()).find()) {
+			return COLOR_BUS_ROUTES_EXPRESS;
+		}
+		if (STARTS_WITH_BRT.matcher(gRoute.getRouteLongName()).find()) {
+			return COLOR_BUS_ROUTES_BRT;
+		}
+		if (rsn >= 1 && rsn <= 299) {
 			return null;
 		}
+		if (rsn >= 400 && rsn <= 599) {
+			return null;
+		}
+		if (isGoodEnoughAccepted()) {
+			return null;
+		}
+		System.out.printf("\nUnexpected route color %s!\n", gRoute);
+		System.exit(-1);
+		return null;
 	}
 
 	private static final String SLASH = " / ";
-	private static final String _17_AVENUE_SE = "17 AV SE";
+	private static final String SPACE = " ";
+
+	private static final String _17_AVE_SE = "17 Ave Se";
 	private static final String _69_ST_STATION = "69 St Sta";
 	private static final String _69_ST_SW = "69 St SW";
-	private static final String OAKRIDGE = "Oakridge";
+	private static final String _78_AVE_TERMINAL = "78 Ave Terminal";
 	private static final String AIRPORT = "Airport";
 	private static final String ANDERSON = "Anderson";
 	private static final String ANDERSON_STATION = ANDERSON + " Sta";
 	private static final String ANNIE_GALE = "Annie Gale";
 	private static final String APPLEWOOD = "Applewood";
-	private static final String ARBOUR_LK = "Arbour Lk";
-	private static final String AUBURN_BAY = "Auburn Bay";
-	private static final String B_GRANDIN = "B Grandin";
 	private static final String BEAVERBROOK = "Beaverbrook";
 	private static final String BISHOP_O_BYRNE = "B O'Byrne";
-	private static final String BISHOP_CARROLL = "B Carroll";
-	private static final String BONAVISTA = "Bonavista";
-	private static final String BONAVISTA_WEST = "W " + BONAVISTA;
 	private static final String BOWNESS = "Bowness";
 	private static final String BREBEUF = "Brebeuf";
 	private static final String BRENTWOOD = "Brentwood";
 	private static final String BRENTWOOD_STATION = BRENTWOOD + " Sta";
-	private static final String BRIDGELAND = "Bridgeland";
 	private static final String BRIDLEWOOD = "Bridlewood";
-	private static final String BRIDLEWOOD_STATION = BRIDLEWOOD + " Sta";
-	private static final String BRT = "BRT";
-	private static final String BRT_AIRPORT = BRT + " " + AIRPORT;
-	private static final String CASTLERIDGE = "Castleridge";
+	private static final String CANYON_MEADOWS = "Canyon Mdws";
 	private static final String CANADA_OLYMPIC_PARK = "Canada Olympic Pk";
 	private static final String CENTRAL_MEMORIAL = "Central Memorial";
-	private static final String CHAPARRAL = "Chaparral";
+	private static final String CHATEAU_EST = "Chateau Est";
 	private static final String CHATEAU_ESTS = "Chateau Ests";
 	private static final String CHINOOK = "Chinook";
 	private static final String CHINOOK_STATION = CHINOOK + " Sta";
 	private static final String CHURCHILL = "Churchill";
-	private static final String CITADEL = "Citadel";
 	private static final String CITY_CTR = "City Ctr";
+	private static final String CITY_HALL = "City Hall";
 	private static final String COACH_HILL = "Coach Hl";
 	private static final String COPPERFIELD = "Copperfield";
 	private static final String CORAL_SPGS = "Coral Spgs";
 	private static final String COUGAR_RDG = "Cougar Rdg";
-	private static final String COUNTRY_HLS = "Country Hls";
 	private static final String COUNTRY_VLG = "Country Vlg";
-	private static final String COVENTRY = "Coventry";
-	private static final String COVENTRY_HLS = COVENTRY + " Hls";
-	private static final String COVENTRY_SOUTH = "S" + COVENTRY;
 	private static final String CRANSTON = "Cranston";
 	private static final String CRESCENT_HTS = "Crescent Hts";
 	private static final String CROWFOOT = "Crowfoot";
@@ -509,58 +221,41 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String DISCOVERY_RIDGE = "Discovery Rdg";
 	private static final String DOUGLASDALE = "Douglasdale";
 	private static final String DOUGLAS_GLEN = "Douglas Glen";
-	private static final String DOWNTOWN = "Downtown";
-	private static final String EDGEBROOK_RISE = "Edgebrook Rise";
-	private static final String EDGEMONT = "Edgemont";
-	private static final String ELBOW_DR = "Elbow Dr";
+	private static final String EAST_HILLS = "East Hls";
 	private static final String ERIN_WOODS = "Erin Woods";
 	private static final String ERINWOODS = "Erinwoods";
 	private static final String EVANSTON = "Evanston";
 	private static final String EVERGREEN = "Evergreen";
 	private static final String SOMERSET = "Somerset";
-	private static final String FALCONRIDGE = "Falconridge";
 	private static final String FOOTHILLS = "Foothills";
 	private static final String FOOTHILLS_IND = FOOTHILLS + " Ind";
 	private static final String FOREST_LAWN = "Forest Lawn";
-	private static final String FOWLER = "Fowler";
-	private static final String FRANKLIN = "Franklin";
 	private static final String GLAMORGAN = "Glamorgan";
 	private static final String HAMPTONS = "Hamptons";
-	private static final String HARVEST_HLS = "Harvest Hls";
-	private static final String HAWKWOOD = "Hawkwood";
 	private static final String HERITAGE = "Heritage";
 	private static final String HERITAGE_STATION = HERITAGE + " Sta";
-	private static final String HIDDEN_VLY = "Hidden Vly";
-	private static final String HOME_ROAD = "Home Rd";
 	private static final String HUNTINGTON = "Huntington";
 	private static final String KILLARNEY = "Killarney";
 	private static final String KILLARNEY_17_AVE = KILLARNEY + " 17 Ave";
 	private static final String KILLARNEY_26_AVE = KILLARNEY + " 26 Ave";
-	private static final String KINCORA = "Kincora";
 	private static final String LAKEVIEW = "Lakeview";
-	private static final String LYNNWOOD = "Lynnwood";
-	private static final String M_D_HOUET = "M d'Houet";
 	private static final String MAC_EWAN = "MacEwan";
-	private static final String MARTINDALE = "Martindale";
-	private static final String MC_CALL_WAY = "McCall Way";
+	private static final String MARLBOROUGH_STATION = "Marlborough Sta";
+	private static final String MCCALL_WAY = "Mccall Way";
 	private static final String MC_KENZIE = "McKenzie";
 	private static final String MC_KENZIE_TOWNE = MC_KENZIE + " Towne";
 	private static final String MC_KNIGHT_WESTWINDS = "McKnight-Westwinds";
+	private static final String MCKNIGHT_WESTWINDS = "Mcknight Westwinds";
 	private static final String MRU = "MRU";
 	private static final String MOUNT_PLEASANT = "Mt Pleasant";
 	private static final String MOUNT_MC_KENZIE = "Mt " + MC_KENZIE;
-	private static final String MTN_PARK = "Mtn Park";
 	private static final String NEW_BRIGHTON = "New Brighton";
 	private static final String NOLAN_HILL = "Nolan Hl";
-	private static final String NORTH_HAVEN = "North Haven";
-	private static final String NORTH_POINTE = "North Pte";
-	private static final String NORTHLAND = "Northland";
+	private static final String NORTH = "North";
+	private static final String NORTH_HAVEN = NORTH + " Haven";
+	private static final String NORTH_POINTE = NORTH + " Pte";
 	private static final String NORTHMOUNT_DR = "Northmount Dr";
 	private static final String NOTRE_DAME = "Notre Dame";
-	private static final String OGDEN = "Ogden";
-	private static final String OGDEN_NORTH = "North " + OGDEN;
-	private static final String PALLISER = "Palliser";
-	private static final String PALLISER_OAKRIDGE = PALLISER + SLASH + OAKRIDGE;
 	private static final String PANORAMA = "Panorama";
 	private static final String PANORAMA_HLS = PANORAMA + " Hls";
 	private static final String PANORAMA_HLS_NORTH = "N " + PANORAMA_HLS;
@@ -568,70 +263,68 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String PARKLAND = "Parkland";
 	private static final String PARK_GATE_HERITAGE = "Pk Gt Heritage";
 	private static final String PRESTWICK = "Prestwick";
-	private static final String QUEEN_ELIZABETH = "Queen Elizabeth";
 	private static final String QUEENSLAND = "Queensland";
-	private static final String R_THIRSK = "R Thirsk";
 	private static final String RAMSAY = "Ramsay";
 	private static final String RENFREW = "Renfrew";
 	private static final String RIVERBEND = "Riverbend";
-	private static final String ROCKY_RIDGE = "Rocky Rdg";
 	private static final String ROYAL_OAK = "Royal Oak";
 	private static final String RUNDLE_STATION = "Rundle Sta";
+	private static final String SADDLEBROOK = "Saddlebrook";
 	private static final String SADDLECREST = "Saddlecrest";
 	private static final String SADDLERIDGE = "Saddleridge";
-	private static final String SADDLE_RIDGE = "Saddle Rdg";
-	private static final String SADDLETOWN = "Saddletown";
 	private static final String SADDLETOWNE = "Saddletowne";
 	private static final String SAGE_HILL = "Sage Hl";
 	private static final String SANDSTONE = "Sandstone";
 	private static final String SCARLETT = "Scarlett";
 	private static final String SCENIC_ACRES = "Scenic Acres";
-	private static final String SCENIC_ACRES_SOUTH = "S " + SCENIC_ACRES;
 	private static final String SCENIC_ACRES_NORTH = "N " + SCENIC_ACRES;
-	private static final String SHAWVILLE = "Shawville";
 	private static final String SHERWOOD = "Sherwood";
 	private static final String SILVER_SPGS = "Silver Spgs";
-	private static final String SKYVIEW_RANCH = "Skyview Ranch";
-	private static final String SOMERSET_BRIDLEWOOD_STATION = SOMERSET + "-" + BRIDLEWOOD_STATION;
-	private static final String SOUTH_CALGARY = "South Calgary";
+	private static final String SOUTH = "South";
+	private static final String SOUTH_CALGARY = SOUTH + " Calgary";
 	private static final String SOUTH_HEALTH = "South Health";
 	private static final String SOUTH_HEALTH_CAMPUS = SOUTH_HEALTH + " Campus";
-	private static final String SOUTHCENTER = "Southcentre";
 	private static final String SOUTHLAND = "Southland";
 	private static final String SOUTHLAND_STATION = SOUTHLAND + " Sta";
 	private static final String STAMPEDE_PARK = "Stampede Pk";
-	private static final String ST_AUGUSTINE = "St Augustine";
-	private static final String ST_HELENA = "St Helena";
 	private static final String ST_FRANCIS = "St Francis";
-	private static final String ST_ISABELLA = "St Isabella";
 	private static final String ST_MARGARET = "St Margaret";
-	private static final String ST_MATTHEW = "St Matthew";
-	private static final String ST_STEPHEN = "St Stephen";
 	private static final String STATION_HERITAGE = "Sta " + HERITAGE;
 	private static final String STRATHCONA = "Strathcona";
 	private static final String TARADALE = "Taradale";
 	private static final String TOM_BAINES = "Tom Baines";
 	private static final String TUSCANY = "Tuscany";
 	private static final String UNIVERSITY_OF_CALGARY = "University Of Calgary";
-	private static final String VALLEYRIDGE = "Valleyridge";
 	private static final String VALLEY_RIDGE = "Vly Rdg";
-	private static final String VARSITY_ACRES = "Varsity Acres";
-	private static final String VINCENT_MASSEY = "V Massey";
 	private static final String VISTA_HTS = "Vista Hts";
 	private static final String WCHS_ST_MARY_S = "WCHS" + SLASH + "St Mary''s";
 	private static final String WESTBROOK = "Westbrook";
 	private static final String WESTBROOK_STATION = WESTBROOK + " Sta";
-	private static final String WESTERN_CANADA = "Western Canada";
 	private static final String WESTHILLS = "Westhills";
-	private static final String WHITEHORN = "Whitehorn";
-	private static final String WHITEHORN_STATION = WHITEHORN + " Sta";
-	private static final String WISE_WOOD = "Wise Wood";
-	private static final String WOODBINE = "Woodbine";
-	private static final String WOODLANDS = "Woodlands";
 
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
+		map2.put(2L, new RouteTripSpec(2L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, MOUNT_PLEASANT, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, KILLARNEY_17_AVE) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"8068", // SB Glenside DR @ 17 AV SW
+								"5144", // NB 8 ST SW @ 7 AV SW
+								"5084", // EB 5 AV SW @ 2 ST SW
+								"5579", // NB Centre ST N @ 78 AV N
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"5579", // NB Centre ST N @ 78 AV N
+								"8531", // SB Centre ST N @ Beddington BV N
+								"5038", // WB 78 AV N @ Centre ST N
+								"5115", // WB 6 AV SW @ 1 ST SW
+								"5122", // SB 8 ST SW @ 7 AV SW
+								"8068", // SB Glenside DR @ 17 AV SW
+						})) //
+				.compileBothTripSort());
 		map2.put(4l, new RouteTripSpec(4l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, HUNTINGTON, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR) //
@@ -719,16 +412,37 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MInboundType.OUTBOUND.intValue(), //
 						Arrays.asList(new String[] { "6709", "4472", "5898", "8141", "8140", "5872" })) //
 				.compileBothTripSort());
-		if (!GOOD_ENOUGH_ACCEPTED) {
-			map2.put(37l, new RouteTripSpec(37l, //
-					MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, DALHOUSIE, // NORTHWEST LOOP
-					MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CROWFOOT) // CROWFOOT_CENTRE
-					.addTripSort(MDirectionType.EAST.intValue(), //
-							Arrays.asList(new String[] { "9876", "3489", "3845", "4000" })) //
-					.addTripSort(MDirectionType.WEST.intValue(), //
-							Arrays.asList(new String[] { "4000", "6732", "9876" })) //
-					.compileBothTripSort());
-		}
+		map2.put(30L, new RouteTripSpec(30L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.EAST.getId(), //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.WEST.getId()) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"7792", // EB 7 AV SW @ 2 ST SW
+								"5574", // EB 39 AV SE @ Burnsland RD
+								"5981", // ++
+								"7320", // SB 12 ST SE @ 42 AV SE
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"7320", // SB 12 ST SE @ 42 AV SE
+								"4131", // ++
+								"5574", // EB 39 AV SE @ Burnsland RD
+						})) //
+				.compileBothTripSort());
+		map2.put(37l, new RouteTripSpec(37l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, HERITAGE, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CANYON_MEADOWS) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"3415", // SB 6 ST SW @ Canyon Meadows DR SW
+								"5194", // Heritage LRT Station
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"5194", // Heritage LRT Station
+								"3415", // SB 6 ST SW @ Canyon Meadows DR SW
+						})) //
+				.compileBothTripSort());
 		map2.put(52l, new RouteTripSpec(52l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, EVERGREEN, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOMERSET) //
@@ -744,6 +458,49 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "6461", "6097" })) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "6097", "6562", "6461" })) //
+				.compileBothTripSort());
+		map2.put(66L, new RouteTripSpec(66L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SADDLETOWNE, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHINOOK) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"6342", // Chinook LRT Station WB
+								"8576", // Saddletowne LRT Station SB
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"8576", // Saddletowne LRT Station SB
+								"6342", // Chinook LRT Station WB
+						})) //
+				.compileBothTripSort());
+		map2.put(69L, new RouteTripSpec(69L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, DEERFOOT_CENTER, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"5053", // EB 7 AV SW @ 2 ST SW
+								"6680", // NB 9 ST NE @ 64 AV NE
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"6680", // NB 9 ST NE @ 64 AV NE
+								"7334", // WB 65 AV NE @ 9 ST NE
+								"5001", // WB 7 AV SW @ 2 ST SW
+						})) //
+				.compileBothTripSort());
+		map2.put(71l, new RouteTripSpec(71l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SADDLETOWNE, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, MC_KNIGHT_WESTWINDS) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"9848", // McKnight-Westwinds LRT Station
+								"8580", // Saddletowne LRT Station SB
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"8580", // Saddletowne LRT Station SB
+								"9848", // McKnight-Westwinds LRT Station
+						})) //
 				.compileBothTripSort());
 		map2.put(72l, new RouteTripSpec(72l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRENTWOOD, //
@@ -792,6 +549,52 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "6440", "6116", "5762" })) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "5762", "6433", "6440" })) //
+				.compileBothTripSort());
+		map2.put(81L, new RouteTripSpec(81L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.NORTH.getId(), //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.SOUTH.getId()) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"9324", // SB Lake Fraser DR @ N. End of Avenida PL SE
+								"9669", // Anderson LRT Station
+								"5528", // Chinook LRT Station NB
+								"6914", // WB 50 AV SW @ 4 ST SW
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"6914", // WB 50 AV SW @ 4 ST SW
+								"5553", // Chinook LRT Station SB
+								"3650", // Canyon Meadows Stn (NB Lake Fraser Dr)
+								"9324", // SB Lake Fraser DR @ N. End of Avenida PL SE
+						})) //
+				.compileBothTripSort());
+		map2.put(86L, new RouteTripSpec(86L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.NORTH.getId(), //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.SOUTH.getId()) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"9767", // NB Harvest Hills BV @ Country Village WY NE
+								"8468", // SB Country Village LI @ Country Village WY NE
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"8468", // SB Country Village LI @ Country Village WY NE
+								"9767", // NB Harvest Hills BV @ Country Village WY NE
+						})) //
+				.compileBothTripSort());
+		map2.put(91L, new RouteTripSpec(91L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRENTWOOD, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Lions Pk") //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"5735", // Lions Park LRT Station
+								"6846", // Brentwood LRT Station NB
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"6846", // Brentwood LRT Station NB
+								"5735", // Lions Park LRT Station (WB 14 AV NW)
+						})) //
 				.compileBothTripSort());
 		map2.put(94l, new RouteTripSpec(94l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, STRATHCONA, //
@@ -842,6 +645,37 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"4025", // Dalhousie LRT Station NB
 						})) //
 				.compileBothTripSort());
+		map2.put(125L, new RouteTripSpec(125L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, ERIN_WOODS, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"3944", // EB 5 AV SW @ 9 ST SW
+								"6303", // EB Erin Woods BV @ 36 ST SE
+								"6305", // SB Erin Woods BV @ Erin Dale CR SE
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"6303", // EB Erin Woods BV @ 36 ST SE
+								"6305", // SB Erin Woods BV @ Erin Dale CR SE
+								"9978", // WB 6 AV SW @ 8 ST SW
+						})) //
+				.compileBothTripSort());
+		map2.put(126L, new RouteTripSpec(126L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, APPLEWOOD, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"3944", // EB 5 AV SW @ 9 ST SW
+								"8823", // NB 68 ST SE @ 14 AV SE
+								"6934", // WB Applewood DR @ Appletree CR SE
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"6934", // WB Applewood DR @ Appletree CR SE
+								"9978", // WB 6 AV SW @ 8 ST SW
+						})) //
+				.compileBothTripSort());
 		map2.put(134l, new RouteTripSpec(134l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CROWFOOT, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, DALHOUSIE) //
@@ -854,6 +688,20 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"3857", // Crowfoot LRT Station
 								"4025", // Dalhousie LRT Station NB
+						})) //
+				.compileBothTripSort());
+		map2.put(157L, new RouteTripSpec(157L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Beacon Hl Ctr", //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, TUSCANY) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"2149", // Tuscany Station - Rocky Ridge Terminal
+								"3863", // SB Beacon Hill CTR @ Shoppers Drug Mart
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"3863", // SB Beacon Hill CTR @ Shoppers Drug Mart
+								"2149", // Tuscany Station - Rocky Ridge Terminal
 						})) //
 				.compileBothTripSort());
 		map2.put(158l, new RouteTripSpec(158l, //
@@ -896,6 +744,98 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"2229", // SB Legacy VW SE @ Legacy Legacy CI SE
 						})) //
 				.compileBothTripSort());
+		map2.put(174L, new RouteTripSpec(174L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.NORTH.getId(), //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.SOUTH.getId()) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4127", // WB Tuscany Ravine RD @ Tuscany Ravine HT NW
+								"3823", // ++
+								"2153", // Tuscany Station - Tuscany Terminal
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"2153", // Tuscany Station - Tuscany Terminal
+								"3833", // ++
+								"4127", // WB Tuscany Ravine RD @ Tuscany Ravine HT NW
+						})) //
+				.compileBothTripSort());
+		map2.put(176L, new RouteTripSpec(176L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SADDLETOWNE, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOUTH) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"3902", // <> WB 114 AV SE (WBay) @ 29 ST SE
+								"7635", // <>
+								"4980", // <>
+								"4979", // <> SB 114 AV SE @ 29 ST SE
+								"9488", // !=
+								"8576", // Saddletowne LRT Station SB
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"8576", // Saddletowne LRT Station SB
+								"9487", // !=
+								"3902", // <> WB 114 AV SE (WBay) @ 29 ST SE
+								"7635", // <>
+								"4980", // <>
+								"4979", // <> SB 114 AV SE @ 29 ST SE
+						})) //
+				.compileBothTripSort());
+		map2.put(300L, new RouteTripSpec(300L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, AIRPORT, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"3881", // WB 4 AV SW @ 2 ST SW
+								"3884", // EB 9 AV S @ Centre ST S
+								"3880", // WB 4 AV SE @ 1 ST SE
+								"3900", // YYC Airport Domestic Terminal
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"3900", // YYC Airport Domestic Terminal
+								"3881", // WB 4 AV SW @ 2 ST SW
+						})) //
+				.compileBothTripSort());
+		map2.put(301L, new RouteTripSpec(301L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, NORTH, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"2030", // SB 7 ST SW @ 7 AVE SW
+								"4267", // ++
+								"4456", // NB Harvest Hills BV @ Country Village WY NE
+								"4593", // SB Country Village LI @ Country Village WY NE
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4456", // NB Harvest Hills BV @ Country Village WY NE
+								"4593", // SB Country Village LI @ Country Village WY NE
+								"4592", // ++
+								"2030", // SB 7 ST SW @ 7 AVE SW
+						})) //
+				.compileBothTripSort());
+		map2.put(302L, new RouteTripSpec(302L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOUTH_HEALTH) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"2200", // WB Front ST @ Main Ent. South Health Campus SE
+								"3876", // ==
+								"3803", // !=
+								"3613", // !=
+								"9820", // ==
+								"9823", // WB 6 AV SE @ Macleod TR
+								"3882", // SB 5 ST SW @ 8 AV SW
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"3882", // SB 5 ST SW @ 8 AV SW
+								"3884", // EB 9 AV S @ Centre ST S
+								"2200", // WB Front ST @ Main Ent. South Health Campus SE
+						})) //
+				.compileBothTripSort());
 		map2.put(404l, new RouteTripSpec(404l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.EAST.getId(), //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.WEST.getId()) //
@@ -903,6 +843,22 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "6628", "6730" })) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { "6730", "6628" })) //
+				.compileBothTripSort());
+		map2.put(408L, new RouteTripSpec(408L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRENTWOOD, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, VALLEY_RIDGE) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"7706", // Valley Ridge East Terminal
+								"9136", // WB Crestmont BV @ Cresthaven PL SW
+								"6752", // Brentwood LRT Station
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"6752", // Brentwood LRT Station
+								"9136", // WB Crestmont BV @ Cresthaven PL SW
+								"7706", // Valley Ridge East Terminal
+						})) //
 				.compileBothTripSort());
 		map2.put(410L, new RouteTripSpec(410L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHINOOK_STATION, //
@@ -1003,6 +959,35 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						// no stops
 						})) //
 				.compileBothTripSort());
+		map2.put(698L, new RouteTripSpec(698L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WCHS_ST_MARY_S, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"3785", // NB 69 ST SW @ 69 Street West LRT Station
+								"5324", // EB 17 AV SW@ 2 ST SW
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"5287", // WB 17 AV SW@ 1 ST SW
+								"3785", // NB 69 ST SW @ 69 Street West LRT Station
+						})) //
+				.compileBothTripSort());
+		map2.put(699L, new RouteTripSpec(699L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Schools", // Central Memorial
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "West Spgs") // West Spgs
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"8822", // NB 77 ST SW @ Old Banff Coach RD
+								"4690", // EB 50 AV SW @ 21A ST SW
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"4791", // WB 50 AV SW @ 22 ST SW
+								"8822", // NB 77 ST SW @ Old Banff Coach RD
+								"4924", // EB Old Banff Coach RD @ 73 St SW
+						})) //
+				.compileBothTripSort());
 		map2.put(702l, new RouteTripSpec(702l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, NOLAN_HILL, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHURCHILL) //
@@ -1022,6 +1007,180 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"5491" // SB Northland DR @ 52 AV NW
 						})) //
 				.compileBothTripSort());
+		map2.put(703L, new RouteTripSpec(703L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SHERWOOD, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHURCHILL) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"5598", // NB Northland DR @ 52 AV NW
+								"8176", // SB Sherwood BV @ Sherwood ST NW
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"8176", // SB Sherwood BV @ Sherwood ST NW
+								"5598", // NB Northland DR @ 52 AV NW
+						})) //
+				.compileBothTripSort());
+		map2.put(704L, new RouteTripSpec(704L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Edgepark Blvd", // HAMPTONS // COUNTRY_HLS
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHURCHILL) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"5598", // NB Northland DR @ 52 AV NW
+								"7707", // Hamptons Bus Terminal WB
+								"8544", // EB Country Hills BV @ Edgebrook BV NW
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"8640", // WB Country Hills BV @ Hamptons DR NW
+								"7707", // Hamptons Bus Terminal WB
+								"5491", // SB Northland DR @ 52 AV NW
+						})) //
+				.compileBothTripSort());
+		map2.put(705L, new RouteTripSpec(705L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Edgepark Rise", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHURCHILL) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"5598", // NB Northland DR @ 52 AV NW
+								"6600", // Edgebrook RI NW Terminal
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"6600", // Edgebrook RI NW Terminal
+								"5491", // SB Northland DR @ 52 AV NW
+						})) //
+				.compileBothTripSort());
+		map2.put(706L, new RouteTripSpec(706L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, HAMPTONS, // "Edenwold Dr", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHURCHILL) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"5598", // NB Northland DR @ 52 AV NW
+								"7707", // Hamptons Bus Terminal WB
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"7707", // Hamptons Bus Terminal WB
+								"8357", // SB Edgebrook BV @ Country Hills BV NW
+								"5491", // SB Northland DR @ 52 AV NW
+						})) //
+				.compileBothTripSort());
+		map2.put(710L, new RouteTripSpec(710L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CRANSTON) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4794", // SB Cranston BV @ Cranleigh DR SE
+								"9291", // NB Cranston DR @ Cranleigh GA SE
+								"8443", // ++
+								"4210", // WB 90 AV SE @ Fairmount DR
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4210", // WB 90 AV SE @ Fairmount DR
+								"4163", // ++
+								"4794", // SB Cranston BV @ Cranleigh DR SE
+								"9291", // NB Cranston DR @ Cranleigh GA SE
+						})) //
+				.compileBothTripSort());
+		map2.put(711L, new RouteTripSpec(711L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, DOUGLAS_GLEN, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"4210", // WB 90 AV SE @ Fairmount DR
+								"7377", // SB Mount McKenzie DR @ 130 AV SE
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"8318", // NB Douglasdale BV @ 130 AV SE
+								"4210", // WB 90 AV SE @ Fairmount DR
+						})) //
+				.compileBothTripSort());
+		map2.put(712L, new RouteTripSpec(712L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, PARKLAND) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"6468", // SB Parkvalley DR @ W. of Parkridge DR SE
+								"4210", // WB 90 AV SE @ Fairmount DR
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4826", // SB Fairmount DR @ 88 AV SE
+								"6468", // SB Parkvalley DR @ W. of Parkridge DR SE
+						})) //
+				.compileBothTripSort());
+		map2.put(713L, new RouteTripSpec(713L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, DEER_RUN) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"6270", // NB 146 AV SE @ Deer Lake RD Terminal
+								"8297", // NB Deer Run BV @ Deer Lane CL SE
+								"6273", // ++
+								"4210", // WB 90 AV SE @ Fairmount DR
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4826", // SB Fairmount DR @ 88 AV SE
+								"8302", // ++
+								"6270", // NB 146 AV SE @ Deer Lake RD Terminal
+								"8297", // NB Deer Run BV @ Deer Lane CL SE
+						})) //
+				.compileBothTripSort());
+		map2.put(714L, new RouteTripSpec(714L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, PRESTWICK) // MC_KENZIE_TOWNE
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4904", // NB Prestwick BV @ Prestwick CI SE
+								"4210", // WB 90 AV SE @ Fairmount DR
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4826", // SB Fairmount DR @ 88 AV SE
+								"8327", // SB Prestwick BV @ Prestwick CI SE
+						})) //
+				.compileBothTripSort());
+		map2.put(715L, new RouteTripSpec(715L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, QUEENSLAND) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"8315", // EB Queensland PL @ Queensland DR SE
+								"8316", // WB Queensland PL @ Queensland DR SE
+								"8317", // ++
+								"4210", // WB 90 AV SE @ Fairmount DR
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4826", // SB Fairmount DR @ 88 AV SE
+								"9163", // ++
+								"8315", // EB Queensland PL @ Queensland DR SE
+								"8316", // WB Queensland PL @ Queensland DR SE
+						})) //
+				.compileBothTripSort());
+		map2.put(716L, new RouteTripSpec(716L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, NEW_BRIGHTON, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"4826", // SB Fairmount DR @ 88 AV SE
+								"3897", // ++
+								"7798", // EB New Brighton DR @ 52 ST SE
+								"9864", // WB New Brighton DR @ W. of New Brighton DR SE
+
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"7798", // EB New Brighton DR @ 52 ST SE
+								"9864", // WB New Brighton DR @ W. of New Brighton DR SE
+								"3868", // ++
+								"4210", // WB 90 AV SE @ Fairmount DR
+						})) //
+				.compileBothTripSort());
 		map2.put(717l, new RouteTripSpec(717l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, COPPERFIELD, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK) //
@@ -1029,6 +1188,42 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "4826", "9621", "3512" })) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { "3511", "3969", "4210" })) //
+				.compileBothTripSort());
+		map2.put(718L, new RouteTripSpec(718L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, DOUGLASDALE, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"4210", // WB 90 AV SE @ Fairmount DR
+								"7036", // ++
+								"6596", // Douglasbank WY Terminal SE
+								"6512", // WB Douglasdale BV @ Douglas Woods WY SE
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"6596", // Douglasbank WY Terminal SE
+								"6512", // WB Douglasdale BV @ Douglas Woods WY SE
+								"7034", // ++
+								"4210", // WB 90 AV SE @ Fairmount DR
+						})) //
+				.compileBothTripSort());
+		map2.put(719L, new RouteTripSpec(719L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, MC_KENZIE, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"4210", // WB 90 AV SE @ Fairmount DR
+								"6970", // ++
+								"7039", // EB McKenzie DR @ McKenzie Lake BV SE
+								"6585", // EB McKenzie Lake BV @ McKenzie Lake WY SE
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"7039", // EB McKenzie DR @ McKenzie Lake BV SE
+								"6585", // EB McKenzie Lake BV @ McKenzie Lake WY SE
+								"7682", // ++
+								"4210", // WB 90 AV SE @ Fairmount DR
+						})) //
 				.compileBothTripSort());
 		map2.put(720l, new RouteTripSpec(720l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK, //
@@ -1044,6 +1239,20 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						"4210", // WB 90 AV SE @ Fairmount DR
 								"6970", // WB McKenzie Lake BV @ Mount McKenzie DR SE
 								"7051" // EB Mountain Park DR @ Mount Kidd RD SE
+						})) //
+				.compileBothTripSort());
+		map2.put(721L, new RouteTripSpec(721L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, MC_KENZIE_TOWNE, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"4826", // SB Fairmount DR @ 88 AV SE
+								"2303", // SB 52 ST SE @ Copperfield GA
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"2302", // NB 52 ST SE @ Copperfield GA
+								"4210", // WB 90 AV SE @ Fairmount DR
 						})) //
 				.compileBothTripSort());
 		map2.put(722l, new RouteTripSpec(722l, //
@@ -1078,24 +1287,104 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"4718", // <> EB Tuscany Estates DR @ Tuscany Glen PA NW
 						})) //
 				.compileBothTripSort());
+		map2.put(724L, new RouteTripSpec(724L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, TUSCANY, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BOWNESS) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4060", // SB 77 ST NW @ 46 AV NW
+								"4061", // ++
+								"6731", // ++
+								"8432", // NB Tuscany Springs BV @ Tuscany BV NW
+								"3822", // SB Tuscany WY @ Tuscany Ridge HT NW
+								"8003", // EB Tuscany BV @ Tuscany Hills RD NW
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"8432", // NB Tuscany Springs BV @ Tuscany BV NW
+								"3822", // SB Tuscany WY @ Tuscany Ridge HT NW
+								"8003", // EB Tuscany BV @ Tuscany Hills RD NW
+								"5179", // ++
+								"6317", // ++
+								"4060", // SB 77 ST NW @ 46 AV NW
+						})) //
+				.compileBothTripSort());
+		map2.put(725L, new RouteTripSpec(725L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SILVER_SPGS, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BOWNESS) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4060", // SB 77 ST NW @ 46 AV NW
+								"5824", //
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"5811", //
+								"4060", // SB 77 ST NW @ 46 AV NW
+						})) //
+				.compileBothTripSort());
 		map2.put(738l, new RouteTripSpec(738l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, PANORAMA_HLS_NORTH, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, DIEFENBAKER) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "5783", "4114", "4414", "4304", //
+						Arrays.asList(new String[] { //
+						"5783", "4114", "4414", "4304", //
 								"4095", //
 								"4094", //
-								"4093", "4100" })) //
+								"4093", "4100" //
+						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "4100", "8421", "5783" })) //
+						Arrays.asList(new String[] { //
+						"4100", "8421", "5783" //
+						})) //
+				.compileBothTripSort());
+		map2.put(731L, new RouteTripSpec(731L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, RIVERBEND, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CENTRAL_MEMORIAL) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"4083", // SB 21 ST SW @ 51 AV SW
+								"8058", // ++
+								"6909", // SB 18 ST SE @ Riverview CL
+								"8064", // NB 18 ST SE @ Riverglen DR
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"6909", // SB 18 ST SE @ Riverview CL
+								"8064", // NB 18 ST SE @ Riverglen DR
+								"4690", // ++
+								"4083", // SB 21 ST SW @ 51 AV SW
+						})) //
+				.compileBothTripSort());
+		map2.put(732L, new RouteTripSpec(732L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CENTRAL_MEMORIAL, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, GLAMORGAN) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"6867", // NB Sierra Morena BV @ Signal Hill CTR SW
+								"9640", // EB Discovery Ridge BV @ Discovery Ridge CI SW
+								"4083", // SB 21 ST SW @ 51 AV SW
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"4083", // SB 21 ST SW @ 51 AV SW
+								"6867", // NB Sierra Morena BV @ Signal Hill CTR SW
+								"9640", // EB Discovery Ridge BV @ Discovery Ridge CI SW
+						})) //
 				.compileBothTripSort());
 		map2.put(748l, new RouteTripSpec(748l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Hidden Ranch", //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CRESCENT_HTS) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "112113", "9705" })) //
+						Arrays.asList(new String[] { //
+						"2025", // Crescent Heights High School
+								"9705", // EB Hidden Creek WY @ Hidden Creek PT NW
+						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "9344", "112112" })) //
+						Arrays.asList(new String[] { //
+						"9344", // WB Hidden Creek WY @ Hidden Creek PT NW
+								"112112", // Crescent Heights High School
+						})) //
 				.compileBothTripSort());
 		map2.put(750l, new RouteTripSpec(750l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Nelson Mandela", //
@@ -1104,6 +1393,57 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "9625", "5792" })) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "7671", "9440" })) //
+				.compileBothTripSort());
+		map2.put(767L, new RouteTripSpec(767L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.NORTH.getId(), // ANDERSON_STATION
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.SOUTH.getId()) // SCARLETT
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"9904", // WB Canterbury DR @ Canterbury PL SW
+								"7013", // ==
+								"5221", // !=
+								"7020", // !=
+								"5206", // ==
+								"5974", // Anderson LRT Station
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"5974", // Anderson LRT Station
+								"9904", // WB Canterbury DR @ Canterbury PL SW
+								"7013", // ==
+								"5205", // !=
+								"8689", // !=
+								"5206", // ==
+								"5974", // Anderson LRT Station
+						})) //
+				.compileBothTripSort());
+		map2.put(768L, new RouteTripSpec(768L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SCARLETT, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Walden") // Legacy
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"3570", // SB Walden BV @ N. leg Walden DR SE midblk
+								"9904", // WB Canterbury DR @ Canterbury PL SW
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"9904", // WB Canterbury DR @ Canterbury PL SW
+								"3574", // NB Walden BV @ nleg Walden Dr SE midblk
+						})) //
+				.compileBothTripSort());
+		map2.put(782L, new RouteTripSpec(782L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, NOLAN_HILL, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "HD Cartwrightl") //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"2427", // SB 53 Street @ Dalhart Rd nearside
+								"2034", // EB Nolan Hill BV @ Nolan Hill DR farside
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"2039", // WB Nolan Hill BV @ Shaganappi TR NW
+								"2427", // SB 53 Street @ Dalhart Rd nearside
+						})) //
 				.compileBothTripSort());
 		map2.put(797l, new RouteTripSpec(797l, //
 				0, MTrip.HEADSIGN_TYPE_STRING, TOM_BAINES, // AM
@@ -1134,12 +1474,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SCENIC_ACRES_NORTH) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"7159", // NB Scurfield DR @ Scripps LD NW {51.120135,-114.222632}
+						"7159", // NB Scurfield DR @ Scripps LD NW
 								"8840", // EB Northmont DR @ Calandar RD NW
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"8976", // WB Northmount DR @ Clarendon RD NW {51.085406,-114.101168}
+						"8976", // WB Northmount DR @ Clarendon RD NW
 								"5222", // EB Scenic Acres BV @ Scenic Acres DR NW
 						})) //
 				.compileBothTripSort());
@@ -1162,13 +1502,40 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "St V De Paul") //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"7092", // EB Varsity DR @ 49 ST NW {51.093665,-114.159458}
+						"7092", // EB Varsity DR @ 49 ST NW
 								"7164", // SB Scurfield DR @ Scenic GD NW
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"6535", // NB Scurfield DR @ Scenic Acres BV NW {51.119976,-114.210694}
+						"6535", // NB Scurfield DR @ Scenic Acres BV NW
 								"7092", // EB Varsity DR @ 49 ST NW
+						})) //
+				.compileBothTripSort());
+		map2.put(843L, new RouteTripSpec(843L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, NOTRE_DAME, //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, MAC_EWAN) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"7364", // WB Berkley DR @ Bermondsey RI NW
+								"2018", // NB Country Village LI south of Country Village Rd
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"4085", // WB Country Village WY @ Country Village LINK NE
+								"7332", // EB Berkley DR @ Hunterview DR NW
+						})) //
+				.compileBothTripSort());
+		map2.put(844L, new RouteTripSpec(844L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, NOTRE_DAME, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, EVANSTON) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						/* no stops */
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"4085", // WB Country Village WY @ Country Village LINK NE
+								"3700", // WB Symons Valley PY @ Evanspark BV NW
 						})) //
 				.compileBothTripSort());
 		map2.put(862l, new RouteTripSpec(862l, //
@@ -1181,7 +1548,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"4727", // EB 86 AV SW @ Haddon RD
+						"2727", // SB Haddon Rd @ Hogarth Rd
 								"2303", // SB 52 ST SE @ Copperfield GA
 						})) //
 				.compileBothTripSort());
@@ -1234,1084 +1601,10 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
 			return; // split
 		}
-		if (!isGoodEnoughAccepted()) {
-			mTrip.setHeadsignString(cleanTripHeadsign(gTrip.getTripHeadsign()), gTrip.getDirectionId() == null ? 0 : gTrip.getDirectionId());
+		if (isGoodEnoughAcceptedForSchoolsRoutes(mRoute.getId())) { // School routes
+			int directionId = gTrip.getDirectionId() == null ? 0 : gTrip.getDirectionId();
+			mTrip.setHeadsignString(cleanTripHeadsign(gTrip.getTripHeadsign()) + (directionId == 0 ? "" : " "), directionId);
 			return;
-		}
-		if (mRoute.getId() == 30l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.getId() == 41l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(LYNNWOOD, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 62l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(HIDDEN_VLY, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 63l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(LAKEVIEW, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 64l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(MAC_EWAN, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 66l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CHINOOK, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 69l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(DEERFOOT_CENTER, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 70l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(VALLEY_RIDGE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 71l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(MC_KNIGHT_WESTWINDS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 81l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.getId() == 85l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(MC_KNIGHT_WESTWINDS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 86l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.getId() == 91l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(BRENTWOOD_STATION, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 100l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(AIRPORT, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(MC_KNIGHT_WESTWINDS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 103l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(MC_KENZIE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 107l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SOUTH_CALGARY, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 109l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(HARVEST_HLS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 110l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 116l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(COVENTRY_HLS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 125l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ERIN_WOODS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 126l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(APPLEWOOD, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 142l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(PANORAMA, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 145l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(NORTHLAND, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 151l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(NEW_BRIGHTON, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 157l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.getId() == 174l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(TUSCANY, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 176l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.getId() == 300l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(AIRPORT, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(DOWNTOWN, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 301l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(COUNTRY_VLG, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 302l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CITY_CTR, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SOUTH_HEALTH, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 306l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(WESTBROOK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(HERITAGE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 406l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(MC_KENZIE_TOWNE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SHAWVILLE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 440l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CHATEAU_ESTS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(FRANKLIN, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 445l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SKYVIEW_RANCH, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SADDLETOWN, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 698l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(WCHS_ST_MARY_S, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(_69_ST_STATION, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 699l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignDirection(MDirectionType.NORTH);
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignDirection(MDirectionType.SOUTH);
-				return;
-			}
-		} else if (mRoute.getId() == 703l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SHERWOOD, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CHURCHILL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 704l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(COUNTRY_HLS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CHURCHILL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 705l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(EDGEBROOK_RISE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CHURCHILL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 706l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(HAMPTONS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CHURCHILL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 710l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CRANSTON, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 711l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(DOUGLAS_GLEN, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 712l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(PARKLAND, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 713l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(DEER_RUN, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 714l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(PRESTWICK, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 715l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(QUEENSLAND, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 716l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(NEW_BRIGHTON, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 718l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(DOUGLASDALE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 719l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BEAVERBROOK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(MC_KENZIE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 721l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(TUSCANY, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(BOWNESS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 724l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(TUSCANY, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(BOWNESS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 725l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SILVER_SPGS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(BOWNESS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 731l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(RIVERBEND, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CENTRAL_MEMORIAL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 732l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CENTRAL_MEMORIAL, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(GLAMORGAN, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 733l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CENTRAL_MEMORIAL, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(LAKEVIEW, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 734l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(OGDEN, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CENTRAL_MEMORIAL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 735l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(OGDEN_NORTH, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CENTRAL_MEMORIAL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 737l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(HARVEST_HLS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(DIEFENBAKER, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 738l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(PANORAMA_HLS_NORTH, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(DIEFENBAKER, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 739l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(PANORAMA_HLS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(DIEFENBAKER, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 740l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 741l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SADDLECREST, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 742l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SADDLE_RIDGE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 743l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(WHITEHORN_STATION, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 744l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(COVENTRY_SOUTH, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 745l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(VISTA_HTS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 746l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(COVENTRY_HLS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 747l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(HIDDEN_VLY, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CRESCENT_HTS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 751l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(TARADALE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 752l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(MARTINDALE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 753l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(EVANSTON, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 754l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SADDLETOWNE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 755l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CASTLERIDGE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 756l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(MARTINDALE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 757l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CORAL_SPGS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 758l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(TARADALE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 759l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(FALCONRIDGE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(FOWLER, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 760l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BONAVISTA_WEST, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 761l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(AUBURN_BAY, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 762l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BONAVISTA, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 763l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(WOODBINE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 764l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SOMERSET_BRIDLEWOOD_STATION, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 765l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SOMERSET_BRIDLEWOOD_STATION, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 766l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SCARLETT, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(EVERGREEN, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 767l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString("PM", gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString("AM", gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 770l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(WESTERN_CANADA, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(OGDEN, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 771l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CHINOOK_STATION, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 773l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(R_THIRSK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ROCKY_RIDGE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 774l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(R_THIRSK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ROYAL_OAK, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 775l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CITADEL, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(R_THIRSK, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 776l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(WISE_WOOD, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(PALLISER_OAKRIDGE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 777l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(WISE_WOOD, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(EVERGREEN, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 778l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(WISE_WOOD, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(WOODLANDS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 779l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(WISE_WOOD, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(WOODBINE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 780l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(WISE_WOOD, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(OAKRIDGE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 791l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(MAC_EWAN, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(QUEEN_ELIZABETH, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 792l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SANDSTONE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(QUEEN_ELIZABETH, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 794l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString("AM", gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString("PM", gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 795l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(VINCENT_MASSEY, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(STRATHCONA, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 796l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(EDGEMONT, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(TOM_BAINES, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 799l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(CORAL_SPGS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ANNIE_GALE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 802l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BREBEUF, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(HAWKWOOD, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 804l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SHERWOOD, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(BREBEUF, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 805l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(HAMPTONS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(BREBEUF, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 807l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(BREBEUF, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ROCKY_RIDGE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 810l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(NORTH_POINTE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 811l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(TUSCANY, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 812l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITADEL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 813l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ARBOUR_LK, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 814l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ROYAL_OAK, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 815l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ARBOUR_LK, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 816l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CITADEL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 817l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ROCKY_RIDGE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 818l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(HAMPTONS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 819l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SHERWOOD, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 821l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(MTN_PARK, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(BISHOP_O_BYRNE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 825l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(MC_KENZIE_TOWNE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(BISHOP_CARROLL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 830l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SANDSTONE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(M_D_HOUET, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 831l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SCENIC_ACRES_NORTH, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 832l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_FRANCIS, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SCENIC_ACRES_SOUTH, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 833l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(DALHOUSIE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(M_D_HOUET, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 834l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(DALHOUSIE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(M_D_HOUET, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 835l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ANDERSON, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 837l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SCENIC_ACRES_SOUTH, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 838l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SCENIC_ACRES_NORTH, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 841l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(NOTRE_DAME, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(HIDDEN_VLY, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 842l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(NOTRE_DAME, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(MAC_EWAN, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 851l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(LYNNWOOD, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ST_AUGUSTINE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 853l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(RIVERBEND, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ST_AUGUSTINE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 857l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_STEPHEN, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(EVERGREEN, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 860l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(B_GRANDIN, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CRANSTON, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 861l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(B_GRANDIN, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(AUBURN_BAY, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 878l) {
-			if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CHAPARRAL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 880l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_MATTHEW, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(HERITAGE, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 883l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(EVANSTON, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ST_HELENA, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 884l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(KINCORA, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ST_HELENA, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 888l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(NORTH_POINTE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(ST_MARGARET, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == 892l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ST_ISABELLA, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(MC_KENZIE, gTrip.getDirectionId());
-				return;
-			}
 		}
 		mTrip.setHeadsignString(cleanTripHeadsign(gTrip.getTripHeadsign()), gTrip.getDirectionId() == null ? 0 : gTrip.getDirectionId());
 	}
@@ -2319,140 +1612,157 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public boolean mergeHeadsign(MTrip mTrip, MTrip mTripToMerge) {
 		List<String> headsignsValues = Arrays.asList(mTrip.getHeadsignValue(), mTripToMerge.getHeadsignValue());
-		if (!isGoodEnoughAccepted()) {
-			System.out.printf("\nUnexpected trips to merge %s & %s!\n", mTrip, mTripToMerge);
-			System.exit(-1);
-			return false;
-		}
-		if (mTrip.getRouteId() == 1l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(FOREST_LAWN, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+		if (mTrip.getRouteId() == 1L) {
+			if (Arrays.asList( //
+					CITY_CTR, //
+					BOWNESS //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(BOWNESS, mTrip.getHeadsignId());
 				return true;
-			}
-		} else if (mTrip.getRouteId() == 2l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(MOUNT_PLEASANT, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(KILLARNEY_17_AVE, mTrip.getHeadsignId());
+			} else if (Arrays.asList( //
+					CITY_CTR, //
+					FOREST_LAWN //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(FOREST_LAWN, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 3l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(SANDSTONE, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(ELBOW_DR, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 6l) {
-			if (mTrip.getHeadsignId() == 0) {
+		} else if (mTrip.getRouteId() == 7L) {
+			if (Arrays.asList( //
+					SOUTH_CALGARY, //
+					CITY_CTR //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CITY_CTR, mTrip.getHeadsignId());
 				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(KILLARNEY_26_AVE, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 7l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(CITY_CTR, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+			} else if (Arrays.asList( //
+					StringUtils.EMPTY, //
+					SOUTH_CALGARY //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SOUTH_CALGARY, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 8l) {
-			if (mTrip.getHeadsignId() == 0) {
+		} else if (mTrip.getRouteId() == 8L) {
+			if (Arrays.asList( //
+					UNIVERSITY_OF_CALGARY, //
+					NORTH_POINTE //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(NORTH_POINTE, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 9l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(BRIDGELAND, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(VARSITY_ACRES, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 10l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(HOME_ROAD, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(SOUTHCENTER, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 9L) {
+			if (Arrays.asList( //
+					CHINOOK, //
+					CITY_HALL //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CITY_HALL, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 13l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(CITY_CTR, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(WESTHILLS, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 10L) {
+			if (Arrays.asList( //
+					CHINOOK, //
+					CITY_HALL //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CITY_HALL, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 14l) {
-			if (mTrip.getHeadsignId() == 0) {
+		} else if (mTrip.getRouteId() == 14L) {
+			if (Arrays.asList( //
+					BRIDLEWOOD, //
+					CRANSTON //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CRANSTON, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 17l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(RENFREW, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+		} else if (mTrip.getRouteId() == 17L) {
+			if (Arrays.asList( //
+					CITY_CTR, //
+					RAMSAY //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(RAMSAY, mTrip.getHeadsignId());
 				return true;
+			} else if (Arrays.asList( //
+					CITY_CTR, //
+					RENFREW //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(RENFREW, mTrip.getHeadsignId());
+				return true;
 			}
-		} else if (mTrip.getRouteId() == 18l) {
-			if (mTrip.getHeadsignId() == 0) {
+		} else if (mTrip.getRouteId() == 18L) {
+			if (Arrays.asList( //
+					MRU, //
+					CITY_CTR //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CITY_CTR, mTrip.getHeadsignId());
 				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+			} else if (Arrays.asList( //
+					MRU, //
+					LAKEVIEW //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(LAKEVIEW, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 20l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(NORTHMOUNT_DR, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+		} else if (mTrip.getRouteId() == 20L) {
+			if (Arrays.asList( //
+					StringUtils.EMPTY, //
+					_78_AVE_TERMINAL, //
+					BRENTWOOD_STATION, //
+					NORTHMOUNT_DR, //
+					UNIVERSITY_OF_CALGARY, //
+					HERITAGE //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(HERITAGE, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 23l) {
-			if (mTrip.getHeadsignId() == 1) {
+		} else if (mTrip.getRouteId() == 21L) {
+			if (Arrays.asList( //
+					MARLBOROUGH_STATION, //
+					FOOTHILLS_IND //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(FOOTHILLS_IND, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 33l) {
-			if (mTrip.getHeadsignId() == 0) {
+		} else if (mTrip.getRouteId() == 23L) {
+			if (Arrays.asList( //
+					MARLBOROUGH_STATION, //
+					FOOTHILLS_IND //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(FOOTHILLS_IND, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 33L) {
+			if (Arrays.asList( //
+					VISTA_HTS, //
+					RUNDLE_STATION //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(RUNDLE_STATION, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 45l) {
-			if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(APPLEWOOD, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 41L) {
+			if (Arrays.asList( //
+					StringUtils.EMPTY, //
+					CHINOOK //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CHINOOK, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 55l) {
-			// TODO split 55?
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(FALCONRIDGE, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 57l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(MC_CALL_WAY, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+		} else if (mTrip.getRouteId() == 57L) {
+			if (Arrays.asList( //
+					MARLBOROUGH_STATION, //
+					ERINWOODS //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(ERINWOODS, mTrip.getHeadsignId());
 				return true;
+			} else if (Arrays.asList( //
+					MARLBOROUGH_STATION, //
+					MCCALL_WAY // MC_CALL_WAY //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(MCCALL_WAY, mTrip.getHeadsignId()); // MC_CALL_WAY
+				return true;
 			}
-		} else if (mTrip.getRouteId() == 59l) {
-			if (mTrip.getHeadsignId() == 0) {
+		} else if (mTrip.getRouteId() == 59L) {
+			if (Arrays.asList( //
+					StringUtils.EMPTY, //
+					SADDLECREST //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SADDLECREST, mTrip.getHeadsignId());
 				return true;
 			}
@@ -2464,77 +1774,71 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(NOLAN_HILL, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 85l) {
-			if (mTrip.getHeadsignId() == 0) {
+		} else if (mTrip.getRouteId() == 85L) {
+			if (Arrays.asList( //
+					StringUtils.EMPTY, //
+					MCKNIGHT_WESTWINDS //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(MCKNIGHT_WESTWINDS, mTrip.getHeadsignId()); // MC_KNIGHT_WESTWINDS
+				return true;
+			} else if (Arrays.asList( //
+					StringUtils.EMPTY, //
+					SADDLERIDGE //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SADDLERIDGE, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 93l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(WESTBROOK, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+		} else if (mTrip.getRouteId() == 93L) {
+			if (Arrays.asList( //
+					StringUtils.EMPTY, //
+					_69_ST_STATION, //
+					COACH_HILL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(COACH_HILL, mTrip.getHeadsignId());
 				return true;
+			} else if (Arrays.asList( //
+					StringUtils.EMPTY, //
+					_69_ST_STATION, //
+					WESTBROOK //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(WESTBROOK, mTrip.getHeadsignId());
+				return true;
 			}
-		} else if (mTrip.getRouteId() == 102l) {
-			if (mTrip.getHeadsignId() == 0) {
+		} else if (mTrip.getRouteId() == 107L) {
+			if (Arrays.asList( //
+					SOUTH_CALGARY, //
+					CITY_CTR //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CITY_CTR, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(DOUGLASDALE, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 117l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(CITY_CTR, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(MC_KENZIE_TOWNE, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 129L) {
 			if (Arrays.asList( //
-					SAGE_HILL, //
-					"Route 129" //
-			).containsAll(headsignsValues)) {
+					StringUtils.EMPTY, //
+					SAGE_HILL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SAGE_HILL, mTrip.getHeadsignId());
 				return true;
 			} else if (Arrays.asList( //
-					DALHOUSIE, //
-					"Route 129" //
-			).containsAll(headsignsValues)) {
+					StringUtils.EMPTY, //
+					DALHOUSIE //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(DALHOUSIE, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 133l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(CITY_CTR, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(CRANSTON, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 153l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(COPPERFIELD, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 159L) {
+			if (Arrays.asList( //
+					StringUtils.EMPTY, //
+					SADDLEBROOK //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(SADDLEBROOK, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 159l) {
-			if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString("Saddlebrook", mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 300l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(BRT_AIRPORT, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 302l) {
-			if (mTrip.getHeadsignId() == 1) {
+		} else if (mTrip.getRouteId() == 302L) {
+			if (Arrays.asList( //
+					CITY_CTR, //
+					SOUTH_HEALTH_CAMPUS //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SOUTH_HEALTH_CAMPUS, mTrip.getHeadsignId());
 				return true;
 			}
@@ -2546,30 +1850,27 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(STAMPEDE_PARK, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 305l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(_17_AVENUE_SE, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 305L) {
+			if (Arrays.asList( //
+					CITY_CTR, //
+					_17_AVE_SE //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(_17_AVE_SE, mTrip.getHeadsignId()); // 17 Ave SE
 				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+			} else if (Arrays.asList( //
+					CITY_CTR, //
+					CANADA_OLYMPIC_PARK //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CANADA_OLYMPIC_PARK, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 405l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(BRENTWOOD, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 407l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(BRENTWOOD, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 408l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(BRENTWOOD, mTrip.getHeadsignId());
-				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(VALLEYRIDGE, mTrip.getHeadsignId());
+		} else if (mTrip.getRouteId() == 440L) {
+			if (Arrays.asList( //
+					EAST_HILLS + SLASH + CHATEAU_EST, //
+					EAST_HILLS, //
+					CHATEAU_EST //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(CHATEAU_ESTS, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 627L) {
@@ -2578,6 +1879,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 					"Columbia College" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("Columbia College", mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 810L) {
+			if (Arrays.asList( //
+					ST_MARGARET + SPACE + ST_FRANCIS + SLASH + NORTH_POINTE, //
+					ST_MARGARET + SPACE + NORTH_POINTE //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(ST_MARGARET + SPACE + NORTH_POINTE, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == RID_FLOATER) {
@@ -2589,26 +1898,43 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			}
 		}
+		if (isGoodEnoughAccepted()) {
+			return super.mergeHeadsign(mTrip, mTripToMerge);
+		}
 		System.out.printf("\nUnexpected trips to merge %s & %s!\n", mTrip, mTripToMerge);
 		System.exit(-1);
 		return false;
 	}
 
-	private static final Pattern BRT_ = Pattern.compile("((^|\\W){1}(brt)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
-	private static final String BRT_REPLACEMENT = "$2" + BRT + "$4";
+	private static final Pattern AVENUE_ = Pattern.compile("((^|\\W){1}(av)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
+	private static final String AVENUE_REPLACEMENT = "$2Avenue$4";
 
-	private static final Pattern MRU_ = Pattern.compile("((^|\\W){1}(mru)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
+	private static final Pattern MRU_ = Pattern.compile("((^|\\W){1}(mru|mount royal university)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
 	private static final String MRU_REPLACEMENT = "$2" + MRU + "$4";
 
 	private static final Pattern STN = Pattern.compile("((^|\\W){1}(stn)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
 	private static final String STN_REPLACEMENT = "$2Station$4";
 
+	private static final Pattern ENDS_WITH_EXPRESS = Pattern.compile("((\\W){1}(express)($){1})", Pattern.CASE_INSENSITIVE);
+
+	private static final Pattern STARTS_WITH_BRT = Pattern.compile("((^){1}(brt)(\\W){1})", Pattern.CASE_INSENSITIVE);
+
+	private static final Pattern ROUTE_RSN = Pattern.compile("((^){1}(route )?([\\d]+)($){1})", Pattern.CASE_INSENSITIVE);
+
+	private static final Pattern ENDS_WITH_VIA = Pattern.compile("( via .*$)", Pattern.CASE_INSENSITIVE);
+
 	@Override
 	public String cleanTripHeadsign(String tripHeadsign) {
-		tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
-		tripHeadsign = BRT_.matcher(tripHeadsign).replaceAll(BRT_REPLACEMENT);
+		if (Utils.isUppercaseOnly(tripHeadsign, true, true)) {
+			tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
+		}
+		tripHeadsign = AVENUE_.matcher(tripHeadsign).replaceAll(AVENUE_REPLACEMENT);
+		tripHeadsign = STARTS_WITH_BRT.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = MRU_.matcher(tripHeadsign).replaceAll(MRU_REPLACEMENT);
 		tripHeadsign = STN.matcher(tripHeadsign).replaceAll(STN_REPLACEMENT);
+		tripHeadsign = ENDS_WITH_EXPRESS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+		tripHeadsign = ROUTE_RSN.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+		tripHeadsign = ENDS_WITH_VIA.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = CleanUtils.cleanSlashes(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanNumbers(tripHeadsign);
