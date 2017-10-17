@@ -53,7 +53,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		if (routeId >= 732L && routeId <= 899L) {
 			return true; // TODO clean school trip splitting
 		}
-		return super.isGoodEnoughAccepted();
+		return false;
 	}
 
 	private HashSet<String> serviceIds;
