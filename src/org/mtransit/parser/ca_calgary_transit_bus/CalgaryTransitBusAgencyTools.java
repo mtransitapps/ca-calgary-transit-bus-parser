@@ -1595,7 +1595,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		return super.splitTripStop(mRoute, gTrip, gTripStop, splitTrips, routeGTFS);
 	}
 
-
 	@Override
 	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
@@ -1881,6 +1880,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString("Columbia College", mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 765L) {
+			if (Arrays.asList( //
+					"Ep Scarlett Woodbine", //
+					"Ep Scarlett Somerset-Bridlewood Sta" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Ep Scarlett Woodbine", mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 810L) {
 			if (Arrays.asList( //
 					ST_MARGARET + SPACE + ST_FRANCIS + SLASH + NORTH_POINTE, //
@@ -1897,9 +1904,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString("Stampede Parade", mTrip.getHeadsignId());
 				return true;
 			}
-		}
-		if (isGoodEnoughAccepted()) {
-			return super.mergeHeadsign(mTrip, mTripToMerge);
 		}
 		System.out.printf("\nUnexpected trips to merge %s & %s!\n", mTrip, mTripToMerge);
 		System.exit(-1);
