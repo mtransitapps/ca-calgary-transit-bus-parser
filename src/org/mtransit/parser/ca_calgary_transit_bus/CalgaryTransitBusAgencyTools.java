@@ -382,6 +382,25 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"6866" // SB Stewart GR @ S. of Richmond RD SW
 						})) //
 				.compileBothTripSort());
+		map2.put(14L, new RouteTripSpec(14L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CRANSTON, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRIDLEWOOD) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"9602", // NB 24 ST SW @ Bridle Estates RD #BRIDLEWOOD
+								"3621", // Somerset-Bridlewood Stn
+								"6456", // SB 45 ST SE @ South Health Campus #CRANSTON
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"6456", // SB 45 ST SE @ South Health Campus #CRANSTON
+								"7256", // WB Sun Valley BV @ Midpark BV SW
+								"8508", // SB Shawville BV @ 162 AV SE
+								"8668", // WB Shawville GA @ Somervale CO SW
+								"4820", // SB Bridleridge WY @ Bridleglen MR SW
+								"9602", // NB 24 ST SW @ Bridle Estates RD #BRIDLEWOOD
+						})) //
+				.compileBothTripSort());
 		map2.put(15l, new RouteTripSpec(15l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.NORTH.getId(), // Fish Crk-Lacombe Sta
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.SOUTH.getId()) // SHAWVILLE
@@ -618,6 +637,20 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						"8822", // NB 77 ST SW @ Old Banff Coach RD
 								"3717", // EB Old Banff Coach RD @ 89 ST SW
 								"8373", // 69 Street West LRT Station
+						})) //
+				.compileBothTripSort());
+		map2.put(100L, new RouteTripSpec(100L, //
+				0, MTrip.HEADSIGN_TYPE_STRING, AIRPORT, //
+				1, MTrip.HEADSIGN_TYPE_STRING, MCKNIGHT_WESTWINDS) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						"9644", // McKnight-Westwinds LRT Station
+								"7557", // YYC Airport Domestic Terminal
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						"7557", // YYC Airport Domestic Terminal
+								"9644", // McKnight-Westwinds LRT Station
 						})) //
 				.compileBothTripSort());
 		map2.put(112l, new RouteTripSpec(112l, //
