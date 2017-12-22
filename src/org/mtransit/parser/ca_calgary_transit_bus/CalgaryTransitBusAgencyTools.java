@@ -282,7 +282,8 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String SILVER_SPGS = "Silver Spgs";
 	private static final String SOUTH = "South";
 	private static final String SOUTH_CALGARY = SOUTH + " Calgary";
-	private static final String SOUTH_HEALTH = "South Health";
+	private static final String SOUTHCENTRE = "Southcentre";
+	private static final String SOUTH_HEALTH = SOUTH + " Health";
 	private static final String SOUTH_HEALTH_CAMPUS = SOUTH_HEALTH + " Campus";
 	private static final String SOUTHLAND = "Southland";
 	private static final String SOUTHLAND_STATION = SOUTHLAND + " Sta";
@@ -414,13 +415,21 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.WEST.getId()) // WB University WY @ Craigie Hall
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"5408", "5703", "5706", "5710", "5725", "5718" //
+						"5408", // WB University WY @ Craigie Hall
+								"5703", // EB 16 AV N @ Centre ST N
+								"5706", // ++
+								"5710", // ++
+								"5725", // Vista Heights Terminal
+								"5718", // Rundle LRT Station (SB 36 ST NE @ 25 AV NE)
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"5718", "9413", "5735", "7573", // ==
-								"5697", // !=
-								"5408" // !=
+						"5718", // Rundle LRT Station (SB 36 ST NE @ 25 AV NE)
+								"5728", // WB 8 AV NE @ 19 ST NE
+								"9413", // ++
+								"5735", // ++
+								"7573", // ++
+								"5408" // WB University WY @ Craigie Hall
 						})) //
 				.compileBothTripSort());
 		map2.put(26l, new RouteTripSpec(26l, //
@@ -640,16 +649,16 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(100L, new RouteTripSpec(100L, //
-				0, MTrip.HEADSIGN_TYPE_STRING, AIRPORT, //
+				0, MTrip.HEADSIGN_TYPE_STRING, NORTH_POINTE, //
 				1, MTrip.HEADSIGN_TYPE_STRING, MCKNIGHT_WESTWINDS) //
 				.addTripSort(0, //
 						Arrays.asList(new String[] { //
 						"9644", // McKnight-Westwinds LRT Station
-								"7557", // YYC Airport Domestic Terminal
+								"4100", // SB Country Village LI @ Country Village WY NE
 						})) //
 				.addTripSort(1, //
 						Arrays.asList(new String[] { //
-						"7557", // YYC Airport Domestic Terminal
+						"4100", // SB Country Village LI @ Country Village WY NE
 								"9644", // McKnight-Westwinds LRT Station
 						})) //
 				.compileBothTripSort());
@@ -949,12 +958,20 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "3497", "4450", "4734" })) //
 				.compileBothTripSort());
 		map2.put(430l, new RouteTripSpec(430l, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, AIRPORT, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, NORTH_POINTE, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SANDSTONE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "9873", "4100", "7557" })) //
+						Arrays.asList(new String[] { //
+						"9873", // Sandstone Terminal
+								"4318", // ++
+								"3497", // WB Country Village WY @ Harvest Hills BV N
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "7557", "4085", "9873" })) //
+						Arrays.asList(new String[] { //
+						"3497", // WB Country Village WY @ Harvest Hills BV N
+								"4317", // ++
+								"9873", // Sandstone Terminal
+						})) //
 				.compileBothTripSort());
 		map2.put(439l, new RouteTripSpec(439l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION, //
@@ -1410,7 +1427,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CRESCENT_HTS) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
-						"2025", // Crescent Heights High School
+						"112113", // 12 AV NW @ 1 ST NW - Crescent Heights
 								"9705", // EB Hidden Creek WY @ Hidden Creek PT NW
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
@@ -1690,10 +1707,17 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 10L) {
 			if (Arrays.asList( //
+					CITY_CTR, //
 					CHINOOK, //
 					CITY_HALL //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CITY_HALL, mTrip.getHeadsignId());
+				return true;
+			} else if (Arrays.asList( //
+					CITY_CTR, //
+					SOUTHCENTRE //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(SOUTHCENTRE, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 14L) {
@@ -1754,6 +1778,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 23L) {
 			if (Arrays.asList( //
+					CHINOOK, //
 					MARLBOROUGH_STATION, //
 					FOOTHILLS_IND //
 					).containsAll(headsignsValues)) {
@@ -1894,6 +1919,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 					CANADA_OLYMPIC_PARK //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CANADA_OLYMPIC_PARK, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 421L) {
+			if (Arrays.asList( //
+					NORTH_POINTE, //
+					"Panatella" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Panatella", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 440L) {
