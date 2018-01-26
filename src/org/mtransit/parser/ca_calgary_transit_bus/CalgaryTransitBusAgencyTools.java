@@ -746,13 +746,25 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"2149", // Tuscany Station - Rocky Ridge Terminal
 						})) //
 				.compileBothTripSort());
-		map2.put(158l, new RouteTripSpec(158l, //
+		map2.put(158L, new RouteTripSpec(158L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, ROYAL_OAK, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, TUSCANY) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "2150", "3533", "3535" })) //
+						Arrays.asList(new String[] { //
+						"2150", // Tuscany Station - Rocky Ridge Terminal
+								"3533", // ++
+								"9575", // == NB Rocky Ridge RD @ Royal Oak GD NW
+								"3535", // != EB 112 AV NW @ Rocky Ridge RD
+								"3451", // !=
+						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "3535", "8892", "2150" })) //
+						Arrays.asList(new String[] { //
+								"3451", // !=
+								"3535", // != EB 112 AV NW @ Rocky Ridge RD
+								"9574", // == SB Country Hills BV @ Royal Oak Centre NW
+								"8892", // ++
+								"2150", // Tuscany Station - Rocky Ridge Terminal
+						})) //
 				.compileBothTripSort());
 		map2.put(167L, new RouteTripSpec(167L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Walden", //
@@ -1624,7 +1636,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public int compareEarly(long routeId, List<MTripStop> list1, List<MTripStop> list2, MTripStop ts1, MTripStop ts2, GStop ts1GStop, GStop ts2GStop) {
 		if (ALL_ROUTE_TRIPS2.containsKey(routeId)) {
-			return ALL_ROUTE_TRIPS2.get(routeId).compare(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop);
+			return ALL_ROUTE_TRIPS2.get(routeId).compare(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop, this);
 		}
 		return super.compareEarly(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop);
 	}
@@ -1640,7 +1652,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public Pair<Long[], Integer[]> splitTripStop(MRoute mRoute, GTrip gTrip, GTripStop gTripStop, ArrayList<MTrip> splitTrips, GSpec routeGTFS) {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
-			return SplitUtils.splitTripStop(mRoute, gTrip, gTripStop, routeGTFS, ALL_ROUTE_TRIPS2.get(mRoute.getId()));
+			return SplitUtils.splitTripStop(mRoute, gTrip, gTripStop, routeGTFS, ALL_ROUTE_TRIPS2.get(mRoute.getId()), this);
 		}
 		return super.splitTripStop(mRoute, gTrip, gTripStop, splitTrips, routeGTFS);
 	}
