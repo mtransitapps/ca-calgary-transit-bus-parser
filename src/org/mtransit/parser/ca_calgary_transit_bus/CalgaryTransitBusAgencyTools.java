@@ -432,6 +432,24 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"5408" // WB University WY @ Craigie Hall
 						})) //
 				.compileBothTripSort());
+		map2.put(20L, new RouteTripSpec(20L, //
+				0, MTrip.HEADSIGN_TYPE_STRING, NORTHMOUNT_DR, //
+				1, MTrip.HEADSIGN_TYPE_STRING, HERITAGE) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						"5762", // Heritage LRT Station SB
+								"6278", // NB Mount Royal CI @ MRU East Gate
+								"5012", // NB 29 ST NW @ Parkdale BV
+								"7626", // EB @ 78 AV N Terminal
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						"7626", // EB @ 78 AV N Terminal
+								"9009", // WB 4 ST W @ Centre ST N
+								"6750", // Brentwood LRT Station NB
+								"5762", // Heritage LRT Station SB
+						})) //
+				.compileBothTripSort());
 		map2.put(26l, new RouteTripSpec(26l, //
 				MInboundType.INBOUND.intValue(), MTrip.HEADSIGN_TYPE_INBOUND, MInboundType.INBOUND.getId(), //
 				MInboundType.OUTBOUND.intValue(), MTrip.HEADSIGN_TYPE_INBOUND, MInboundType.OUTBOUND.getId()) //
@@ -584,7 +602,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"9324", // SB Lake Fraser DR @ N. End of Avenida PL SE
-								"9669", // Anderson LRT Station
+								"2497", // Anderson LRT Station
 								"5528", // Chinook LRT Station NB
 								"6914", // WB 50 AV SW @ 4 ST SW
 						})) //
@@ -759,7 +777,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { //
-								"3451", // !=
+						"3451", // !=
 								"3535", // != EB 112 AV NW @ Rocky Ridge RD
 								"9574", // == SB Country Hills BV @ Royal Oak Centre NW
 								"8892", // ++
@@ -1773,7 +1791,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 					StringUtils.EMPTY, //
 					_78_AVE_TERMINAL, //
 					BRENTWOOD_STATION, //
-					NORTHMOUNT_DR, //
 					UNIVERSITY_OF_CALGARY, //
 					HERITAGE //
 					).containsAll(headsignsValues)) {
@@ -1811,6 +1828,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 					CHINOOK //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(CHINOOK, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 45L) {
+			if (Arrays.asList( //
+					StringUtils.EMPTY, //
+					APPLEWOOD //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(APPLEWOOD, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 57L) {
