@@ -609,7 +609,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"6914", // WB 50 AV SW @ 4 ST SW
-								"5553", // Chinook LRT Station SB
+								"7024", // Chinook LRT Station WB
 								"3650", // Canyon Meadows Stn (NB Lake Fraser Dr)
 								"9324", // SB Lake Fraser DR @ N. End of Avenida PL SE
 						})) //
@@ -1703,6 +1703,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 					FOREST_LAWN //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(FOREST_LAWN, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 3L) {
+			if (Arrays.asList( //
+					CITY_CTR, //
+					HERITAGE_STATION //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(HERITAGE_STATION, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 7L) {
