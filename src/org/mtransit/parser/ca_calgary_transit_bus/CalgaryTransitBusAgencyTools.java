@@ -72,25 +72,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	private void setupNext() {
-		ALL_ROUTE_TRIPS2.put(23L, new RouteTripSpec(23L, //
-				0, MTrip.HEADSIGN_TYPE_STRING, SADDLETOWNE, //
-				1, MTrip.HEADSIGN_TYPE_STRING, MC_KENZIE_TOWNE) //
-				.addTripSort(0, //
-						Arrays.asList(new String[] { //
-						"3610", // SB 52 St @ Mckenzie Towne Li SE
-								"5063", // NB 52 ST SE @ 17 AV SE
-								"6384", // NB 52 ST NE @ Rundlehorn DR
-								"7762", // NB Falconridge BV @ Falworth RD NE
-								"8576", // Saddletowne LRT Station SB
-						})) //
-				.addTripSort(1, //
-						Arrays.asList(new String[] { //
-						"8576", // Saddletowne LRT Station SB
-								"4947", // SB 52 ST SE @ 17 AV SE
-								"3610", // SB 52 St @ Mckenzie Towne Li SE
-						})) //
-				.compileBothTripSort());
-		ALL_ROUTE_TRIPS2.remove(91L);
 	}
 
 	@Override
@@ -302,7 +283,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String RIVERBEND = "Riverbend";
 	private static final String ROYAL_OAK = "Royal Oak";
 	private static final String RUNDLE_STATION = "Rundle Sta";
-	private static final String SADDLEBROOK = "Saddlebrook";
 	private static final String SADDLETOWNE = "Saddletowne";
 	private static final String SAGE_HILL = "Sage Hl";
 	private static final String SANDSTONE = "Sandstone";
@@ -506,11 +486,11 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.compileBothTripSort());
 		map2.put(23L, new RouteTripSpec(23L, //
 				0, MTrip.HEADSIGN_TYPE_STRING, SADDLETOWNE, //
-				1, MTrip.HEADSIGN_TYPE_STRING, CHINOOK_STATION) // FOOTHILLS_IND
+				1, MTrip.HEADSIGN_TYPE_STRING, MC_KENZIE_TOWNE) //
 				.addTripSort(0, //
 						Arrays.asList(new String[] { //
-						"5990", // Chinook LRT Station WB
-								"6218", // NB 36 ST SE @ 17 AV SE
+						"3610", // SB 52 St @ Mckenzie Towne Li SE
+								"5063", // NB 52 ST SE @ 17 AV SE
 								"6384", // NB 52 ST NE @ Rundlehorn DR
 								"7762", // NB Falconridge BV @ Falworth RD NE
 								"8576", // Saddletowne LRT Station SB
@@ -518,8 +498,8 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(1, //
 						Arrays.asList(new String[] { //
 						"8576", // Saddletowne LRT Station SB
-								"6765", // Marlborough LRT Station (SB 36 ST NE @ 8 AV NE)
-								"5990", // Chinook LRT Station WB =>
+								"4947", // SB 52 ST SE @ 17 AV SE
+								"3610", // SB 52 St @ Mckenzie Towne Li SE
 						})) //
 				.compileBothTripSort());
 		map2.put(26l, new RouteTripSpec(26l, //
@@ -716,20 +696,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"8468", // SB Country Village LI @ Country Village WY NE
 								"9767", // NB Harvest Hills BV @ Country Village WY NE
-						})) //
-				.compileBothTripSort());
-		map2.put(91L, new RouteTripSpec(91L, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRENTWOOD, //
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Lions Pk") //
-				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { //
-						"5735", // Lions Park LRT Station
-								"6846", // Brentwood LRT Station NB
-						})) //
-				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { //
-						"6846", // Brentwood LRT Station NB
-								"5735", // Lions Park LRT Station (WB 14 AV NW)
 						})) //
 				.compileBothTripSort());
 		map2.put(94l, new RouteTripSpec(94l, //
