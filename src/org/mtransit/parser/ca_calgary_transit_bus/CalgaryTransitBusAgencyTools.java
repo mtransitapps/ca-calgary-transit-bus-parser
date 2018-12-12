@@ -472,14 +472,13 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						"5762", // Heritage LRT Station SB
 								"6278", // NB Mount Royal CI @ MRU East Gate
 								"5697", // WB University WY @ Craigie Hall
-								"5012", // NB 29 ST NW @ Parkdale BV
 								"7626", // EB @ 78 AV N Terminal
 						})) //
 				.addTripSort(1, //
 						Arrays.asList(new String[] { //
 						"7626", // EB @ 78 AV N Terminal
 								"9009", // WB 4 ST W @ Centre ST N
-								"6750", // Brentwood LRT Station NB
+								"5742", // WB Northmount DR @ 14 ST NW
 								"7410", // WB University WY @ Craigie Hall
 								"5762", // Heritage LRT Station SB
 						})) //
@@ -580,11 +579,15 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"2298", // NB East Hills SQ @ East Hills BV SE
-								"8585", // Saddletowne LRT Station SB
+								"4124", // ==
+								"8585", // != Saddletowne LRT Station SB =>
+								"2728", // != Saddletowne LRT Station SB =>
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { //
-						"8585", // Saddletowne LRT Station SB
+						"2728", // != Saddletowne LRT Station SB <=
+								"8585", // != Saddletowne LRT Station SB <=
+								"9440", // ==
 								"2298", // NB East Hills SQ @ East Hills BV SE
 						})) //
 				.compileBothTripSort());
@@ -1537,17 +1540,22 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"5783", // NB 4 ST NW @ 68 AV NW (JG Diefenbaker HS)
 						})) //
 				.compileBothTripSort());
-		map2.put(748l, new RouteTripSpec(748l, //
+		map2.put(748L, new RouteTripSpec(748L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Hidden Ranch", //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CRESCENT_HTS) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
-						"112113", // 12 AV NW @ 1 ST NW - Crescent Heights
+						"2025", // != Crescent Heights High School <=
+								"112113", // != 12 AV NW @ 1 ST NW - Crescent Heights <=
+								"7100", // ==
 								"9705", // EB Hidden Creek WY @ Hidden Creek PT NW
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"9344", // WB Hidden Creek WY @ Hidden Creek PT NW
+								"9347", // ==
+								"9756", // !=
+								"7701", // ==
 								"112112", // Crescent Heights High School
 						})) //
 				.compileBothTripSort());
@@ -1719,12 +1727,13 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"2303", // SB 52 ST SE @ Copperfield GA
 						})) //
 				.compileBothTripSort());
-		map2.put(894l, new RouteTripSpec(894l, //
+		map2.put(894L, new RouteTripSpec(894L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_SW, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, STRATHCONA) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"6515", // EB Strathcona DR @ Strathcona BV SW
+						"9284", // NB Strathcona DR @ Strathlea AV SW
+								"6515", // EB Strathcona DR @ Strathcona BV SW
 								"4167", // WB Strathcona DR @ Strathcona DR SW
 								"3409", // EB 26 Ave @ 51 St SW
 						})) //
@@ -1732,7 +1741,8 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"3408", // WB 26 Ave @ St. Gregory School
 								"6515", // EB Strathcona DR @ Strathcona BV SW
-								"4167" // WB Strathcona DR @ Strathcona DR SW
+								"4167", // WB Strathcona DR @ Strathcona DR SW
+								"9283", // SB Strathcona DR @ Strathlea CR SW
 						})) //
 				.compileBothTripSort());
 		ALL_ROUTE_TRIPS2 = map2;
@@ -2005,6 +2015,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 					"Franklin Industrial" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("Franklin Industrial", mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 135L) {
+			if (Arrays.asList( //
+					"36 St Se" + SLASH + ERIN_WOODS, // <>
+					MARLBOROUGH //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(MARLBOROUGH, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 302L) {
