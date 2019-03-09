@@ -687,6 +687,22 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"9324", // SB Lake Fraser DR @ N. End of Avenida PL SE
 						})) //
 				.compileBothTripSort());
+		map2.put(85L, new RouteTripSpec(85L, //
+				0, MTrip.HEADSIGN_TYPE_STRING, SADDLETOWNE, //
+				1, MTrip.HEADSIGN_TYPE_STRING, MCKNIGHT_WESTWINDS) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						"9645", // McKnight-Westwinds LRT Station
+								"4983", // ++
+								"8597", // Saddletowne LRT Station NB
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						"2728", // Saddletowne LRT Station SB
+								"9638", // ++
+								"9645", // McKnight-Westwinds LRT Station
+						})) //
+				.compileBothTripSort());
 		map2.put(86L, new RouteTripSpec(86L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.NORTH.getId(), //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.SOUTH.getId()) //
@@ -810,20 +826,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"3857", // Crowfoot LRT Station
 								"4025", // Dalhousie LRT Station NB
-						})) //
-				.compileBothTripSort());
-		map2.put(157L, new RouteTripSpec(157L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Beacon Hl Ctr", //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, TUSCANY) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { //
-						"2149", // Tuscany Station - Rocky Ridge Terminal
-								"3863", // SB Beacon Hill CTR @ Shoppers Drug Mart
-						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { //
-						"3863", // SB Beacon Hill CTR @ Shoppers Drug Mart
-								"2149", // Tuscany Station - Rocky Ridge Terminal
 						})) //
 				.compileBothTripSort());
 		map2.put(158L, new RouteTripSpec(158L, //
