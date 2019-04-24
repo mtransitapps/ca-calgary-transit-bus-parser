@@ -119,7 +119,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	private static final String RSN_FLOATER = "FLT";
-	private static final long RID_FLOATER = 10001l;
+	private static final long RID_FLOATER = 10_001L;
 
 	@Override
 	public long getRouteId(GRoute gRoute) {
@@ -341,7 +341,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"8068", // SB Glenside DR @ 17 AV SW
 						})) //
 				.compileBothTripSort());
-		map2.put(4l, new RouteTripSpec(4l, //
+		map2.put(4L, new RouteTripSpec(4L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, HUNTINGTON, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -358,7 +358,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"6133", // WB 4 AV SW @ 7 ST SW
 						})) //
 				.compileBothTripSort());
-		map2.put(5l, new RouteTripSpec(5l, //
+		map2.put(5L, new RouteTripSpec(5L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, NORTH_HAVEN, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -375,7 +375,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"5252", // EB 5 AV SE @ Macleod TR
 						})) //
 				.compileBothTripSort());
-		map2.put(6l, new RouteTripSpec(6l, //
+		map2.put(6L, new RouteTripSpec(6L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, KILLARNEY_26_AVE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -391,7 +391,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"5122", "7941", "3711" //
 						})) //
 				.compileBothTripSort());
-		map2.put(13l, new RouteTripSpec(13l, //
+		map2.put(13L, new RouteTripSpec(13L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WESTHILLS) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -429,7 +429,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"3621", // Somerset-Bridlewood Stn
 						})) //
 				.compileBothTripSort());
-		map2.put(15l, new RouteTripSpec(15l, //
+		map2.put(15L, new RouteTripSpec(15L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.NORTH.getId(), // Fish Crk-Lacombe Sta
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.SOUTH.getId()) // SHAWVILLE
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -501,7 +501,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"3610", // SB 52 St @ Mckenzie Towne Li SE
 						})) //
 				.compileBothTripSort());
-		map2.put(26l, new RouteTripSpec(26l, //
+		map2.put(26L, new RouteTripSpec(26L, //
 				MInboundType.INBOUND.intValue(), MTrip.HEADSIGN_TYPE_INBOUND, MInboundType.INBOUND.getId(), //
 				MInboundType.OUTBOUND.intValue(), MTrip.HEADSIGN_TYPE_INBOUND, MInboundType.OUTBOUND.getId()) //
 				.addTripSort(MInboundType.INBOUND.intValue(), //
@@ -543,7 +543,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"3415", // SB 6 ST SW @ Canyon Meadows DR SW
 						})) //
 				.compileBothTripSort());
-		map2.put(52l, new RouteTripSpec(52l, //
+		map2.put(52L, new RouteTripSpec(52L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, EVERGREEN, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOMERSET) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -551,7 +551,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "9189", "4798", "9199", "9207", "3622" })) //
 				.compileBothTripSort());
-		map2.put(56l, new RouteTripSpec(56l, //
+		map2.put(56L, new RouteTripSpec(56L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOUTHLAND_STATION, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, ANDERSON_STATION) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -606,7 +606,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"5001", // WB 7 AV SW @ 2 ST SW
 						})) //
 				.compileBothTripSort());
-		map2.put(71l, new RouteTripSpec(71l, //
+		map2.put(71L, new RouteTripSpec(71L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SADDLETOWNE, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, MC_KNIGHT_WESTWINDS) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -620,7 +620,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"9848", // McKnight-Westwinds LRT Station
 						})) //
 				.compileBothTripSort());
-		map2.put(72l, new RouteTripSpec(72l, //
+		map2.put(72L, new RouteTripSpec(72L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRENTWOOD, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHINOOK) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -628,7 +628,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "6748", "6339", "5779", "9036", "6096", "6358", "6301", "6362", "5853", "5267", "6342" })) //
 				.compileBothTripSort());
-		map2.put(73l, new RouteTripSpec(73l, //
+		map2.put(73L, new RouteTripSpec(73L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRENTWOOD, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHINOOK) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -636,7 +636,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "3845", "6369", "6374" })) //
 				.compileBothTripSort());
-		map2.put(75l, new RouteTripSpec(75l, //
+		map2.put(75L, new RouteTripSpec(75L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, RIVERBEND) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -653,7 +653,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"8064" // NB 18 ST SE @ Riverglen DR
 						})) //
 				.compileBothTripSort());
-		map2.put(79l, new RouteTripSpec(79l, //
+		map2.put(79L, new RouteTripSpec(79L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, HERITAGE_STATION, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOUTHLAND_STATION) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -661,7 +661,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "6412", "6416", "6420" })) //
 				.compileBothTripSort());
-		map2.put(80l, new RouteTripSpec(80l, //
+		map2.put(80L, new RouteTripSpec(80L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, HERITAGE_STATION, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOUTHLAND_STATION) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -717,7 +717,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"9767", // NB Harvest Hills BV @ Country Village WY NE
 						})) //
 				.compileBothTripSort());
-		map2.put(94l, new RouteTripSpec(94l, //
+		map2.put(94L, new RouteTripSpec(94L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, STRATHCONA, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WESTBROOK_STATION) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -725,7 +725,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { "6515", "3732", "7597", "3741" })) //
 				.compileBothTripSort());
-		map2.put(98l, new RouteTripSpec(98l, //
+		map2.put(98L, new RouteTripSpec(98L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, COUGAR_RDG, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -755,7 +755,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"9644", // McKnight-Westwinds LRT Station
 						})) //
 				.compileBothTripSort());
-		map2.put(112l, new RouteTripSpec(112l, //
+		map2.put(112L, new RouteTripSpec(112L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WESTHILLS) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -766,7 +766,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"6545", //
 								"6542", "6866" })) //
 				.compileBothTripSort());
-		map2.put(120l, new RouteTripSpec(120l, //
+		map2.put(120L, new RouteTripSpec(120L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CROWFOOT, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, DALHOUSIE) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -814,7 +814,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"2377", // WB 6 AV SW @ 9 ST SW
 						})) //
 				.compileBothTripSort());
-		map2.put(134l, new RouteTripSpec(134l, //
+		map2.put(134L, new RouteTripSpec(134L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CROWFOOT, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, DALHOUSIE) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -846,6 +846,22 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"9574", // == SB Country Hills BV @ Royal Oak Centre NW
 								"8892", // ++
 								"2150", // Tuscany Station - Rocky Ridge Terminal
+						})) //
+				.compileBothTripSort());
+		map2.put(164L, new RouteTripSpec(164L, //
+				0, MTrip.HEADSIGN_TYPE_STRING, "Aspen Summit", //
+				1, MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						"8398", // 69 Street West LRT Station
+								"2439", // ++
+								"2442", // WB 14 AV SW @ Aspen Ridge WY
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						"2442", // WB 14 AV SW @ Aspen Ridge WY
+								"2445", // ++
+								"8398", // 69 Street West LRT Station
 						})) //
 				.compileBothTripSort());
 		map2.put(167L, new RouteTripSpec(167L, //
@@ -972,7 +988,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"2200", // WB Front ST @ Main Ent. South Health Campus SE
 						})) //
 				.compileBothTripSort());
-		map2.put(404l, new RouteTripSpec(404l, //
+		map2.put(404L, new RouteTripSpec(404L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.EAST.getId(), //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.WEST.getId()) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -1020,7 +1036,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"6412", // Heritage LRT Station NB => END
 						})) //
 				.compileBothTripSort());
-		map2.put(414l, new RouteTripSpec(414l, //
+		map2.put(414L, new RouteTripSpec(414L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, NORTH_HAVEN, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -1035,7 +1051,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"5331" // SB 14 ST SW@ 17 AV SW
 						})) //
 				.compileBothTripSort());
-		map2.put(419l, new RouteTripSpec(419l, //
+		map2.put(419L, new RouteTripSpec(419L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, FOOTHILLS, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, PARKHILL) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -1043,7 +1059,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "8340", "8339", "5108", "5580", "5574" })) //
 				.compileBothTripSort());
-		map2.put(425l, new RouteTripSpec(425l, //
+		map2.put(425L, new RouteTripSpec(425L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, COUNTRY_VLG, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SAGE_HILL) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -1051,7 +1067,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { "3497", "4450", "4734" })) //
 				.compileBothTripSort());
-		map2.put(430l, new RouteTripSpec(430l, //
+		map2.put(430L, new RouteTripSpec(430L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, NORTH_POINTE, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SANDSTONE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -1067,7 +1083,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"9873", // Sandstone Terminal
 						})) //
 				.compileBothTripSort());
-		map2.put(439l, new RouteTripSpec(439l, //
+		map2.put(439L, new RouteTripSpec(439L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, DISCOVERY_RIDGE) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -1082,7 +1098,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"9365", // EB Discovery Ridge BV @ Discovery Ridge LN SW
 						})) //
 				.compileBothTripSort());
-		map2.put(502l, new RouteTripSpec(502l, //
+		map2.put(502L, new RouteTripSpec(502L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, STATION_HERITAGE, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, PARK_GATE_HERITAGE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -1090,7 +1106,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { "5762", "4577", "7592" })) //
 				.compileBothTripSort());
-		map2.put(695l, new RouteTripSpec(695l, //
+		map2.put(695L, new RouteTripSpec(695L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, ST_FRANCIS, // BOWNESS
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, VALLEY_RIDGE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -1132,7 +1148,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"4924", // EB Old Banff Coach RD @ 73 St SW
 						})) //
 				.compileBothTripSort());
-		map2.put(702l, new RouteTripSpec(702l, //
+		map2.put(702L, new RouteTripSpec(702L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, NOLAN_HILL, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CHURCHILL) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -1334,7 +1350,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"4210", // WB 90 AV SE @ Fairmount DR
 						})) //
 				.compileBothTripSort());
-		map2.put(717l, new RouteTripSpec(717l, //
+		map2.put(717L, new RouteTripSpec(717L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, COPPERFIELD, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -1386,7 +1402,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"4210", // == WB 90 AV SE @ Fairmount DR
 						})) //
 				.compileBothTripSort());
-		map2.put(720l, new RouteTripSpec(720l, //
+		map2.put(720L, new RouteTripSpec(720L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BEAVERBROOK, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, MOUNT_MC_KENZIE) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -1416,7 +1432,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"4942", // EB Valley Ridge DR @ Valley Crest CL NW
 						})) //
 				.compileBothTripSort());
-		map2.put(722l, new RouteTripSpec(722l, //
+		map2.put(722L, new RouteTripSpec(722L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BOWNESS, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, TUSCANY) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -1561,7 +1577,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"112112", // Crescent Heights High School
 						})) //
 				.compileBothTripSort());
-		map2.put(750l, new RouteTripSpec(750l, //
+		map2.put(750L, new RouteTripSpec(750L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Nelson Mandela", //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CORAL_SPGS) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -1620,7 +1636,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"2427", // SB 53 Street @ Dalhart Rd nearside
 						})) //
 				.compileBothTripSort());
-		map2.put(797l, new RouteTripSpec(797l, //
+		map2.put(797L, new RouteTripSpec(797L, //
 				0, MTrip.HEADSIGN_TYPE_STRING, TOM_BAINES, // AM
 				1, MTrip.HEADSIGN_TYPE_STRING, HAMPTONS) // PM
 				.addTripSort(0, //
@@ -1628,7 +1644,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(1, //
 						Arrays.asList(new String[] { "4013", "8537", "7707", "6399" })) //
 				.compileBothTripSort());
-		map2.put(798l, new RouteTripSpec(798l, //
+		map2.put(798L, new RouteTripSpec(798L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, TARADALE, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, ANNIE_GALE) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
@@ -1636,7 +1652,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "9290", "4723", "4898" })) //
 				.compileBothTripSort());
-		map2.put(801l, new RouteTripSpec(801l, //
+		map2.put(801L, new RouteTripSpec(801L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BREBEUF, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, ROYAL_OAK) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -1644,7 +1660,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { "6862", "6851", "8367", "9598" })) //
 				.compileBothTripSort());
-		map2.put(820l, new RouteTripSpec(820l, //
+		map2.put(820L, new RouteTripSpec(820L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, ST_FRANCIS, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SCENIC_ACRES_NORTH) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -1658,7 +1674,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"5222", // EB Scenic Acres BV @ Scenic Acres DR NW
 						})) //
 				.compileBothTripSort());
-		map2.put(822l, new RouteTripSpec(822l, //
+		map2.put(822L, new RouteTripSpec(822L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Walden", // Legacy
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BISHOP_O_BYRNE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -1672,7 +1688,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"2164", // EB Shawville GA @ Shawville LI SE
 						})) //
 				.compileBothTripSort());
-		map2.put(836l, new RouteTripSpec(836l, //
+		map2.put(836L, new RouteTripSpec(836L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, SCENIC_ACRES, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "St V De Paul") //
 				.addTripSort(MDirectionType.EAST.intValue(), //
