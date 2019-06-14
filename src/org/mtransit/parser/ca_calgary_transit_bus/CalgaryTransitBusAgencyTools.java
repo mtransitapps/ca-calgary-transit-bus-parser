@@ -725,22 +725,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { "6515", "3732", "7597", "3741" })) //
 				.compileBothTripSort());
-		map2.put(98L, new RouteTripSpec(98L, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, COUGAR_RDG, //
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION) //
-				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { //
-						"8374", // 69 Street West LRT Station
-								"8822", // NB 77 ST SW @ Old Banff Coach RD
-								"3717", // EB Old Banff Coach RD @ 89 ST SW
-						})) //
-				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { //
-						"8822", // NB 77 ST SW @ Old Banff Coach RD
-								"3717", // EB Old Banff Coach RD @ 89 ST SW
-								"8373", // 69 Street West LRT Station
-						})) //
-				.compileBothTripSort());
 		map2.put(100L, new RouteTripSpec(100L, //
 				0, MTrip.HEADSIGN_TYPE_STRING, NORTH_POINTE, //
 				1, MTrip.HEADSIGN_TYPE_STRING, MCKNIGHT_WESTWINDS) //
@@ -853,7 +837,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				1, MTrip.HEADSIGN_TYPE_STRING, _69_ST_STATION) //
 				.addTripSort(0, //
 						Arrays.asList(new String[] { //
-						"8398", // 69 Street West LRT Station
+						"8373", "8398", // 69 Street West LRT Station
 								"2439", // ++
 								"2442", // WB 14 AV SW @ Aspen Ridge WY
 						})) //
@@ -861,7 +845,8 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { //
 						"2442", // WB 14 AV SW @ Aspen Ridge WY
 								"2445", // ++
-								"8398", // 69 Street West LRT Station
+								"9687", // ==
+								"8373", "8398", // 69 Street West LRT Station
 						})) //
 				.compileBothTripSort());
 		map2.put(167L, new RouteTripSpec(167L, //
@@ -2013,6 +1998,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 96L) {
 			if (Arrays.asList( //
+					MC_KENZIE, // <>
 					WOODBINE, //
 					ANDERSON_STATION //
 					).containsAll(headsignsValues)) {
@@ -2150,6 +2136,9 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final Pattern MRU_ = Pattern.compile("((^|\\W){1}(mru|mount royal university)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
 	private static final String MRU_REPLACEMENT = "$2" + MRU + "$4";
 
+	private static final Pattern MC_KENZIE_ = Pattern.compile("((^|\\W){1}(mckenzie)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
+	private static final String MC_KENZIE_REPLACEMENT = "$2" + MC_KENZIE + "$4";
+
 	private static final Pattern STN = Pattern.compile("((^|\\W){1}(stn)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
 	private static final String STN_REPLACEMENT = "$2Station$4";
 
@@ -2169,6 +2158,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		tripHeadsign = AVENUE_.matcher(tripHeadsign).replaceAll(AVENUE_REPLACEMENT);
 		tripHeadsign = STARTS_WITH_BRT.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = MRU_.matcher(tripHeadsign).replaceAll(MRU_REPLACEMENT);
+		tripHeadsign = MC_KENZIE_.matcher(tripHeadsign).replaceAll(MC_KENZIE_REPLACEMENT);
 		tripHeadsign = STN.matcher(tripHeadsign).replaceAll(STN_REPLACEMENT);
 		tripHeadsign = ENDS_WITH_EXPRESS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = ROUTE_RSN.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
