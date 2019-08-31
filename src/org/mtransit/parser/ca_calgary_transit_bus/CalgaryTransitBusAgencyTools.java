@@ -222,7 +222,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String COACH_HILL = "Coach Hl";
 	private static final String COPPERFIELD = "Copperfield";
 	private static final String CORAL_SPGS = "Coral Spgs";
-	private static final String COUGAR_RDG = "Cougar Rdg";
 	private static final String COUNTRY_VLG = "Country Vlg";
 	private static final String CRANSTON = "Cranston";
 	private static final String CRESCENT_HTS = "Crescent Hts";
@@ -1408,13 +1407,19 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, VALLEY_RIDGE) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						/* no stops */
+						"9136", // <> WB Crestmont BV @ Cresthaven PL SW #CRESTMONT
+								"7473", // <> ++
+								"4942", // <> EB Valley Ridge DR @ Valley Crest CL NW #VALLEY_RIDGE
+								"8859", // !=
+								"4060", // SB 77 ST NW @ 46 AV NW #BOWNESS
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"4063", // WB 46 AV NW @ 77 ST NW
-								"7473", // ++
-								"4942", // EB Valley Ridge DR @ Valley Crest CL NW
+						"4060", // SB 77 ST NW @ 46 AV NW #BOWNESS
+								"4092", // !=
+								"9136", // <> WB Crestmont BV @ Cresthaven PL SW #CRESTMONT
+								"7473", // <> ++
+								"4942", // <> EB Valley Ridge DR @ Valley Crest CL NW #VALLEY_RIDGE
 						})) //
 				.compileBothTripSort());
 		map2.put(722L, new RouteTripSpec(722L, //
@@ -1538,7 +1543,9 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { //
-						"4100", // SB Country Village LI @ Country Village WY NE
+						"4114", // WB Panatela GA @ Harvest Hills BV NE
+								"4414", // WB Panatella BV @ Panatella ST NW
+								"9703", // SB Panamount BV @ S. of Panamount PZ NW
 								"8421", // ++
 								"5783", // NB 4 ST NW @ 68 AV NW (JG Diefenbaker HS)
 						})) //
@@ -1715,19 +1722,19 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						})) //
 				.compileBothTripSort());
 		map2.put(862L, new RouteTripSpec(862L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Bishop Grandin", //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "52 St") //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "North " + CRANSTON, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "All Saints") //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"2302", // NB 52 ST SE @ Copperfield GA
-								"8879", // SB 52 ST SE @ 130 AV SE
-								"4727", // EB 86 AV SW @ Haddon RD
+						"2500", // != All Saints High School
+								"4794", // <> SB Cranston BV @ Cranleigh DR SE
+								"4793", // <> WB Cranston BV @ Cranfield LI SE
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
-						"2727", // SB Haddon Rd @ Hogarth Rd
-								"3617", // NB 52 ST SE @ New Brighton DR
-								"2303", // SB 52 ST SE @ Copperfield GA
+						"4794", // <> SB Cranston BV @ Cranleigh DR SE
+								"4793", // <> WB Cranston BV @ Cranfield LI SE
+								"2500", // != All Saints High School
 						})) //
 				.compileBothTripSort());
 		map2.put(894L, new RouteTripSpec(894L, //
@@ -1735,17 +1742,18 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, STRATHCONA) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
-						"9284", // NB Strathcona DR @ Strathlea AV SW
-								"6515", // EB Strathcona DR @ Strathcona BV SW
+						"2441", // WB 14 AV @ 73 ST SW
+								"9284", // ++ NB Strathcona DR @ Strathlea AV SW
+								"6515", // ++ EB Strathcona DR @ Strathcona BV SW
 								"4167", // WB Strathcona DR @ Strathcona DR SW
 								"3409", // EB 26 Ave @ 51 St SW
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
 						"3408", // WB 26 Ave @ St. Gregory School
-								"6515", // EB Strathcona DR @ Strathcona BV SW
+								"2441", // WB 14 AV @ 73 ST SW
+								"6515", // ++ EB Strathcona DR @ Strathcona BV SW
 								"4167", // WB Strathcona DR @ Strathcona DR SW
-								"9283", // SB Strathcona DR @ Strathlea CR SW
 						})) //
 				.compileBothTripSort());
 		ALL_ROUTE_TRIPS2 = map2;
