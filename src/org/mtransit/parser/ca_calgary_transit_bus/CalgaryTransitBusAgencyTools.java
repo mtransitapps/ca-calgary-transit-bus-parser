@@ -577,17 +577,22 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.SOUTH.getId()) // East Hills
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
-						"2298", // NB East Hills SQ @ East Hills BV SE
+						"2298", // <> NB East Hills SQ @ East Hills BV SE <=
+								"3742", // <> SB 84 ST SE @ 17 AV SE
+								"2299", // <> WB 17th AV SE @ 84th ST SE <=
+								"2180", // !=
 								"4124", // ==
-								"8585", // != Saddletowne LRT Station SB =>
 								"2728", // != Saddletowne LRT Station SB =>
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { //
 						"2728", // != Saddletowne LRT Station SB <=
-								"8585", // != Saddletowne LRT Station SB <=
 								"9440", // ==
-								"2298", // NB East Hills SQ @ East Hills BV SE
+								"2178", // == !=
+								"2298", // != <> NB East Hills SQ @ East Hills BV SE =>
+								"3743", // != <> NB 84 ST SE @ 17 AV SE
+								"3742", // != <> SB 84 ST SE @ 17 AV SE
+								"2299", // != <> WB 17th AV SE @ 84th ST SE =>
 						})) //
 				.compileBothTripSort());
 		map2.put(69L, new RouteTripSpec(69L, //
@@ -1109,6 +1114,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
 						"3785", // NB 69 ST SW @ 69 Street West LRT Station
+								"3732", // EB 17 AV SW @ 69 Street West LRT Station
 								"5324", // EB 17 AV SW@ 2 ST SW
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
@@ -1737,6 +1743,20 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"2500", // != All Saints High School
 						})) //
 				.compileBothTripSort());
+		map2.put(882L, new RouteTripSpec(882L, //
+				0, MTrip.HEADSIGN_TYPE_STRING, "Nolan Hl", //
+				1, MTrip.HEADSIGN_TYPE_STRING, StringUtils.EMPTY) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						"3864", // SB Sherwood BV @ Sherwood WY NW
+								"2070", // ++
+								"2034", // EB Nolan Hill BV @ Nolan Hill DR farside
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						/* no stops */
+						})) //
+				.compileBothTripSort());
 		map2.put(894L, new RouteTripSpec(894L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, _69_ST_SW, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, STRATHCONA) //
@@ -2106,6 +2126,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 					"Columbia College" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("Columbia College", mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 753L) {
+			if (Arrays.asList( //
+					"North", //
+					"James Fowler / Evanston" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("James Fowler / Evanston", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 765L) {
