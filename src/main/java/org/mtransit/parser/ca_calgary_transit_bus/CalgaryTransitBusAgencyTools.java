@@ -529,22 +529,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"4127" //  WB Tuscany Ravine RD @ Tuscany Ravine HT NW
 						)) //
 				.compileBothTripSort());
-		map2.put(300L, new RouteTripSpec(300L, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, AIRPORT, //
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CITY_CTR) //
-				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList( //
-								"3881", // WB 4 AV SW @ 2 ST SW
-								"3884", // EB 9 AV S @ Centre ST S
-								"3880", // WB 4 AV SE @ 1 ST SE
-								"3900" //  YYC Airport Domestic Terminal
-						)) //
-				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList( //
-								"3900", // YYC Airport Domestic Terminal
-								"3881" //  WB 4 AV SW @ 2 ST SW
-						)) //
-				.compileBothTripSort());
 		map2.put(408L, new RouteTripSpec(408L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRENTWOOD, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, VALLEY_RIDGE) //
@@ -1341,6 +1325,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MARLBOROUGH, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 300L) {
+			if (Arrays.asList( //
+					"Downtown", // <>
+					AIRPORT //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(AIRPORT, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 302L) {
 			if (Arrays.asList( //
 					CITY_CTR, //
@@ -1465,9 +1457,9 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final Pattern STARTS_WITH_BRT = Pattern.compile("((^)(brt)(\\W))", Pattern.CASE_INSENSITIVE);
 
-	private static final Pattern ROUTE_RSN = Pattern.compile("((^)(route )?([\\d]+)($))", Pattern.CASE_INSENSITIVE);
+	private static final Pattern STARTS_WITH_MAX_NAME_ = Pattern.compile("((^)(max [\\w]+)(\\W))", Pattern.CASE_INSENSITIVE);
 
-	private static final Pattern ENDS_WITH_VIA = Pattern.compile("( via .*$)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern ROUTE_RSN = Pattern.compile("((^)(route )?([\\d]+)($))", Pattern.CASE_INSENSITIVE);
 
 	@Override
 	public String cleanTripHeadsign(String tripHeadsign) {
@@ -1476,12 +1468,13 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		}
 		tripHeadsign = AVENUE_.matcher(tripHeadsign).replaceAll(AVENUE_REPLACEMENT);
 		tripHeadsign = STARTS_WITH_BRT.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+		tripHeadsign = STARTS_WITH_MAX_NAME_.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = MRU_.matcher(tripHeadsign).replaceAll(MRU_REPLACEMENT);
 		tripHeadsign = MC_KENZIE_.matcher(tripHeadsign).replaceAll(MC_KENZIE_REPLACEMENT);
 		tripHeadsign = STN.matcher(tripHeadsign).replaceAll(STN_REPLACEMENT);
 		tripHeadsign = ENDS_WITH_EXPRESS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = ROUTE_RSN.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
-		tripHeadsign = ENDS_WITH_VIA.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+		tripHeadsign = CleanUtils.keepToAndRemoveVia(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanSlashes(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanNumbers(tripHeadsign);
