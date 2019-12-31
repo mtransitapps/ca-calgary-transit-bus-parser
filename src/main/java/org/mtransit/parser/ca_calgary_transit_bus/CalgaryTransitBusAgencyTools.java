@@ -64,27 +64,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		if (isNext) {
 			setupNext();
 		}
-		this.serviceIds = extractUsefulServiceIds(args, this);
+		this.serviceIds = extractUsefulServiceIds(args, this, true);
 		super.start(args);
 		MTLog.log("Generating Calgary Transit bus data... DONE in %s.", Utils.getPrettyDuration(System.currentTimeMillis() - start));
 	}
 
 	private void setupNext() {
-		ALL_ROUTE_TRIPS2.put(56L, new RouteTripSpec(56L, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, HERITAGE_STATION, //
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, ANDERSON_STATION) //
-				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList( //
-								"6461", // Anderson LRT Station
-								"5762" // Heritage LRT Station SB
-						)) //
-				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList( //
-								"5762", // Heritage LRT Station SB
-								"6562", // SB 24 ST SW @ Woodglen RI
-								"6461" // Anderson LRT Station
-						)) //
-				.compileBothTripSort());
 	}
 
 	@Override
@@ -404,16 +389,16 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						)) //
 				.compileBothTripSort());
 		map2.put(56L, new RouteTripSpec(56L, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, SOUTHLAND_STATION, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, HERITAGE_STATION, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, ANDERSON_STATION) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList( //
-								"6461", //  Anderson LRT Station
-								"6097" // Southland LRT Station EB
+								"6461", // Anderson LRT Station
+								"5762" // Heritage LRT Station SB
 						)) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList( //
-								"6097", // Southland LRT Station EB
+								"5762", // Heritage LRT Station SB
 								"6562", // SB 24 ST SW @ Woodglen RI
 								"6461" // Anderson LRT Station
 						)) //
