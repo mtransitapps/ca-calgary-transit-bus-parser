@@ -1009,6 +1009,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 2L) {
 			if (Arrays.asList( //
+					"78th Ave Terminal", //
 					CITY_CTR, // <>
 					MOUNT_PLEASANT // <>
 			).containsAll(headsignsValues)) {
