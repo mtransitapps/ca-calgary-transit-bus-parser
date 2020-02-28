@@ -1286,6 +1286,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ANDERSON_STATION, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 99L) {
+			if (Arrays.asList( //
+					"West", //
+					"Oakridge" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Oakridge", mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 107L) {
 			if (Arrays.asList( //
 					SOUTH_CALGARY, //
