@@ -1334,6 +1334,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MARLBOROUGH, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 150L) {
+			if (Arrays.asList( //
+					"114 Ave Se", // <>
+					ANDERSON //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(ANDERSON, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 300L) {
 			if (Arrays.asList( //
 					"Downtown", // <>
