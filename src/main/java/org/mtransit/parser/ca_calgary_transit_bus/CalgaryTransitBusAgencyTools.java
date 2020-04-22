@@ -367,6 +367,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(1, //
 						Arrays.asList( //
 								"8576", // Saddletowne LRT Station SB
+								"8156", // SB 52 ST NE @ Rundlehorn DR
 								"4947", // SB 52 ST SE @ 17 AV SE
 								"3610" // SB 52 St @ Mckenzie Towne Li SE
 						)) //
