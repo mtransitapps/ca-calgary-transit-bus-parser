@@ -53,7 +53,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	private boolean isGoodEnoughAcceptedForSchoolsRoutes(long routeId) {
-		return routeId >= 732L && routeId <= 899L; // TODO clean school trip splitting
+		return routeId >= 600L && routeId <= 899L; // TODO clean school trip splitting
 	}
 
 	@Nullable
@@ -819,27 +819,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						)) //
 				.compileBothTripSort());
 		//noinspection deprecation
-		map2.put(721L, new RouteTripSpec(721L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BOWNESS, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, VALLEY_RIDGE) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList( //
-								"9136", // <> WB Crestmont BV @ Cresthaven PL SW #CRESTMONT
-								"7473", // <> ++
-								"4942", // <> EB Valley Ridge DR @ Valley Crest CL NW #VALLEY_RIDGE
-								"8859", // !=
-								"4060" //  SB 77 ST NW @ 46 AV NW #BOWNESS
-						)) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList( //
-								"4060", // SB 77 ST NW @ 46 AV NW #BOWNESS
-								"4092", // !=
-								"9136", // <> WB Crestmont BV @ Cresthaven PL SW #CRESTMONT
-								"7473", // <> ++
-								"4942" //  <> EB Valley Ridge DR @ Valley Crest CL NW #VALLEY_RIDGE
-						)) //
-				.compileBothTripSort());
-		//noinspection deprecation
 		map2.put(722L, new RouteTripSpec(722L, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BOWNESS, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, TUSCANY) //
@@ -1251,32 +1230,28 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString("Brentwood", mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 41L) {
+			if (Arrays.asList( //
+					"Chinook", //
+					"Lynnwood" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Lynnwood", mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 57L) {
 			if (Arrays.asList( //
-					MARLBOROUGH_STATION, //
-					ERINWOODS //
+					"Whitehorn Sta", // <>
+					"Monterey Pk" // <>
 			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString(ERINWOODS, mTrip.getHeadsignId());
-				return true;
-			} else if (Arrays.asList( //
-					MARLBOROUGH_STATION, //
-					MCCALL_WAY // MC_CALL_WAY //
-			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString(MCCALL_WAY, mTrip.getHeadsignId()); // MC_CALL_WAY
+				mTrip.setHeadsignString("Monterey Pk", mTrip.getHeadsignId());
 				return true;
 			}
 			if (Arrays.asList( //
-					"Whitehorn Sta", //
+					"Whitehorn Sta", // <>
+					"Monterey Pk", // <>
 					MCCALL_WAY //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(MCCALL_WAY, mTrip.getHeadsignId());
-				return true;
-			}
-			if (Arrays.asList( //
-					"Whitehorn Sta", //
-					"Monterey Pk" //
-			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString("Monterey Pk", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 81L) {
@@ -1304,13 +1279,15 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 93L) {
 			if (Arrays.asList( //
-					_69_ST_STATION, //
-					COACH_HILL //
+					_69_ST_STATION, // <>
+					COACH_HILL // <>
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(COACH_HILL, mTrip.getHeadsignId());
 				return true;
-			} else if (Arrays.asList( //
-					_69_ST_STATION, //
+			}
+			if (Arrays.asList( //
+					_69_ST_STATION, // <>
+					COACH_HILL, // <>
 					WESTBROOK //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(WESTBROOK, mTrip.getHeadsignId());
@@ -1396,6 +1373,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(ANDERSON, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 152L) {
+			if (Arrays.asList( //
+					"114 Ave Se", //
+					"New Brighton" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("New Brighton", mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 300L) {
 			if (Arrays.asList( //
 					"Downtown", // <>
@@ -1436,10 +1421,17 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 406L) {
 			if (Arrays.asList( //
-					"Auburn Bay", //
+					"Auburn Bay", // <>
 					SOMERSET + "-" + BRIDLEWOOD + " Sta" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SOMERSET + "-" + BRIDLEWOOD + " Sta", mTrip.getHeadsignId());
+				return true;
+			}
+			if (Arrays.asList( //
+					"Auburn Bay", // <>
+					"McKenzie Towne" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("McKenzie Towne", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 421L) {
