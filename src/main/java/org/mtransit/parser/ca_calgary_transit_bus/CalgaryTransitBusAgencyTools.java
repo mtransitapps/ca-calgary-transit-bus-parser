@@ -636,6 +636,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList( //
 								"4791", // WB 50 AV SW @ 22 ST SW
+								"5130", // WB 17 AV SW @ 38 ST SW
 								"8822", // NB 77 ST SW @ Old Banff Coach RD
 								"4924" //  EB Old Banff Coach RD @ 73 St SW
 						)) //
@@ -1004,7 +1005,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		final String tripHeadsign = gTrip.getTripHeadsignOrDefault();
 		if (isGoodEnoughAcceptedForSchoolsRoutes(mRoute.getId())) { // School routes
 			int directionId = gTrip.getDirectionId() == null ? 0 : gTrip.getDirectionId();
-			mTrip.setHeadsignString(cleanTripHeadsign(tripHeadsign) + (directionId == 0 ? "" : " "), directionId);
+			mTrip.setHeadsignString(cleanTripHeadsign(tripHeadsign) + (directionId == 0 ? "" : SPACE), directionId);
 			return;
 		}
 		if (tripHeadsign.endsWith(" N")) {
@@ -1483,12 +1484,51 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString("Ep Scarlett Woodbine", mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 766L) {
+			if (Arrays.asList( //
+					"Ep Scarlett Evergreen" + SPACE, //
+					SOUTH + SPACE //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(SOUTH + SPACE, mTrip.getHeadsignId());
+				return true;
+			}
+			if (Arrays.asList( //
+					"Ep Scarlett Evergreen", //
+					NORTH //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(NORTH, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 795L) {
+			if (Arrays.asList( //
+					"F E Osborne / Sage Hl" + SPACE, //
+					SOUTH + SPACE //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(SOUTH + SPACE, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 810L) {
 			if (Arrays.asList( //
 					ST_MARGARET + SPACE + ST_FRANCIS + SLASH + NORTH_POINTE, //
-					ST_MARGARET + SPACE + NORTH_POINTE //
+					ST_MARGARET + SPACE + NORTH_POINTE, //
+					NORTH //
 			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString(ST_MARGARET + SPACE + NORTH_POINTE, mTrip.getHeadsignId());
+				mTrip.setHeadsignString(NORTH, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 845L) {
+			if (Arrays.asList( //
+					"Msgr Js Smith / Mahogany", //
+					NORTH //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(NORTH, mTrip.getHeadsignId());
+				return true;
+			}
+			if (Arrays.asList( //
+					"Msgr Js Smith / Mahogany" + SPACE, //
+					SOUTH + SPACE //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(SOUTH + SPACE, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == RID_FLOATER) {
@@ -1500,8 +1540,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			}
 		}
-		MTLog.logFatal("Unexpected trips to merge %s & %s!", mTrip, mTripToMerge);
-		return false;
+		throw new MTLog.Fatal("Unexpected trips to merge %s & %s!", mTrip, mTripToMerge);
 	}
 
 	private static final Pattern AVENUE_ = Pattern.compile("((^|\\W)(av)(\\W|$))", Pattern.CASE_INSENSITIVE);
