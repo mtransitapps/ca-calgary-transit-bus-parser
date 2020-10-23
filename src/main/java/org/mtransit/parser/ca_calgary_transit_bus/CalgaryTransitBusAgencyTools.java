@@ -634,7 +634,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						)) //
 				.compileBothTripSort());
 		//noinspection deprecation
-		map2.put(699L, new RouteTripSpec(699L, //
+		map2.put(699L, new RouteTripSpec(699L, // BECAUSE same HEAD-SIGN for different trips
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Schools", // Central Memorial
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "West Spgs") // West Spgs
 				.addTripSort(MDirectionType.EAST.intValue(), //
@@ -645,6 +645,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList( //
 								"4791", // WB 50 AV SW @ 22 ST SW
+								"6344", // NB 37 ST SW @ RICHMOND RD
 								"5130", // WB 17 AV SW @ 38 ST SW
 								"8822", // NB 77 ST SW @ Old Banff Coach RD
 								"4924" //  EB Old Banff Coach RD @ 73 St SW
