@@ -202,8 +202,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	private static final String _SLASH_ = " / ";
-	@Deprecated
-	private static final String SLASH = _SLASH_;
 	private static final String SPACE = " ";
 	private static final String DASH = "-";
 
@@ -237,7 +235,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String DOUGLAS_GLEN = "Douglas Glen";
 	private static final String EAST_HILLS = "East Hls";
 	private static final String ERIN_WOODS = "Erin Woods";
-	private static final String ERINWOODS = "Erinwoods";
 	private static final String FOOTHILLS = "Foothills";
 	private static final String FOOTHILLS_IND = FOOTHILLS + " Ind";
 	private static final String FOREST_LAWN = "Forest Lawn";
@@ -302,7 +299,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String WHITEHORN_STATION = "Whitehorn Sta";
 	private static final String WOODBINE = "Woodbine";
 
-	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
+	private static final HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<>();
@@ -361,8 +358,10 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList( //
 								"5718", // != Rundle LRT Station (SB 36 ST NE @ 25 AV NE)
 								"7570", // != Rundle LRT Station (SB 36 ST NE @ 25 AV NE)
+								"5712", // Vista Heights Terminal
 								"5728", // == WB 8 AV NE @ 19 ST NE
 								"9413", // == 8 Ave NE @ Regal Cr
+								"5732", // Centre Street N Station (WB)
 								"5734", // == SAIT Station (WB)
 								"6626", // != Lions Pk LRT Station (EB 14 AV NW) =>
 								"5735", // != Lions Pk LRT Sta (WB 14 Ave NW)
@@ -639,7 +638,13 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "West Spgs") // West Spgs
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList( //
-								"8822", // NB 77 ST SW @ Old Banff Coach RD
+								"8396", // NB Old Banff Coach RD @ Coach Hill RD SW <=
+								"3561", // !=
+								"3786", // <>
+								"8822", // <> NB 77 ST SW @ Old Banff Coach RD <=
+								"3706", // <>
+								"4922", // !=
+								"5613", // ++
 								"4690" //  EB 50 AV SW @ 21A ST SW
 						)) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
@@ -647,8 +652,12 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 								"4791", // WB 50 AV SW @ 22 ST SW
 								"6344", // NB 37 ST SW @ RICHMOND RD
 								"5130", // WB 17 AV SW @ 38 ST SW
-								"8822", // NB 77 ST SW @ Old Banff Coach RD
-								"4924" //  EB Old Banff Coach RD @ 73 St SW
+								"4925", // !=
+								"3786", // <>
+								"8822", // <> NB 77 ST SW @ Old Banff Coach RD =>
+								"3706", // <>
+								"4924", // != EB Old Banff Coach RD @ 73 St SW =>
+								"6499" // SB  Old Banff Coach RD @ Coach Hill RD SW =>
 						)) //
 				.compileBothTripSort());
 		//noinspection deprecation
@@ -1139,10 +1148,10 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			}
 			if (Arrays.asList( //
-					BRIDLEWOOD + SLASH + SOMERSET_STATION, // <>
-					CRANSTON + SLASH + SOMERSET_STATION //
+					BRIDLEWOOD + _SLASH_ + SOMERSET_STATION, // <>
+					CRANSTON + _SLASH_ + SOMERSET_STATION //
 			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString(CRANSTON + SLASH + SOMERSET_STATION, mTrip.getHeadsignId());
+				mTrip.setHeadsignString(CRANSTON + _SLASH_ + SOMERSET_STATION, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 17L) {
@@ -1363,7 +1372,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 135L) {
 			if (Arrays.asList( //
-					"36 St Se" + SLASH + ERIN_WOODS, // <>
+					"36 St Se" + _SLASH_ + ERIN_WOODS, // <>
 					MARLBOROUGH_STATION //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(MARLBOROUGH_STATION, mTrip.getHeadsignId());
@@ -1448,7 +1457,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 440L) {
 			if (Arrays.asList( //
-					EAST_HILLS + SLASH + CHATEAU_EST, //
+					EAST_HILLS + _SLASH_ + CHATEAU_EST, //
 					EAST_HILLS, //
 					CHATEAU_EST //
 			).containsAll(headsignsValues)) {
@@ -1512,7 +1521,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 810L) {
 			if (Arrays.asList( //
-					ST_MARGARET + SPACE + ST_FRANCIS + SLASH + NORTH_POINTE, //
+					ST_MARGARET + SPACE + ST_FRANCIS + _SLASH_ + NORTH_POINTE, //
 					ST_MARGARET + SPACE + NORTH_POINTE, //
 					NORTH //
 			).containsAll(headsignsValues)) {
