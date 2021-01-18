@@ -1,6 +1,5 @@
 package org.mtransit.parser.ca_calgary_transit_bus;
 
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mtransit.parser.CleanUtils;
@@ -9,6 +8,7 @@ import org.mtransit.parser.MTLog;
 import org.mtransit.parser.Pair;
 import org.mtransit.parser.SplitUtils;
 import org.mtransit.parser.SplitUtils.RouteTripSpec;
+import org.mtransit.parser.StringUtils;
 import org.mtransit.parser.Utils;
 import org.mtransit.parser.gtfs.data.GCalendar;
 import org.mtransit.parser.gtfs.data.GCalendarDate;
@@ -31,6 +31,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
+
+import static org.mtransit.parser.StringUtils.EMPTY;
 
 // https://www.calgarytransit.com/developer-resources
 // https://data.calgary.ca/
@@ -63,17 +65,9 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	public void start(@NotNull String[] args) {
 		MTLog.log("Generating Calgary Transit bus data...");
 		long start = System.currentTimeMillis();
-		boolean isNext = "next_".equalsIgnoreCase(args[2]);
-		if (isNext) {
-			setupNext();
-		}
 		this.serviceIds = extractUsefulServiceIdInts(args, this, true);
 		super.start(args);
 		MTLog.log("Generating Calgary Transit bus data... DONE in %s.", Utils.getPrettyDuration(System.currentTimeMillis() - start));
-	}
-
-	private void setupNext() {
-		// DO NOTHING
 	}
 
 	@Override
@@ -157,8 +151,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		return AGENCY_COLOR;
 	}
 
-	@SuppressWarnings("unused")
-	private static final String COLOR_BUS_ROUTES = "004B85"; // BLUE (from PDF map)
+	// private static final String COLOR_BUS_ROUTES = "004B85"; // BLUE (from PDF map)
 	private static final String COLOR_BUS_ROUTES_EXPRESS = "00BBE5"; // LIGHT BLUE (from PDF map)
 	private static final String COLOR_BUS_ROUTES_BRT = "ED1C2E"; // RED (from PDF map)
 	private static final String COLOR_BUS_ROUTES_SCHOOL = "E4A024"; // YELLOW (from PDF map)
@@ -166,46 +159,49 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	@Nullable
 	@Override
 	public String getRouteColor(@NotNull GRoute gRoute) {
-		final String rsnS = gRoute.getRouteShortName();
-		if (!Utils.isDigitsOnly(rsnS)) {
-			if (RSN_FLOATER.equals(rsnS)) {
+		if (StringUtils.isEmpty(gRoute.getRouteColor())) {
+			final String rsnS = gRoute.getRouteShortName();
+			if (!Utils.isDigitsOnly(rsnS)) {
+				if (RSN_FLOATER.equals(rsnS)) {
+					return null;
+				}
+			}
+			int rsn = Integer.parseInt(rsnS);
+			if (rsn >= 600 && rsn <= 899) {
+				return COLOR_BUS_ROUTES_SCHOOL;
+			}
+			final String rln = gRoute.getRouteLongNameOrDefault();
+			if (ENDS_WITH_EXPRESS.matcher(rln).find()) {
+				return COLOR_BUS_ROUTES_EXPRESS;
+			}
+			if (STARTS_WITH_BRT.matcher(rln).find()) {
+				return COLOR_BUS_ROUTES_BRT;
+			}
+			if (rsn >= 1 && rsn <= 299) {
 				return null;
 			}
+			if (rsn == 303) { // MO MAX Orange
+				return "EF8B22";
+			} else if (rsn == 304) { // MY MAX Yellow
+				return "FFCD02";
+			} else if (rsn == 306) { // MT MAX Teal
+				return "009bA7";
+			} else if (rsn == 307) { // MP MAX Purple
+				return "92368D";
+			}
+			if (rsn >= 400 && rsn <= 599) {
+				return null;
+			}
+			throw new MTLog.Fatal("Unexpected route color %s!", gRoute);
 		}
-		int rsn = Integer.parseInt(rsnS);
-		if (rsn >= 600 && rsn <= 899) {
-			return COLOR_BUS_ROUTES_SCHOOL;
-		}
-		final String rln = gRoute.getRouteLongNameOrDefault();
-		if (ENDS_WITH_EXPRESS.matcher(rln).find()) {
-			return COLOR_BUS_ROUTES_EXPRESS;
-		}
-		if (STARTS_WITH_BRT.matcher(rln).find()) {
-			return COLOR_BUS_ROUTES_BRT;
-		}
-		if (rsn >= 1 && rsn <= 299) {
-			return null;
-		}
-		if (rsn == 303) { // MO MAX Orange
-			return "EF8B22";
-		} else if (rsn == 304) { // MY MAX Yellow
-			return "FFCD02";
-		} else if (rsn == 306) { // MT MAX Teal
-			return "009bA7";
-		} else if (rsn == 307) { // MP MAX Purple
-			return "92368D";
-		}
-		if (rsn >= 400 && rsn <= 599) {
-			return null;
-		}
-		throw new MTLog.Fatal("Unexpected route color %s!", gRoute);
+		return super.getRouteColor(gRoute);
 	}
 
 	private static final String _SLASH_ = " / ";
 	private static final String SPACE = " ";
 	private static final String DASH = "-";
 
-	private static final String _17_AVE_SE = "17 Ave Se";
+	private static final String _17_AVE_SE = "17 Ave SE";
 	private static final String _69_ST_STATION = "69 St Sta";
 	private static final String AIRPORT = "Airport";
 	private static final String ANDERSON = "Anderson";
@@ -243,11 +239,11 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String HERITAGE_STATION = HERITAGE + " Sta";
 	private static final String HUNTINGTON = "Huntington";
 	private static final String KILLARNEY = "Killarney";
-	private static final String KILLARNEY_SLASH_17_AVE_SW = KILLARNEY + _SLASH_ + "17 Ave Sw";
+	private static final String KILLARNEY_SLASH_17_AVE_SW = KILLARNEY + _SLASH_ + "17 Ave SW";
 	private static final String LAKEVIEW = "Lakeview";
 	private static final String MARLBOROUGH = "Marlborough";
 	private static final String MARLBOROUGH_STATION = MARLBOROUGH + " Sta";
-	private static final String MCCALL_WAY_NE = "Mccall Wy Ne";
+	private static final String MCCALL_WAY_NE = "Mccall Wy NE";
 	private static final String MC_KENZIE = "McKenzie";
 	private static final String MC_KENZIE_TOWNE = MC_KENZIE + " Towne";
 	private static final String MC_KNIGHT = "McKnight";
@@ -974,7 +970,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		//noinspection deprecation
 		map2.put(882L, new RouteTripSpec(882L, //
 				0, MTrip.HEADSIGN_TYPE_STRING, "Nolan Hl", //
-				1, MTrip.HEADSIGN_TYPE_STRING, StringUtils.EMPTY) //
+				1, MTrip.HEADSIGN_TYPE_STRING, EMPTY) //
 				.addTripSort(0, //
 						Arrays.asList( //
 								"3864", // SB Sherwood BV @ Sherwood WY NW
@@ -1357,9 +1353,9 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 127L) {
 			if (Arrays.asList( //
 					MARLBOROUGH_STATION, //
-					"Franklin Industrial" //
+					"Franklin Ind" //
 			).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString("Franklin Industrial", mTrip.getHeadsignId());
+				mTrip.setHeadsignString("Franklin Ind", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 134L) {
@@ -1372,7 +1368,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 135L) {
 			if (Arrays.asList( //
-					"36 St Se" + _SLASH_ + ERIN_WOODS, // <>
+					"36 St SE" + _SLASH_ + ERIN_WOODS, // <>
 					MARLBOROUGH_STATION //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(MARLBOROUGH_STATION, mTrip.getHeadsignId());
@@ -1380,7 +1376,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 150L) {
 			if (Arrays.asList( //
-					"114 Ave Se", // <>
+					"114 Ave SE", // <>
 					ANDERSON //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(ANDERSON, mTrip.getHeadsignId());
@@ -1388,7 +1384,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		} else if (mTrip.getRouteId() == 152L) {
 			if (Arrays.asList( //
-					"114 Ave Se", //
+					"114 Ave SE", //
 					"New Brighton" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("New Brighton", mTrip.getHeadsignId());
@@ -1578,27 +1574,31 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	@NotNull
 	@Override
 	public String cleanTripHeadsign(@NotNull String tripHeadsign) {
-		if (Utils.isUppercaseOnly(tripHeadsign, true, true)) {
-			tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
-		}
+		tripHeadsign = CleanUtils.toLowerCaseUpperCaseWords(Locale.ENGLISH, tripHeadsign, getIgnoredWords());
 		tripHeadsign = CleanUtils.keepToAndRemoveVia(tripHeadsign);
 		tripHeadsign = AVENUE_.matcher(tripHeadsign).replaceAll(AVENUE_REPLACEMENT);
-		tripHeadsign = STARTS_WITH_BRT.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
-		tripHeadsign = STARTS_WITH_MAX_NAME_.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+		tripHeadsign = STARTS_WITH_BRT.matcher(tripHeadsign).replaceAll(EMPTY);
+		tripHeadsign = STARTS_WITH_MAX_NAME_.matcher(tripHeadsign).replaceAll(EMPTY);
 		tripHeadsign = MRU_.matcher(tripHeadsign).replaceAll(MRU_REPLACEMENT);
 		tripHeadsign = MC_KENZIE_.matcher(tripHeadsign).replaceAll(MC_KENZIE_REPLACEMENT);
 		tripHeadsign = STN.matcher(tripHeadsign).replaceAll(STN_REPLACEMENT);
-		tripHeadsign = ROUTE_RSN.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
-		tripHeadsign = ENDS_WITH_EXPRESS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+		tripHeadsign = ROUTE_RSN.matcher(tripHeadsign).replaceAll(EMPTY);
+		tripHeadsign = ENDS_WITH_EXPRESS.matcher(tripHeadsign).replaceAll(EMPTY);
 		tripHeadsign = CleanUtils.cleanSlashes(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanNumbers(tripHeadsign);
 		return CleanUtils.cleanLabel(tripHeadsign);
 	}
 
-	private static final Pattern ENDS_WITH_BOUND = Pattern.compile("([\\s]*[sewn]b[\\s]$)", Pattern.CASE_INSENSITIVE);
-
-	private static final Pattern STARTS_WITH_BOUND = Pattern.compile("(^[\\s]*[sewn]b[\\s]*)", Pattern.CASE_INSENSITIVE);
+	private String[] getIgnoredWords() {
+		return new String[]{
+				"SE", "SW", "NE", "NW",
+				"LRT", "YYC", "TRW", "MRU", "SAIT", "JG", "EEEL",
+				"CTrain",
+				"CT",
+				"SC"
+		};
+	}
 
 	private static final Pattern STARTS_WITH_SLASH = Pattern.compile("(^[\\s]*/[\\s]*)", Pattern.CASE_INSENSITIVE);
 
@@ -1722,6 +1722,27 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final Pattern CTR = Pattern.compile(String.format(REGEX_START_END, "CTR"));
 	private static final String CTR_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "Center");
 
+	private static final Pattern PY_ = Pattern.compile(String.format(REGEX_START_END, "PY"));
+	private static final String PY_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "Parkway");
+
+	private static final Pattern PR_ = Pattern.compile(String.format(REGEX_START_END, "PR"));
+	private static final String PR_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "Parade");
+
+	private static final Pattern PS_ = Pattern.compile(String.format(REGEX_START_END, "PS"));
+	private static final String PS_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "Passage");
+
+	private static final Pattern RO_ = Pattern.compile(String.format(REGEX_START_END, "RO"));
+	private static final String RO_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "Row");
+
+	private static final Pattern MT_ = Pattern.compile(String.format(REGEX_START_END, "MT"));
+	private static final String MT_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "Mount");
+
+	private static final Pattern GDN_ = Pattern.compile(String.format(REGEX_START_END, "GDN"));
+	private static final String GDN_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "Garden");
+
+	private static final Pattern TERR_ = Pattern.compile(String.format(REGEX_START_END, "TERR"));
+	private static final String TERR_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "Terrace");
+
 	private static final Pattern MOUNT_ROYAL_UNIVERSITY = Pattern.compile(String.format(REGEX_START_END, "Mount Royal University"));
 	private static final String MOUNT_ROYAL_UNIVERSITY_REPLACEMENT = String.format(REGEX_START_END_REPLACEMENT, "MRU");
 
@@ -1731,8 +1752,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	@NotNull
 	@Override
 	public String cleanStopName(@NotNull String gStopName) {
-		gStopName = STARTS_WITH_BOUND.matcher(gStopName).replaceAll(StringUtils.EMPTY);
-		gStopName = ENDS_WITH_BOUND.matcher(gStopName).replaceAll(StringUtils.EMPTY);
 		gStopName = AV.matcher(gStopName).replaceAll(AV_REPLACEMENT);
 		gStopName = PA.matcher(gStopName).replaceAll(PA_REPLACEMENT);
 		gStopName = HT.matcher(gStopName).replaceAll(HT_REPLACEMENT);
@@ -1772,11 +1791,20 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		gStopName = BY.matcher(gStopName).replaceAll(BY_REPLACEMENT);
 		gStopName = CE.matcher(gStopName).replaceAll(CE_REPLACEMENT);
 		gStopName = CTR.matcher(gStopName).replaceAll(CTR_REPLACEMENT);
+		gStopName = PY_.matcher(gStopName).replaceAll(PY_REPLACEMENT);
+		gStopName = PR_.matcher(gStopName).replaceAll(PR_REPLACEMENT);
+		gStopName = PS_.matcher(gStopName).replaceAll(PS_REPLACEMENT);
+		gStopName = RO_.matcher(gStopName).replaceAll(RO_REPLACEMENT);
+		gStopName = MT_.matcher(gStopName).replaceAll(MT_REPLACEMENT);
+		gStopName = GDN_.matcher(gStopName).replaceAll(GDN_REPLACEMENT);
+		gStopName = TERR_.matcher(gStopName).replaceAll(TERR_REPLACEMENT);
+		gStopName = CleanUtils.toLowerCaseUpperCaseWords(Locale.ENGLISH, gStopName, getIgnoredWords());
 		gStopName = MOUNT_ROYAL_UNIVERSITY.matcher(gStopName).replaceAll(MOUNT_ROYAL_UNIVERSITY_REPLACEMENT);
 		gStopName = MOUNT.matcher(gStopName).replaceAll(MOUNT_REPLACEMENT);
+		gStopName = CleanUtils.cleanBounds(gStopName);
 		gStopName = CleanUtils.cleanStreetTypes(gStopName);
 		gStopName = CleanUtils.cleanNumbers(gStopName);
-		gStopName = STARTS_WITH_SLASH.matcher(gStopName).replaceAll(StringUtils.EMPTY);
+		gStopName = STARTS_WITH_SLASH.matcher(gStopName).replaceAll(EMPTY);
 		return CleanUtils.cleanLabel(gStopName);
 	}
 }
