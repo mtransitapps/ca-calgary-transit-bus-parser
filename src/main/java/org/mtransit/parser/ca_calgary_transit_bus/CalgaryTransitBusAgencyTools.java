@@ -265,6 +265,25 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		return super.directionFinderEnabled(routeId, gRoute);
 	}
 
+	@Override
+	public int getDirectionType() {
+		return MTrip.HEADSIGN_TYPE_DIRECTION;
+	}
+
+	@Nullable
+	@Override
+	public MDirectionType convertDirection(@Nullable String headSign) {
+		if (headSign != null) {
+			final String headSignLC = headSign.toLowerCase(Locale.ENGLISH);
+			if (headSignLC.endsWith(" - north")) {
+				return MDirectionType.NORTH;
+			} else if (headSignLC.endsWith(" - south")) {
+				return MDirectionType.SOUTH;
+			}
+		}
+		return null;
+	}
+
 	private static final Pattern ENDS_PARENTHESES = Pattern.compile("( \\([^(]+\\)$)");
 
 	private static final Pattern STARTS_WITH_BOUNDS = Pattern.compile("(^" + "([A-Z]{2})?" + " )");
@@ -333,6 +352,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		tripHeadsign = HIGH_SCHOOL_.matcher(tripHeadsign).replaceAll(HIGH_SCHOOL_REPLACEMENT);
 		tripHeadsign = TERMINAL_.matcher(tripHeadsign).replaceAll(TERMINAL_REPLACEMENT);
 		tripHeadsign = CleanUtils.cleanSlashes(tripHeadsign);
+		tripHeadsign = CleanUtils.cleanBounds(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanNumbers(tripHeadsign);
 		return CleanUtils.cleanLabel(tripHeadsign);
