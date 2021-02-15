@@ -2,16 +2,14 @@ package org.mtransit.parser.ca_calgary_transit_bus;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mtransit.parser.CleanUtils;
+import org.mtransit.commons.CharUtils;
+import org.mtransit.commons.CleanUtils;
+import org.mtransit.commons.StringUtils;
 import org.mtransit.parser.DefaultAgencyTools;
 import org.mtransit.parser.MTLog;
 import org.mtransit.parser.Pair;
 import org.mtransit.parser.SplitUtils;
 import org.mtransit.parser.SplitUtils.RouteTripSpec;
-import org.mtransit.parser.StringUtils;
-import org.mtransit.parser.Utils;
-import org.mtransit.parser.gtfs.data.GCalendar;
-import org.mtransit.parser.gtfs.data.GCalendarDate;
 import org.mtransit.parser.gtfs.data.GRoute;
 import org.mtransit.parser.gtfs.data.GSpec;
 import org.mtransit.parser.gtfs.data.GStop;
@@ -26,7 +24,6 @@ import org.mtransit.parser.mt.data.MTripStop;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -43,47 +40,19 @@ import static org.mtransit.parser.StringUtils.EMPTY;
 // https://data.calgary.ca/api/file_data/38ff3c2d-efde-4d50-b83c-3a2f49f390e5?filename=CT_GTFS.zip
 public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
-	public static void main(@Nullable String[] args) {
-		if (args == null || args.length == 0) {
-			args = new String[3];
-			args[0] = "input/gtfs.zip";
-			args[1] = "../../mtransitapps/ca-calgary-transit-bus-android/res/raw/";
-			args[2] = ""; // files-prefix
-		}
+	public static void main(@NotNull String[] args) {
 		new CalgaryTransitBusAgencyTools().start(args);
 	}
 
-	@Nullable
-	private HashSet<Integer> serviceIds;
-
 	@Override
-	public void start(@NotNull String[] args) {
-		MTLog.log("Generating Calgary Transit bus data...");
-		long start = System.currentTimeMillis();
-		this.serviceIds = extractUsefulServiceIdInts(args, this, true);
-		super.start(args);
-		MTLog.log("Generating Calgary Transit bus data... DONE in %s.", Utils.getPrettyDuration(System.currentTimeMillis() - start));
+	public boolean defaultExcludeEnabled() {
+		return true;
 	}
 
+	@NotNull
 	@Override
-	public boolean excludingAll() {
-		return this.serviceIds != null && this.serviceIds.isEmpty();
-	}
-
-	@Override
-	public boolean excludeCalendar(@NotNull GCalendar gCalendar) {
-		if (this.serviceIds != null) {
-			return excludeUselessCalendarInt(gCalendar, this.serviceIds);
-		}
-		return super.excludeCalendar(gCalendar);
-	}
-
-	@Override
-	public boolean excludeCalendarDate(@NotNull GCalendarDate gCalendarDates) {
-		if (this.serviceIds != null) {
-			return excludeUselessCalendarDateInt(gCalendarDates, this.serviceIds);
-		}
-		return super.excludeCalendarDate(gCalendarDates);
+	public String getAgencyName() {
+		return "Calgary Transit";
 	}
 
 	private static final Pattern OUT_OF_SERVICE = Pattern.compile("((^|\\W)(out of service)(\\W|$))", Pattern.CASE_INSENSITIVE);
@@ -92,9 +61,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	public boolean excludeTrip(@NotNull GTrip gTrip) {
 		if (OUT_OF_SERVICE.matcher(gTrip.getTripHeadsignOrDefault()).find()) {
 			return true; // exclude
-		}
-		if (this.serviceIds != null) {
-			return excludeUselessTripInt(gTrip, this.serviceIds);
 		}
 		return super.excludeTrip(gTrip);
 	}
@@ -110,7 +76,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public long getRouteId(@NotNull GRoute gRoute) {
-		if (!Utils.isDigitsOnly(gRoute.getRouteShortName())) {
+		if (!CharUtils.isDigitsOnly(gRoute.getRouteShortName())) {
 			if (RSN_FLOATER.equals(gRoute.getRouteShortName())) {
 				return RID_FLOATER;
 			}
@@ -123,12 +89,11 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@NotNull
 	@Override
-	public String getRouteLongName(@NotNull GRoute gRoute) {
-		String gRouteLongName = gRoute.getRouteLongName();
-		gRouteLongName = CleanUtils.cleanSlashes(gRouteLongName);
-		gRouteLongName = CLEAN_STREET_POINT.matcher(gRouteLongName).replaceAll(CLEAN_AVE_POINT_REPLACEMENT);
-		gRouteLongName = CleanUtils.cleanStreetTypes(gRouteLongName);
-		return CleanUtils.cleanLabel(gRouteLongName);
+	public String cleanRouteLongName(@NotNull String routeLongName) {
+		routeLongName = CleanUtils.cleanSlashes(routeLongName);
+		routeLongName = CLEAN_STREET_POINT.matcher(routeLongName).replaceAll(CLEAN_AVE_POINT_REPLACEMENT);
+		routeLongName = CleanUtils.cleanStreetTypes(routeLongName);
+		return CleanUtils.cleanLabel(routeLongName);
 	}
 
 	private static final String AGENCY_COLOR_RED = "B83A3F"; // LIGHT RED (from web site CSS)
@@ -151,7 +116,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	public String getRouteColor(@NotNull GRoute gRoute) {
 		if (StringUtils.isEmpty(gRoute.getRouteColor())) {
 			final String rsnS = gRoute.getRouteShortName();
-			if (!Utils.isDigitsOnly(rsnS)) {
+			if (!CharUtils.isDigitsOnly(rsnS)) {
 				if (RSN_FLOATER.equals(rsnS)) {
 					return null;
 				}
@@ -265,9 +230,13 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		return super.directionFinderEnabled(routeId, gRoute);
 	}
 
+	@NotNull
 	@Override
-	public int getDirectionType() {
-		return MTrip.HEADSIGN_TYPE_DIRECTION;
+	public List<Integer> getDirectionTypes() {
+		return Arrays.asList(
+				MTrip.HEADSIGN_TYPE_DIRECTION,
+				MTrip.HEADSIGN_TYPE_STRING
+		);
 	}
 
 	@Nullable
@@ -309,14 +278,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	private static final Pattern AVENUE_ = Pattern.compile("((^|\\W)(av)(\\W|$))", Pattern.CASE_INSENSITIVE);
-	private static final String AVENUE_REPLACEMENT = "$2Avenue$4";
+	private static final String AVENUE_REPLACEMENT = "$2" + "Avenue" + "$4";
 
 	private static final String MRU = "MRU";
 	private static final Pattern MRU_ = Pattern.compile("((^|\\W)(mru|mount royal university)(\\W|$))", Pattern.CASE_INSENSITIVE);
 	private static final String MRU_REPLACEMENT = "$2" + MRU + "$4";
 
 	private static final Pattern STN = Pattern.compile("((^|\\W)(stn)(\\W|$))", Pattern.CASE_INSENSITIVE);
-	private static final String STN_REPLACEMENT = "$2Station$4";
+	private static final String STN_REPLACEMENT = "$2" + "Station" + "$4";
 
 	private static final Pattern ENDS_WITH_EXPRESS = Pattern.compile("((\\W)(express)($))", Pattern.CASE_INSENSITIVE);
 
