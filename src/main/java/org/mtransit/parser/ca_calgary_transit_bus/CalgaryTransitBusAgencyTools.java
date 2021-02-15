@@ -7,23 +7,13 @@ import org.mtransit.commons.CleanUtils;
 import org.mtransit.commons.StringUtils;
 import org.mtransit.parser.DefaultAgencyTools;
 import org.mtransit.parser.MTLog;
-import org.mtransit.parser.Pair;
-import org.mtransit.parser.SplitUtils;
-import org.mtransit.parser.SplitUtils.RouteTripSpec;
 import org.mtransit.parser.gtfs.data.GRoute;
-import org.mtransit.parser.gtfs.data.GSpec;
-import org.mtransit.parser.gtfs.data.GStop;
 import org.mtransit.parser.gtfs.data.GTrip;
-import org.mtransit.parser.gtfs.data.GTripStop;
 import org.mtransit.parser.mt.data.MAgency;
 import org.mtransit.parser.mt.data.MDirectionType;
-import org.mtransit.parser.mt.data.MRoute;
 import org.mtransit.parser.mt.data.MTrip;
-import org.mtransit.parser.mt.data.MTripStop;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -152,82 +142,23 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		return super.getRouteColor(gRoute);
 	}
 
-	private static final HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
-
-	static {
-		HashMap<Long, RouteTripSpec> map2 = new HashMap<>();
-		//noinspection deprecation
-		map2.put(30L, new RouteTripSpec(30L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.EAST.getId(), //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.WEST.getId()) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList( //
-								"7792", // EB 7 AV SW @ 2 ST SW
-								"5574", // EB 39 AV SE @ Burnsland RD
-								"5981", // ++
-								"7320" // SB 12 ST SE @ 42 AV SE
-						)) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList( //
-								"7320", // SB 12 ST SE @ 42 AV SE
-								"4131", // ++
-								"5574" // EB 39 AV SE @ Burnsland RD
-						)) //
-				.compileBothTripSort());
-		ALL_ROUTE_TRIPS2 = map2;
+	@Override
+	public boolean directionSplitterEnabled() {
+		return true; // ONLY FOR ROUTE 30
 	}
 
 	@Override
-	public int compareEarly(long routeId,
-							@NotNull List<MTripStop> list1, @NotNull List<MTripStop> list2,
-							@NotNull MTripStop ts1, @NotNull MTripStop ts2,
-							@NotNull GStop ts1GStop, @NotNull GStop ts2GStop) {
-		if (ALL_ROUTE_TRIPS2.containsKey(routeId)) {
-			return ALL_ROUTE_TRIPS2.get(routeId).compare(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop, this);
+	public boolean directionSplitterEnabled(long routeId) {
+		//noinspection RedundantIfStatement
+		if (routeId == 30L) {
+			return true; // ENABLED because loop + branch w/ same last stop ID
 		}
-		return super.compareEarly(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop);
-	}
-
-	@NotNull
-	@Override
-	public ArrayList<MTrip> splitTrip(@NotNull MRoute mRoute, @Nullable GTrip gTrip, @NotNull GSpec gtfs) {
-		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
-			return ALL_ROUTE_TRIPS2.get(mRoute.getId()).getAllTrips();
-		}
-		return super.splitTrip(mRoute, gTrip, gtfs);
-	}
-
-	@NotNull
-	@Override
-	public Pair<Long[], Integer[]> splitTripStop(@NotNull MRoute mRoute, @NotNull GTrip gTrip, @NotNull GTripStop gTripStop, @NotNull ArrayList<MTrip> splitTrips, @NotNull GSpec routeGTFS) {
-		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
-			return SplitUtils.splitTripStop(mRoute, gTrip, gTripStop, routeGTFS, ALL_ROUTE_TRIPS2.get(mRoute.getId()), this);
-		}
-		return super.splitTripStop(mRoute, gTrip, gTripStop, splitTrips, routeGTFS);
-	}
-
-	@Override
-	public void setTripHeadsign(@NotNull MRoute mRoute, @NotNull MTrip mTrip, @NotNull GTrip gTrip, @NotNull GSpec gtfs) {
-		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
-			return; // split
-		}
-		mTrip.setHeadsignString(
-				cleanTripHeadsign(gTrip.getTripHeadsignOrDefault()),
-				gTrip.getDirectionIdOrDefault()
-		);
+		return false; // SPLITTER DISABLED
 	}
 
 	@Override
 	public boolean directionFinderEnabled() {
 		return true;
-	}
-
-	@Override
-	public boolean directionFinderEnabled(long routeId, @NotNull GRoute gRoute) {
-		if (routeId == 30L) {
-			return false; // DISABLED because loop + branch w/ same last stop ID
-		}
-		return super.directionFinderEnabled(routeId, gRoute);
 	}
 
 	@NotNull
@@ -270,11 +201,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		directionHeadSign = ENDS_WITH_BOUNDS.matcher(directionHeadSign).replaceAll(EMPTY);
 		directionHeadSign = BOUNDS_BEFORE_AT.matcher(directionHeadSign).replaceAll(BOUNDS_BEFORE_AT_REPLACEMENT);
 		return directionHeadSign;
-	}
-
-	@Override
-	public boolean mergeHeadsign(@NotNull MTrip mTrip, @NotNull MTrip mTripToMerge) {
-		throw new MTLog.Fatal("Unexpected trips to merge %s & %s!", mTrip, mTripToMerge);
 	}
 
 	private static final Pattern AVENUE_ = Pattern.compile("((^|\\W)(av)(\\W|$))", Pattern.CASE_INSENSITIVE);
