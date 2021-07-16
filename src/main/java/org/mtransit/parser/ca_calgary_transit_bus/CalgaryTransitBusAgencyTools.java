@@ -24,8 +24,8 @@ import static org.mtransit.parser.StringUtils.EMPTY;
 // https://data.calgary.ca/
 // https://data.calgary.ca/en/Transportation-Transit/Calgary-Transit-Scheduling-Data/npk7-z3bj
 // https://data.calgary.ca/download/npk7-z3bj/application%2Fzip
+// https://data.calgary.ca/download/npk7-z3bj/application%2Fx-zip-compressed
 // https://data.calgary.ca/Transportation-Transit/Calgary-Transit-Scheduling-Data/npk7-z3bj
-// https://data.calgary.ca/download/npk7-z3bj/application%2Fzip
 // https://data.calgary.ca/d/npk7-z3bj?category=Transportation-Transit&view_name=Calgary-Transit-Scheduling-Data
 // https://data.calgary.ca/api/file_data/38ff3c2d-efde-4d50-b83c-3a2f49f390e5?filename=CT_GTFS.zip
 public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
