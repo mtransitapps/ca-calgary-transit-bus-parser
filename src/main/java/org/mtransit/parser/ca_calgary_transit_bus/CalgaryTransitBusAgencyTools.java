@@ -61,17 +61,25 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		return MAgency.ROUTE_TYPE_BUS;
 	}
 
+	@Override
+	public boolean defaultRouteIdEnabled() {
+		return true;
+	}
+
+	@Override
+	public boolean useRouteShortNameForRouteId() {
+		return true;
+	}
+
 	private static final String RSN_FLOATER = "FLT";
 	private static final long RID_FLOATER = 10_001L;
 
 	@Override
 	public long getRouteId(@NotNull GRoute gRoute) {
-		if (!CharUtils.isDigitsOnly(gRoute.getRouteShortName())) {
-			if (RSN_FLOATER.equals(gRoute.getRouteShortName())) {
-				return RID_FLOATER;
-			}
+		if (RSN_FLOATER.equals(gRoute.getRouteShortName())) {
+			return RID_FLOATER;
 		}
-		return Long.parseLong(gRoute.getRouteShortName()); // using route short name as route ID
+		return super.getRouteId(gRoute);
 	}
 
 	private static final Pattern CLEAN_STREET_POINT = Pattern.compile("((\\s)*(ave|st|mt)\\.(\\s)*)", Pattern.CASE_INSENSITIVE);
@@ -84,6 +92,11 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		routeLongName = CLEAN_STREET_POINT.matcher(routeLongName).replaceAll(CLEAN_AVE_POINT_REPLACEMENT);
 		routeLongName = CleanUtils.cleanStreetTypes(routeLongName);
 		return CleanUtils.cleanLabel(routeLongName);
+	}
+
+	@Override
+	public boolean defaultAgencyColorEnabled() {
+		return true;
 	}
 
 	private static final String AGENCY_COLOR_RED = "B83A3F"; // LIGHT RED (from web site CSS)
@@ -103,7 +116,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Nullable
 	@Override
-	public String getRouteColor(@NotNull GRoute gRoute) {
+	public String getRouteColor(@NotNull GRoute gRoute, @NotNull MAgency agency) {
 		if (StringUtils.isEmpty(gRoute.getRouteColor())) {
 			final String rsnS = gRoute.getRouteShortName();
 			if (!CharUtils.isDigitsOnly(rsnS)) {
@@ -111,7 +124,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 					return null;
 				}
 			}
-			int rsn = Integer.parseInt(rsnS);
+			final int rsn = Integer.parseInt(rsnS);
 			if (rsn >= 600 && rsn <= 899) {
 				return COLOR_BUS_ROUTES_SCHOOL;
 			}
@@ -139,7 +152,7 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 			throw new MTLog.Fatal("Unexpected route color %s!", gRoute);
 		}
-		return super.getRouteColor(gRoute);
+		return super.getRouteColor(gRoute, agency);
 	}
 
 	@Override
