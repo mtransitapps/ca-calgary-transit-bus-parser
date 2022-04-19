@@ -1,10 +1,11 @@
 package org.mtransit.parser.ca_calgary_transit_bus;
 
+import static org.mtransit.parser.StringUtils.EMPTY;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mtransit.commons.CharUtils;
 import org.mtransit.commons.CleanUtils;
-import org.mtransit.commons.StringUtils;
 import org.mtransit.parser.DefaultAgencyTools;
 import org.mtransit.parser.MTLog;
 import org.mtransit.parser.gtfs.data.GRoute;
@@ -17,8 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
-
-import static org.mtransit.parser.StringUtils.EMPTY;
 
 // https://www.calgarytransit.com/developer-resources
 // https://data.calgary.ca/
@@ -71,15 +70,15 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		return true;
 	}
 
-	private static final String RSN_FLOATER = "FLT";
-	private static final long RID_FLOATER = 10_001L;
-
+	@Nullable
 	@Override
-	public long getRouteId(@NotNull GRoute gRoute) {
-		if (RSN_FLOATER.equals(gRoute.getRouteShortName())) {
-			return RID_FLOATER;
+	public Long convertRouteIdFromShortNameNotSupported(@NotNull String routeShortName) {
+		switch (routeShortName) {
+		case "FLT":
+			return 10_001L;
+		default:
+			return super.convertRouteIdFromShortNameNotSupported(routeShortName);
 		}
-		return super.getRouteId(gRoute);
 	}
 
 	private static final Pattern CLEAN_STREET_POINT = Pattern.compile("((\\s)*(ave|st|mt)\\.(\\s)*)", Pattern.CASE_INSENSITIVE);
@@ -116,43 +115,40 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Nullable
 	@Override
-	public String getRouteColor(@NotNull GRoute gRoute, @NotNull MAgency agency) {
-		if (StringUtils.isEmpty(gRoute.getRouteColor())) {
-			final String rsnS = gRoute.getRouteShortName();
-			if (!CharUtils.isDigitsOnly(rsnS)) {
-				if (RSN_FLOATER.equals(rsnS)) {
-					return null;
-				}
-			}
-			final int rsn = Integer.parseInt(rsnS);
-			if (rsn >= 600 && rsn <= 899) {
-				return COLOR_BUS_ROUTES_SCHOOL;
-			}
-			final String rln = gRoute.getRouteLongNameOrDefault();
-			if (ENDS_WITH_EXPRESS.matcher(rln).find()) {
-				return COLOR_BUS_ROUTES_EXPRESS;
-			}
-			if (STARTS_WITH_BRT.matcher(rln).find()) {
-				return COLOR_BUS_ROUTES_BRT;
-			}
-			if (rsn >= 1 && rsn <= 299) {
+	public String provideMissingRouteColor(@NotNull GRoute gRoute) {
+		final String rsnS = gRoute.getRouteShortName();
+		if (!CharUtils.isDigitsOnly(rsnS)) {
+			if ("FLT".equals(rsnS)) {
 				return null;
 			}
-			if (rsn == 303) { // MO MAX Orange
-				return "EF8B22";
-			} else if (rsn == 304) { // MY MAX Yellow
-				return "FFCD02";
-			} else if (rsn == 306) { // MT MAX Teal
-				return "009bA7";
-			} else if (rsn == 307) { // MP MAX Purple
-				return "92368D";
-			}
-			if (rsn >= 400 && rsn <= 599) {
-				return null;
-			}
-			throw new MTLog.Fatal("Unexpected route color %s!", gRoute);
 		}
-		return super.getRouteColor(gRoute, agency);
+		final int rsn = Integer.parseInt(rsnS);
+		if (rsn >= 600 && rsn <= 899) {
+			return COLOR_BUS_ROUTES_SCHOOL;
+		}
+		final String rln = gRoute.getRouteLongNameOrDefault();
+		if (ENDS_WITH_EXPRESS.matcher(rln).find()) {
+			return COLOR_BUS_ROUTES_EXPRESS;
+		}
+		if (STARTS_WITH_BRT.matcher(rln).find()) {
+			return COLOR_BUS_ROUTES_BRT;
+		}
+		if (rsn >= 1 && rsn <= 299) {
+			return null;
+		}
+		if (rsn == 303) { // MO MAX Orange
+			return "EF8B22";
+		} else if (rsn == 304) { // MY MAX Yellow
+			return "FFCD02";
+		} else if (rsn == 306) { // MT MAX Teal
+			return "009bA7";
+		} else if (rsn == 307) { // MP MAX Purple
+			return "92368D";
+		}
+		if (rsn >= 400 && rsn <= 599) {
+			return null;
+		}
+		throw new MTLog.Fatal("Unexpected route color %s!", gRoute);
 	}
 
 	@Override
@@ -161,12 +157,11 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public boolean directionSplitterEnabled(long routeId) {
-		//noinspection RedundantIfStatement
+	public boolean directionOverrideId(long routeId) {
 		if (routeId == 30L) {
-			return true; // ENABLED because loop + branch w/ same last stop ID
+			return true; // because loop + branch w/ same last stop ID
 		}
-		return false; // SPLITTER DISABLED
+		return super.directionOverrideId(routeId);
 	}
 
 	@Override
@@ -237,12 +232,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final Pattern CLEAN_AT_SPACE = Pattern.compile("(\\w)[\\s]*[@][\\s]*(\\w)");
 	private static final String CLEAN_AT_SPACE_REPLACEMENT = "$1 @ $2";
 
-	private static final Pattern HIGH_SCHOOL_ = CleanUtils.cleanWords("high school");
-	private static final String HIGH_SCHOOL_REPLACEMENT = CleanUtils.cleanWordsReplacement("HS");
-
-	private static final Pattern TERMINAL_ = CleanUtils.cleanWords("terminal");
-	private static final String TERMINAL_REPLACEMENT = CleanUtils.cleanWordsReplacement("Term");
-
 	@NotNull
 	@Override
 	public String cleanTripHeadsign(@NotNull String tripHeadsign) {
@@ -257,8 +246,6 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 		tripHeadsign = STN.matcher(tripHeadsign).replaceAll(STN_REPLACEMENT);
 		tripHeadsign = ROUTE_RSN.matcher(tripHeadsign).replaceAll(EMPTY);
 		tripHeadsign = ENDS_WITH_EXPRESS.matcher(tripHeadsign).replaceAll(EMPTY);
-		tripHeadsign = HIGH_SCHOOL_.matcher(tripHeadsign).replaceAll(HIGH_SCHOOL_REPLACEMENT);
-		tripHeadsign = TERMINAL_.matcher(tripHeadsign).replaceAll(TERMINAL_REPLACEMENT);
 		tripHeadsign = CleanUtils.cleanSlashes(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanBounds(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
