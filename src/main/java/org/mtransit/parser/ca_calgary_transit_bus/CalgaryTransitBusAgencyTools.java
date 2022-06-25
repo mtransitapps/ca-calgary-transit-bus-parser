@@ -152,8 +152,11 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public boolean directionSplitterEnabled() {
-		return true; // ONLY FOR ROUTE 30
+	public boolean directionSplitterEnabled(long routeId) {
+		if (routeId == 30L) {
+			return true; // because loop + branch w/ same last stop ID
+		}
+		return super.directionSplitterEnabled(routeId);
 	}
 
 	@Override
@@ -162,6 +165,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 			return true; // because loop + branch w/ same last stop ID
 		}
 		return super.directionOverrideId(routeId);
+	}
+
+	@Override
+	public boolean allowNonDescriptiveHeadSigns(long routeId) {
+		if (routeId == 86L) {
+			return true; // because loop + branch w/ same last stop ID
+		}
+		return super.allowNonDescriptiveHeadSigns(routeId);
 	}
 
 	@Override
