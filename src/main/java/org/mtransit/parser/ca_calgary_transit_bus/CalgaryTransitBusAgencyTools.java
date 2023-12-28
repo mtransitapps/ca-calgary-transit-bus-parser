@@ -214,11 +214,14 @@ public class CalgaryTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final Cleaner BOUNDS_BEFORE_AT = new Cleaner("( " + "([A-Z]{2})?( @)" + " )", "$3 ");
 
+	private static final Cleaner ENDS_WITH_STOP_X = new Cleaner(" stop \\w+$", EMPTY, true);
+
 	@NotNull
 	@Override
 	public String cleanDirectionHeadsign(int directionId, boolean fromStopName, @NotNull String directionHeadSign) {
 		directionHeadSign = super.cleanDirectionHeadsign(directionId, fromStopName, directionHeadSign);
 		directionHeadSign = ENDS_PARENTHESES.clean(directionHeadSign);
+		directionHeadSign = ENDS_WITH_STOP_X.clean(directionHeadSign);
 		directionHeadSign = STARTS_WITH_BOUNDS.clean(directionHeadSign);
 		directionHeadSign = ENDS_WITH_BOUNDS.clean(directionHeadSign);
 		directionHeadSign = BOUNDS_BEFORE_AT.clean(directionHeadSign);
